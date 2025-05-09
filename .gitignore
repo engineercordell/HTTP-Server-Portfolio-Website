@@ -1,6 +1,14 @@
+# Build artifacts
 *.exe
 *.o
 *.out
 *.obj
+
+# Logs
 *.log
+
+# VSCode Settings
 .vscode/
+
+# Backups
+*~
