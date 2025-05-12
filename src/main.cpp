@@ -7,14 +7,12 @@
 
 int main()
 {
-    char buffer[30000] = {0};
-
     std::string response = 
-        "HTTP/1.1 200 OK\r\n"
+        "HTTP/1.1 20 OK\r\n"
         "Content-Type: text/plain\r\n"
         "Content-Length: 13\r\n"
         "\r\n"
-        "Hello World!\r\n";
+        "Testing!\r\n";
 
     int server = socket(AF_INET, SOCK_STREAM, 0);
     if (server < 1)
@@ -26,7 +24,7 @@ int main()
     // "...store addresses for the Internet address family. 
     // Values of this type shall be cast by applications to struct sockaddr for use with socket functions." - opengroup.org
     struct sockaddr_in address; // created on stack
-    constexpr int port{8080};
+    constexpr int port{8081};
 
     socklen_t addrlen = sizeof(address);
     address.sin_family = AF_INET;
@@ -44,5 +42,24 @@ int main()
         return 1;
     }
 
+    std::cout << "Server listening on port " << port << "...\n";
+
+    int new_socket;
+    new_socket = accept(server, (struct sockaddr*)&address, &addrlen);
+    if (new_socket < 0) {
+        perror("accept() failed");
+        return 1;
+    }
+
+    char buffer[30000] = {0};
+
+    read(new_socket, buffer, sizeof(buffer));
+    std::cout << "Received request:\n" << buffer;
+
+    send(new_socket, response.c_str(), response.length(), 0);
+    std::cout << "Response sent.\n";
+
+    close(new_socket);
+    close(server);
     return 0;
 }
