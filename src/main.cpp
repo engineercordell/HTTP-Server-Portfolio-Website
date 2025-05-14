@@ -8,9 +8,9 @@
 int main()
 {
     std::string response = 
-        "HTTP/1.1 20 OK\r\n"
-        "Content-Type: text/plain\r\n"
-        "Content-Length: 13\r\n"
+        "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/html\r\n"
+        "Content-Length:" + std::to_string(response.length()) + "\r\n"
         "\r\n"
         "Testing!\r\n";
 
@@ -53,7 +53,7 @@ int main()
 
     char buffer[30000] = {0};
 
-    read(new_socket, buffer, sizeof(buffer));
+    recv(new_socket, buffer, sizeof(buffer), 0);
     std::cout << "Received request:\n" << buffer;
 
     send(new_socket, response.c_str(), response.length(), 0);
