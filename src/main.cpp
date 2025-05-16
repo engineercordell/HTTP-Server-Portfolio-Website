@@ -7,13 +7,29 @@
 
 int main()
 {
-    std::string response = 
-        "HTTP/1.1 200 OK\r\n"
-        "Content-Type: text/html\r\n"
-        "Content-Length:" + std::to_string(response.length()) + "\r\n"
-        "\r\n"
-        "Testing!\r\n";
+    constexpr const char* html = R"(
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Test Page</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="/script.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to my HTTP server!</h1> 
+    </body>
+    </html>
+    )";
 
+    std::string header = 
+        "HTTP/1.0 200 OK\r\n"
+        "Content-Type: text/html\r\n"
+        "Content-Length:" + std::to_string(strlen(html)) + "\r\n"
+        "\r\n";
+
+    std::string response = header + html;
+        
+    // Create server socket
     int server = socket(AF_INET, SOCK_STREAM, 0);
     if (server < 1)
     {
@@ -24,7 +40,7 @@ int main()
     // "...store addresses for the Internet address family. 
     // Values of this type shall be cast by applications to struct sockaddr for use with socket functions." - opengroup.org
     struct sockaddr_in address; // created on stack
-    constexpr int port{8081};
+    constexpr uint16_t port{8090};
 
     socklen_t addrlen = sizeof(address);
     address.sin_family = AF_INET;
@@ -32,7 +48,7 @@ int main()
     address.sin_port = htons(port);
     if (bind(server, (struct sockaddr*)&address, addrlen) < 0)
     {
-        perror("bind() failed");
+        perror("bind() didn't work");
         return 1;
     }
 
@@ -44,6 +60,7 @@ int main()
 
     std::cout << "Server listening on port " << port << "...\n";
 
+    // Create new connection socket
     int new_socket;
     new_socket = accept(server, (struct sockaddr*)&address, &addrlen);
     if (new_socket < 0) {
@@ -52,10 +69,13 @@ int main()
     }
 
     char buffer[30000] = {0};
-
+    // while(recv(new_socket, buffer, sizeof(buffer), 0) > 0)
+    // {
+    //     std::cout << "Received request:\n" << buffer;
+    // }
     recv(new_socket, buffer, sizeof(buffer), 0);
     std::cout << "Received request:\n" << buffer;
-
+    
     send(new_socket, response.c_str(), response.length(), 0);
     std::cout << "Response sent.\n";
 
