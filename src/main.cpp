@@ -5,8 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "http_server_socket.hpp"
-
-constexpr uint16_t port = 8080;
+#include "inet_address.hpp"
 
 int main()
 {
@@ -35,11 +34,11 @@ int main()
     // Create server socket
     HTTPServerSocket server;
 
-    
 
-    address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(port);
+
+    // address.sin_family = AF_INET;
+    // address.sin_addr.s_addr = INADDR_ANY;
+    // address.sin_port = htons(port);
     if (bind(server, (struct sockaddr*)&address, addrlen) < 0)
     {
         perror("bind() didn't work");
