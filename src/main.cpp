@@ -4,6 +4,9 @@
 #include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include "http_server_socket.hpp"
+
+constexpr uint16_t port = 8080;
 
 int main()
 {
@@ -30,19 +33,10 @@ int main()
     std::string response = header + html;
         
     // Create server socket
-    int server = socket(AF_INET, SOCK_STREAM, 0);
-    if (server < 1)
-    {
-        perror("socket() failed.");
-        return 1;
-    }
+    HTTPServerSocket server;
 
-    // "...store addresses for the Internet address family. 
-    // Values of this type shall be cast by applications to struct sockaddr for use with socket functions." - opengroup.org
-    struct sockaddr_in address; // created on stack
-    constexpr uint16_t port{8090};
+    
 
-    socklen_t addrlen = sizeof(address);
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(port);
