@@ -4,8 +4,9 @@
 #include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "http_server_socket.hpp"
+#include "server_socket.hpp"
 #include "inet_address.hpp"
+#include "connection_socket.hpp"
 
 int main()
 {
@@ -33,46 +34,23 @@ int main()
         
     // Create server socket
     HTTPServerSocket server;
+    INetAddr server_addr { 8080, "127.0.0.1" };
 
-
-
-    // address.sin_family = AF_INET;
-    // address.sin_addr.s_addr = INADDR_ANY;
-    // address.sin_port = htons(port);
-    if (bind(server, (struct sockaddr*)&address, addrlen) < 0)
-    {
-        perror("bind() didn't work");
-        return 1;
-    }
-
-    if (listen(server, 3) < 0)
-    {
-        perror("listen() failed");
-        return 1;
-    }
-
-    std::cout << "Server listening on port " << port << "...\n";
-
-    // Create new connection socket
-    int new_socket;
-    new_socket = accept(server, (struct sockaddr*)&address, &addrlen);
-    if (new_socket < 0) {
-        perror("accept() failed");
-        return 1;
-    }
+    server.bind_server(server_addr);
+    server.listen_server();
+    
+    HTTPConnectionSocket connection { server, server_addr };
 
     char buffer[30000] = {0};
     // while(recv(new_socket, buffer, sizeof(buffer), 0) > 0)
     // {
     //     std::cout << "Received request:\n" << buffer;
     // }
-    recv(new_socket, buffer, sizeof(buffer), 0);
+    recv(connection.get_fd(), buffer, sizeof(buffer), 0);
     std::cout << "Received request:\n" << buffer;
     
-    send(new_socket, response.c_str(), response.length(), 0);
+    send(connection.get_fd(), response.c_str(), response.length(), 0);
     std::cout << "Response sent.\n";
 
-    close(new_socket);
-    close(server);
     return 0;
 }

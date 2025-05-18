@@ -2,11 +2,18 @@
 #define HTTP_SERVER
 
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdexcept>
+#include <unistd.h>
+#include <iostream>
+#include "inet_address.hpp"
 
 class HTTPServerSocket
 {
-// An HTTP Server Socket should be defaulted to the following parameters
+
 private:
+    // An HTTP Server Socket should be defaulted to the following parameters
     int m_domain{ AF_INET };
     int m_type{ SOCK_STREAM };
     int m_protocol{ 0 };
@@ -23,7 +30,9 @@ public:
     HTTPServerSocket(const HTTPServerSocket&) = delete;
     HTTPServerSocket& operator=(const HTTPServerSocket&) = delete;
 
-
+    int get_fd() const { return m_server_fd; } 
+    void bind_server(INetAddr& addr);
+    void listen_server(int backlog = 3);
 };
 
 #endif
