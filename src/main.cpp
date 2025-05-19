@@ -40,12 +40,12 @@ int main()
     std::string header = 
         "HTTP/1.0 200 OK\r\n"
         "Content-Type: text/html\r\n"
-        "Content-Length:" + htmlContent + "\r\n"
+        "Content-Length: " + std::to_string(htmlContent.length()) + "\r\n"
         "\r\n";
 
     std::string response = header + htmlContent;
-    std::cout << response << std::endl;
-        
+    std::cout << response << '\n';
+
     // Create server socket
     HTTPServerSocket server;
     INetAddr server_addr { 8080, "127.0.0.1" };
