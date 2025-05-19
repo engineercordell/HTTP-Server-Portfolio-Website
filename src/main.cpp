@@ -4,33 +4,47 @@
 #include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <fstream>
+#include <sstream>
 #include "server_socket.hpp"
 #include "inet_address.hpp"
 #include "connection_socket.hpp"
 
 int main()
 {
-    constexpr const char* html = R"(
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Test Page</title>
-        <link rel="stylesheet" href="/style.css">
-        <script src="/script.js"></script>
-    </head>
-    <body>
-        <h1>Welcome to my HTTP server!</h1> 
-    </body>
-    </html>
-    )";
+    // constexpr const char* html = R"(
+    // <!DOCTYPE html>
+    // <html>
+    // <head>
+    //     <title>Test Page</title>
+    //     <link rel="stylesheet" href="/style.css">
+    //     <script src="/script.js"></script>
+    // </head>
+    // <body>
+    //     <h1>Welcome to my HTTP server!</h1> 
+    // </body>
+    // </html>
+    // )";
+
+    std::ifstream htmlFile("public/html/main.html");
+    if (!htmlFile.is_open()) {
+        std::cerr << "Could not open file." << std::endl;
+        return 1;
+    }
+
+    std::stringstream html_file_buffer;
+    html_file_buffer << htmlFile.rdbuf();
+    std::string htmlContent = html_file_buffer.str();
+    htmlFile.close();
 
     std::string header = 
         "HTTP/1.0 200 OK\r\n"
         "Content-Type: text/html\r\n"
-        "Content-Length:" + std::to_string(strlen(html)) + "\r\n"
+        "Content-Length:" + htmlContent + "\r\n"
         "\r\n";
 
-    std::string response = header + html;
+    std::string response = header + htmlContent;
+    std::cout << response << std::endl;
         
     // Create server socket
     HTTPServerSocket server;
@@ -51,6 +65,14 @@ int main()
     
     send(connection.get_fd(), response.c_str(), response.length(), 0);
     std::cout << "Response sent.\n";
+
+    std::ofstream httpResponse("HTTP Reponse.txt");
+    if (httpResponse.is_open())
+    {
+        httpResponse << buffer;
+        httpResponse.close();
+        std::cout << "HTTP request saved to HTTP Response.txt" << std::endl;
+    }
 
     return 0;
 }
