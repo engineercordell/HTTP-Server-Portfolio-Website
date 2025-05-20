@@ -1,8 +1,8 @@
 #include "connection_socket.hpp"
 
-HTTPConnectionSocket::HTTPConnectionSocket(HTTPServerSocket& server, INetAddr& addr)
+HTTPConnectionSocket::HTTPConnectionSocket(HTTPServerSocket& server)
 {
-    m_connect_fd = accept(server.get_fd(), addr.get_sock_addr(), addr.get_addrlen_ptr());
+    m_connect_fd = accept(server.get_fd(), m_client_addr.get_sock_addr(), m_client_addr.get_addrlen_ptr());
     if (m_connect_fd < 0)
     {
         std::runtime_error("accept() failed");

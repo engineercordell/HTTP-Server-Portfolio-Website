@@ -15,6 +15,7 @@ private:
 public:
     // sin_family should always be AF_INET since the class deals with IPv4 addr
     INetAddr(unsigned short sin_port, const std::string& ip_addr);
+    INetAddr() = default; // No custom work need be done in default constructor
 
     const sockaddr* get_sock_addr() const {return reinterpret_cast<const sockaddr*>(&m_address); }
     sockaddr* get_sock_addr() { return reinterpret_cast<sockaddr*>(&m_address); } // const member function that should never manipulate the address of m_address

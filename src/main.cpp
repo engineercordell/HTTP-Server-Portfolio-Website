@@ -53,25 +53,24 @@ int main()
     server.bind_server(server_addr);
     server.listen_server();
     
-    HTTPConnectionSocket connection { server, server_addr };
-
     char buffer[30000] = {0};
-    // while(recv(new_socket, buffer, sizeof(buffer), 0) > 0)
-    // {
-    //     std::cout << "Received request:\n" << buffer;
-    // }
-    recv(connection.get_fd(), buffer, sizeof(buffer), 0);
-    std::cout << "Received request:\n" << buffer;
-    
-    send(connection.get_fd(), response.c_str(), response.length(), 0);
-    std::cout << "Response sent.\n";
 
-    std::ofstream httpResponse("HTTP Reponse.txt");
-    if (httpResponse.is_open())
-    {
-        httpResponse << buffer;
-        httpResponse.close();
-        std::cout << "HTTP request saved to HTTP Response.txt" << std::endl;
+    while (true) {
+        HTTPConnectionSocket connection { server };
+
+        recv(connection.get_fd(), buffer, sizeof(buffer), 0);
+        std::cout << "Received request:\n" << buffer;
+    
+        send(connection.get_fd(), response.c_str(), response.length(), 0);
+        std::cout << "Response sent.\n";
+
+        std::ofstream httpResponse("HTTP Response.txt");
+        if (httpResponse.is_open())
+        {
+            httpResponse << buffer;
+            httpResponse.close();
+            std::cout << "HTTP request saved to HTTP Response.txt" << std::endl;
+        }
     }
 
     return 0;

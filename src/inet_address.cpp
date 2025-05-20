@@ -1,5 +1,9 @@
 #include "inet_address.hpp"
 
+// INetAddr::INetAddr()
+// {
+// }
+
 INetAddr::INetAddr(uint16_t sin_port, const std::string& ip_addr)
 {
     m_address.sin_family = AF_INET;

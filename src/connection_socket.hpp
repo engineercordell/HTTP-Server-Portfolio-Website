@@ -7,9 +7,10 @@ class HTTPConnectionSocket
 {
 private:
     int m_connect_fd{ -1 };
+    INetAddr m_client_addr;
 
 public:
-    HTTPConnectionSocket(HTTPServerSocket& server, INetAddr& addr);
+    HTTPConnectionSocket(HTTPServerSocket& server);
     ~HTTPConnectionSocket();
 
     int get_fd() const { return m_connect_fd; } 
