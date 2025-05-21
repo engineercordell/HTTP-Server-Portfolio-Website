@@ -26,6 +26,7 @@ int main()
     // </html>
     // )";
 
+    // This entire I/O logic should probably be moved into the central while loop
     std::ifstream htmlFile("public/html/main.html");
     if (!htmlFile.is_open()) {
         std::cerr << "Could not open file." << std::endl;
@@ -48,19 +49,35 @@ int main()
 
     // Create server socket
     HTTPServerSocket server;
-    INetAddr server_addr { 8080, "127.0.0.1" };
+    INetAddr server_addr { 8089, "127.0.0.1" };
 
     server.bind_server(server_addr);
     server.listen_server();
     
-    char buffer[30000] = {0};
+    std::string request_buffer;
+    char buffer[4096];
 
     while (true) {
         HTTPConnectionSocket connection { server };
 
-        recv(connection.get_fd(), buffer, sizeof(buffer), 0);
-        std::cout << "Received request:\n" << buffer;
-    
+        // Is there a concern that recv could potentially access data from different clients, which could accidentally bleed
+        // together the data of multiple different requests?
+        // Should each connection have access to their own buffer?
+
+        // Perhaps that should be addressed later..
+
+        auto msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0);
+        while (msg_size > 0) {
+            // Handle parsing HTTP request data here from the buffer..
+            std::cout << "Received request:\n" << buffer;
+            request_buffer.append(buffer, msg_size); // append 4096 chars from buffer to request_buffer
+
+
+            msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0);
+        }
+
+        
+        
         send(connection.get_fd(), response.c_str(), response.length(), 0);
         std::cout << "Response sent.\n";
 
