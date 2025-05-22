@@ -2,8 +2,6 @@
 #include <unistd.h>
 #include <string>
 #include <cstring>
-#include <sys/socket.h>
-#include <netinet/in.h>
 #include <fstream>
 #include <sstream>
 #include "server_socket.hpp"
@@ -49,12 +47,13 @@ int main()
 
     // Create server socket
     HTTPServerSocket server;
-    INetAddr server_addr { 8089, "127.0.0.1" };
+    INetAddr server_addr { 8091, "127.0.0.1" };
 
     server.bind_server(server_addr);
     server.listen_server();
     
     std::string request_buffer;
+    ssize_t msg_size;
     char buffer[4096];
 
     while (true) {
@@ -66,28 +65,26 @@ int main()
 
         // Perhaps that should be addressed later..
 
-        auto msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0);
-        while (msg_size > 0) {
+        while ((msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0)) > 0) {
             // Handle parsing HTTP request data here from the buffer..
             std::cout << "Received request:\n" << buffer;
             request_buffer.append(buffer, msg_size); // append 4096 chars from buffer to request_buffer
+            if (request_buffer.find("\r\n\r\n") != std::string::npos) {
+                break;
+            }
 
-
-            msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0);
         }
-
-        
         
         send(connection.get_fd(), response.c_str(), response.length(), 0);
         std::cout << "Response sent.\n";
 
-        std::ofstream httpResponse("HTTP Response.txt");
-        if (httpResponse.is_open())
-        {
-            httpResponse << buffer;
-            httpResponse.close();
-            std::cout << "HTTP request saved to HTTP Response.txt" << std::endl;
-        }
+        // std::ofstream httpRequest("HTTP Request.txt");
+        // if (httpRequest.is_open())
+        // {
+        //     httpRequest << request_buffer;
+        //     httpRequest.close();
+        //     std::cout << "HTTP request saved to HTTP Request.txt" << std::endl;
+        // }
     }
 
     return 0;
