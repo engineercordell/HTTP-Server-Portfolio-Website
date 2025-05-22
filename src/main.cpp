@@ -74,19 +74,19 @@ int main()
             }
         }
 
+        std::ofstream httpRequest("HTTP Request.txt");
+        if (httpRequest.is_open())
+        {
+            httpRequest << request_buffer;
+            httpRequest.close();
+            std::cout << "HTTP request saved to HTTP Request.txt" << std::endl;
+        }
+
         // Handle parsing HTTP request data here from the buffer..
-        // create HTTPRequestHeaders
+        HTTPRequestHeaders reqHeaders { request_buffer };
         
         send(connection.get_fd(), response.c_str(), response.length(), 0);
         std::cout << "Response sent.\n";
-
-        // std::ofstream httpRequest("HTTP Request.txt");
-        // if (httpRequest.is_open())
-        // {
-        //     httpRequest << request_buffer;
-        //     httpRequest.close();
-        //     std::cout << "HTTP request saved to HTTP Request.txt" << std::endl;
-        // }
     }
 
     return 0;
