@@ -1,5 +1,5 @@
-#ifndef HTTP_SERVER
-#define HTTP_SERVER
+#ifndef HTTP_SERVER_SOCKET
+#define HTTP_SERVER_SOCKET
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <unistd.h>
 #include <iostream>
-#include "inet_address.hpp"
+#include "inet_addr.hpp"
 
 class HTTPServerSocket
 {

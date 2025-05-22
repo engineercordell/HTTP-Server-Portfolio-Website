@@ -1,7 +1,7 @@
-#ifndef HTTP_CONNECTION
-#define HTTP_CONNECTION
+#ifndef HTTP_CONNECTION_SOCKET
+#define HTTP_CONNECTION_SOCKET
 
-#include "server_socket.hpp"
+#include "http_server_socket.hpp"
 
 class HTTPConnectionSocket
 {
