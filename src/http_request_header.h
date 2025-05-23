@@ -3,16 +3,22 @@
 
 #include "http_connection_socket.hpp"
 #include <unordered_map>
+#include <variant>
 
 class HTTPRequestHeaders
 {
 private:
     std::string m_request{};
-    std::unordered_map<std::string, std::string> m_request_line{};
+    std::string m_request_method{};
+    std::string m_request_target{};
+    float m_protocol_vers{};
+
     std::unordered_map<std::string, std::string> m_headers{};
 
 public:
     HTTPRequestHeaders(std::string request);
+
+    void parse_request_line();
 
 
 };
