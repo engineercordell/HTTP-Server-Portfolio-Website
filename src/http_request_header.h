@@ -8,7 +8,7 @@ class HTTPRequestHeaders
 {
 private:
     std::string m_request{};
-    std::string m_first_line{};
+    std::unordered_map<std::string, std::string> m_request_line{};
     std::unordered_map<std::string, std::string> m_headers{};
 
 public:
