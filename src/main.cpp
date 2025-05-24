@@ -83,7 +83,12 @@ int main()
         }
 
         // Handle parsing HTTP request data here from the buffer..
-        HTTPRequestHeaders reqHeaders { request_buffer };
+        try {
+            HTTPRequestHeaders reqHeaders { request_buffer };
+        } catch(const std::exception& e) {
+            std::cerr << "Request error...\n";
+            continue;
+        }
         
         send(connection.get_fd(), response.c_str(), response.length(), 0);
         std::cout << "Response sent.\n";

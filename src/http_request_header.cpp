@@ -4,6 +4,7 @@ HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
     : m_request { std::move(request) }
 { 
     parse_request_line();
+    parse_headers();
 }
 
 void HTTPRequestHeaders::parse_request_line()
@@ -28,4 +29,9 @@ void HTTPRequestHeaders::parse_request_line()
     // The '+ 5' offset accounts for 'HTTP/' in protocol
     m_protocol_vers = std::stof(req_line.substr(start + 5, end - start)); // retrives req_line[6, ...) = HTTP/1.1
     std::cout << "Protocol Version: " << m_protocol_vers << '\n';
+}
+
+void HTTPRequestHeaders::parse_headers()
+{
+    
 }
