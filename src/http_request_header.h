@@ -21,8 +21,6 @@ public:
     HTTPRequestHeaders(std::string request);
 
     
-
-
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "http_request_header.h"
+#include <sstream>
 
 HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
     : m_request { std::move(request) }
@@ -33,5 +34,21 @@ void HTTPRequestHeaders::parse_request_line()
 
 void HTTPRequestHeaders::parse_headers()
 {
-    
+    size_t start = m_request.find('\n') + 1; // begin at next line
+    std::cout << "Initial start: " << start << '\n';
+    std::string header = m_request.substr(start, header.find('\r')); // first header line
+    std::cout << "Initial header: " << header << '\n';
+
+    int i = 0;
+
+    while (header != "\r\n")
+    {
+        start = m_request.find(start, '\n') + 1;
+        std::cout << "start: " << start << '\n';
+        header = m_request.substr(start, m_request.find(start, '\r'));
+        std::cout << "header: " << header << '\n';
+
+        if (i > 30) break;
+        ++i;
+    }
 }
