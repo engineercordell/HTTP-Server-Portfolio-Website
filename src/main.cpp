@@ -7,7 +7,7 @@
 #include "http_server_socket.hpp"
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
-#include "http_request_header.h"
+#include "http_request_header.hpp"
 
 int main()
 {
@@ -67,7 +67,7 @@ int main()
         // Perhaps that should be addressed later..
 
         while ((msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0)) > 0) {
-            std::cout << "Received request:\n" << buffer;
+            // std::cout << "Received request:\n" << buffer;
             request_buffer.append(buffer, msg_size); // append 4096 chars from buffer to request_buffer
             if (request_buffer.find("\r\n\r\n") != std::string::npos) {
                 break;

@@ -1,4 +1,4 @@
-#include "http_request_header.h"
+#include "http_request_header.hpp"
 #include <sstream>
 
 HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
@@ -29,7 +29,7 @@ void HTTPRequestHeaders::parse_request_line()
     end = req_line.find('\r', start); // pos = ...
     // The '+ 5' offset accounts for 'HTTP/' in protocol
     m_protocol_vers = std::stof(req_line.substr(start + 5, end - start)); // retrives req_line[6, ...) = HTTP/1.1
-    std::cout << "Protocol Version: " << m_protocol_vers << '\n';
+    // std::cout << "Protocol Version: " << m_protocol_vers << '\n';
 }
 
 void HTTPRequestHeaders::parse_headers()
@@ -41,7 +41,7 @@ void HTTPRequestHeaders::parse_headers()
 
     int i = 0;
 
-    while (header != "\r\n")
+    while (header.compare("\r\n") != 0)
     {
         start = m_request.find(start, '\n') + 1;
         std::cout << "start: " << start << '\n';
@@ -49,6 +49,7 @@ void HTTPRequestHeaders::parse_headers()
         std::cout << "header: " << header << '\n';
 
         if (i > 30) break;
+        std::cout << i << '\n';
         ++i;
     }
 }
