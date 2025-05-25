@@ -79,7 +79,7 @@ int main()
         {
             httpRequest << request_buffer;
             httpRequest.close();
-            std::cout << "HTTP request saved to HTTP Request.txt" << std::endl;
+            std::cout << "HTTP request saved to HTTP Request.txt" << '\n';
         }
 
         // Handle parsing HTTP request data here from the buffer..
