@@ -34,13 +34,14 @@ void HTTPRequestHeaders::parse_request_line()
 
 void HTTPRequestHeaders::parse_headers()
 {
-    size_t start = m_request.find('\n') + 1; // begin at next line
-    std::cout << "Initial start val: " << start << '\n';
-    size_t next_line_end = m_request.find("\r\n", start);
+    size_t start = m_request.find('\n') + 1; // next line 0th idx
+    std::cout << start << '\n';
+    size_t next_line_end = m_request.find('\n', start);
+    std::cout << "The char at next_line_end: " << m_request[next_line_end] << '\n';
 
     std::cout << "next_line_end: " << next_line_end << '\n';
-    std::string header = m_request.substr(start, next_line_end); // first header line
-    std::cout << "Initial header val: " << header << '\n';
+    std::string header = m_request.substr(start, next_line_end - start); // first header line
+    std::cout << header << '\n';
     int i = 0;
 
 //     while (header.compare("\r\n") != 0)
