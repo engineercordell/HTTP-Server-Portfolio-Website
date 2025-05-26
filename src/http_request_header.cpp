@@ -35,32 +35,22 @@ void HTTPRequestHeaders::parse_request_line()
 void HTTPRequestHeaders::parse_headers()
 {
     size_t start = m_request.find('\n') + 1; // next line 0th idx
-    std::cout << start << '\n';
-    size_t end = m_request.find('\r', start);
-    // std::cout << "The char at next_line_end: " << m_request[end] << '\n';
+    std::cout << "Initial start: " << start << '\n';
 
-    // std::cout << "next_line_end: " << end << '\n';
-    std::string header = m_request.substr(start, end - start); // first header line
-    std::cout << header << '\n';
+    size_t end = m_request.find('\r', start);
+    std::cout << "Initial end: " << end << '\n';
+
+    std::string header;
     int i = 0;
 
-    while (header.compare("\r\n") != 0)
+    while (end != std::string::npos)
     {
         // Process header..
-
-        start = end + 2; // end 0: '\n' -> end 1: first char of next header
-        std::cout << "start: " << start << '\n';
-        end = m_request.find('\r', start);
-        std::cout << "end: " << end << '\n';
-        if (end > 5000) break;
-        header = m_request.substr(start, end - start);
+        std::string header = m_request.substr(start, end - start); // first header line
         std::cout << "Header " << i << ": " << header << '\n';
 
-        // start = m_request.find(start, '\n') + 1;
-        // header = m_request.substr(start, m_request.find(start, '\r'));
-        // std::cout << "Header " << i << ": " << header << '\n';
-
-        if (i > 30) break;
+        start = end + 2; // end 0: '\n' -> end 1: first char of next header
+        end = m_request.find('\r', start);
         ++i;
     }
 }
