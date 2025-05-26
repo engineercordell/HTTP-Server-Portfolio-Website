@@ -83,10 +83,11 @@ int main()
         }
 
         // Handle parsing HTTP request data here from the buffer..
-        try {
-            HTTPRequestHeaders reqHeaders { request_buffer };
-        } catch(const std::exception& e) {
-            std::cerr << "Request error...\n";
+        // ...but main should not be responsible with this
+        // main should only be worried about whether the request succeeded.
+        auto headers = HTTPRequestHeaders::from_raw(request_buffer);
+        if (!headers)
+        {
             continue;
         }
         

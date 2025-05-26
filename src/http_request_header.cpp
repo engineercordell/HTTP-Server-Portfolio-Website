@@ -1,6 +1,17 @@
 #include "http_request_header.hpp"
 #include <sstream>
 
+std::optional<HTTPRequestHeaders> HTTPRequestHeaders::from_raw(std::string raw)
+{
+    try {
+        HTTPRequestHeaders headers { raw };
+        return headers;
+    } catch (const std::exception& e) {
+        std::cout << "Failed to parse request: " << e.what() << '\n';
+        return std::nullopt;
+    }
+}
+
 HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
     : m_request { std::move(request) }
 { 
@@ -59,7 +70,7 @@ void HTTPRequestHeaders::parse_headers()
         // std::cout << "Header: " << header << '\n';
 
         value = header_line.substr(colon_idx + 2, end - colon_idx); // '+ 2' to exclude colon and space
-        // std::cout << "Value: " << value << '\n';
+        //std::cout << "Value: " << value << '\n';
 
         m_headers[header] = value;
 

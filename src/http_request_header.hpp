@@ -4,6 +4,7 @@
 #include "http_connection_socket.hpp"
 #include <unordered_map>
 #include <variant>
+#include <optional>
 
 class HTTPRequestHeaders
 {
@@ -14,11 +15,13 @@ private:
     float m_protocol_vers{};
     std::unordered_map<std::string, std::string> m_headers{};
 
+    HTTPRequestHeaders(std::string request);
     void parse_request_line();
     void parse_headers();
     
 public:
-    HTTPRequestHeaders(std::string request);
+    // Only mechanism to create HTTPRequestHeaders obj from anywhere
+    static std::optional<HTTPRequestHeaders> from_raw(std::string raw); 
 
     const std::string& get_request_method() const { return m_request_method; }
     const std::string& get_request_target() const { return m_request_target; }
