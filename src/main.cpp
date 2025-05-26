@@ -48,7 +48,7 @@ int main()
 
     // Create server socket
     HTTPServerSocket server;
-    INetAddr server_addr { 8091, "127.0.0.1" };
+    INetAddr server_addr { 8081, "127.0.0.1" };
 
     server.bind_server(server_addr);
     server.listen_server();

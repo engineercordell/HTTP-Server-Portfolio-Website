@@ -35,19 +35,33 @@ void HTTPRequestHeaders::parse_request_line()
 void HTTPRequestHeaders::parse_headers()
 {
     size_t start = m_request.find('\n') + 1; // next line 0th idx
-    std::cout << "Initial start: " << start << '\n';
+    // std::cout << "Initial start: " << start << '\n';
 
     size_t end = m_request.find('\r', start);
-    std::cout << "Initial end: " << end << '\n';
+    // std::cout << "Initial end: " << end << '\n';
 
+    size_t header_end_boundary = m_request.find("\r\n\r\n");
+
+    std::string header_line;
     std::string header;
+    std::string value;
+    size_t colon_idx;
     int i = 0;
 
-    while (end != std::string::npos)
+    while (end != std::string::npos && end <= header_end_boundary)
     {
         // Process header..
-        std::string header = m_request.substr(start, end - start); // first header line
-        std::cout << "Header " << i << ": " << header << '\n';
+        std::string header_line = m_request.substr(start, end - start); // first header line
+        // std::cout << "Header Line " << i << ": " << header_line << '\n';
+
+        colon_idx = header_line.find(':');
+        header = header_line.substr(0, colon_idx);
+        // std::cout << "Header: " << header << '\n';
+
+        value = header_line.substr(colon_idx + 2, end - colon_idx); // '+ 2' to exclude colon and space
+        // std::cout << "Value: " << value << '\n';
+
+        m_headers[header] = value;
 
         start = end + 2; // end 0: '\n' -> end 1: first char of next header
         end = m_request.find('\r', start);

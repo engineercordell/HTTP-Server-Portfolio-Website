@@ -20,7 +20,9 @@ private:
 public:
     HTTPRequestHeaders(std::string request);
 
-    
+    const std::string& get_request_method() const { return m_request_method; }
+    const std::string& get_request_target() const { return m_request_target; }
+    float get_protocol_vers() const { return m_protocol_vers; }
 };
 
 #endif
