@@ -91,6 +91,12 @@ int main()
             continue;
         }
         
+        if ((headers->get_request_method()).compare("GET") == 0)
+        {
+            // Client wishes to "GET", so get what?
+            std::cout << "Start servicing..." << '\n';
+        }
+
         send(connection.get_fd(), response.c_str(), response.length(), 0);
         std::cout << "Response sent.\n";
     }

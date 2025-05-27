@@ -70,7 +70,7 @@ void HTTPRequestHeaders::parse_headers()
         // std::cout << "Header: " << header << '\n';
 
         value = header_line.substr(colon_idx + 2, end - colon_idx); // '+ 2' to exclude colon and space
-        //std::cout << "Value: " << value << '\n';
+        // std::cout << "Value: " << value << '\n';
 
         m_headers[header] = value;
 
