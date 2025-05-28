@@ -1,5 +1,5 @@
-#ifndef INET_ADDR
-#define INET_ADDR
+#ifndef INET_ADDR_HPP
+#define INET_ADDR_HPP
 
 #include <netinet/in.h>
 #include <sys/socket.h>

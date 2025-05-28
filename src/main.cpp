@@ -11,20 +11,6 @@
 
 int main()
 {
-    // constexpr const char* html = R"(
-    // <!DOCTYPE html>
-    // <html>
-    // <head>
-    //     <title>Test Page</title>
-    //     <link rel="stylesheet" href="/style.css">
-    //     <script src="/script.js"></script>
-    // </head>
-    // <body>
-    //     <h1>Welcome to my HTTP server!</h1> 
-    // </body>
-    // </html>
-    // )";
-
     // This entire I/O logic should probably be moved into the central while loop
     std::ifstream htmlFile("public/html/main.html");
     if (!htmlFile.is_open()) {
@@ -74,7 +60,7 @@ int main()
             }
         }
 
-        std::ofstream httpRequest("HTTP Request.txt");
+        std::ofstream httpRequest("../build/HTTP Request.txt");
         if (httpRequest.is_open())
         {
             httpRequest << request_buffer;

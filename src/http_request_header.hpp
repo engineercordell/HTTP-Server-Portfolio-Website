@@ -1,5 +1,5 @@
-#ifndef HTTP_REQUEST_HEADERS
-#define HTTP_REQUEST_HEADERS
+#ifndef HTTP_REQUEST_HEADERS_HPP
+#define HTTP_REQUEST_HEADERS_HPP
 
 #include "http_connection_socket.hpp"
 #include <unordered_map>
@@ -18,7 +18,7 @@ private:
     HTTPRequestHeaders(std::string request);
     void parse_request_line();
     void parse_headers();
-    
+
 public:
     // Only mechanism to create HTTPRequestHeaders obj from anywhere
     static std::optional<HTTPRequestHeaders> from_raw(std::string raw); 

@@ -1,5 +1,5 @@
-#ifndef HTTP_CONNECTION_SOCKET
-#define HTTP_CONNECTION_SOCKET
+#ifndef HTTP_CONNECTION_SOCKET_HPP
+#define HTTP_CONNECTION_SOCKET_HPP
 
 #include "http_server_socket.hpp"
 

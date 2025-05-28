@@ -1,5 +1,5 @@
-#ifndef HTTP_SERVER_SOCKET
-#define HTTP_SERVER_SOCKET
+#ifndef HTTP_SERVER_SOCKET_HPP
+#define HTTP_SERVER_SOCKET_HPP
 
 #include <sys/socket.h>
 #include <netinet/in.h>
