@@ -1,6 +1,9 @@
 # HTTPS Server
 Lightweight HTTPS server written in C++
 
+### Security
+- [ ] Prevent servicing a file that's outside of 'public/'
+
 ### Optimizations
 - [ ] Optimize header parsing loop  
   - [ ] Call find() once to obtain all LF
