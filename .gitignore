@@ -3,6 +3,7 @@
 *.o
 *.out
 *.obj
+server
 
 # Logs
 *.log
