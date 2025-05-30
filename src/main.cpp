@@ -4,6 +4,7 @@
 #include <cstring>
 #include <fstream>
 #include <sstream>
+#include "config.hpp"
 #include "http_server_socket.hpp"
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
@@ -12,7 +13,7 @@
 int main()
 {
     // This entire I/O logic should probably be moved into the central while loop
-    std::ifstream htmlFile("public/html/main.html");
+    std::ifstream htmlFile("public/home/index.html");
     if (!htmlFile.is_open()) {
         std::cerr << "Could not open file." << std::endl;
         return 1;
@@ -77,10 +78,20 @@ int main()
             continue;
         }
         
+        // Handle particular request method (GET, POST, etc.)
+        // Might somehow consider refactoring this into enum switch
         if ((headers->get_request_method()).compare("GET") == 0)
         {
-            // Client wishes to "GET", so get what?
             std::cout << "Start servicing..." << '\n';
+
+            // sanitize the request target by asking the question:
+            // IS THE REQ INSIDE THE /public FOLDER?
+
+            std::filesystem::path request_target = headers->get_request_target(); // target is either / or 
+            std::filesystem::path full_path = Config::base_dir / request_target.relative_path();
+
+            // after request target dir is resolved, we attempt to open it
+
         }
 
         send(connection.get_fd(), response.c_str(), response.length(), 0);
