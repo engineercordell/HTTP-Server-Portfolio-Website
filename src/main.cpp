@@ -19,23 +19,14 @@ int main()
     server.bind_server(server_addr);
     server.listen_server();
     
-    std::string request_buffer;
-    ssize_t msg_size;
-    
     while (true) {
-        // char buffer[4096];
         HTTPConnectionSocket connection { server };
-
-        // Is there a concern that recv could potentially access data from different clients, which could accidentally bleed
-        // together the data of multiple different requests?
-        // Should each connection have access to their own buffer?
-
-        // Perhaps that should be addressed later..
+        ssize_t msg_size;
 
         while ((msg_size = recv(connection.get_fd(), connection.get_buffer(), connection.get_buffer_size(), 0)) > 0) {
             // std::cout << "Received request:\n" << buffer;
-            request_buffer.append(connection.get_buffer(), msg_size); // append 4096 chars from buffer to request_buffer
-            if (request_buffer.find("\r\n\r\n") != std::string::npos) {
+            connection.add_to_request_buffer(msg_size); // append 4096 chars from buffer to request_buffer
+            if (connection.request_complete()) {
                 break;
             }
         }
@@ -43,7 +34,7 @@ int main()
         std::ofstream httpRequest("build/HTTP Request.txt");
         if (httpRequest.is_open())
         {
-            httpRequest << request_buffer;
+            httpRequest << connection.get_request_buffer();
             httpRequest.close();
             std::cout << "HTTP request saved to HTTP Request.txt" << '\n';
         }
@@ -51,14 +42,14 @@ int main()
         // Handle parsing HTTP request data here from the buffer..
         // ...but main should not be responsible for this
         // main should only be worried about whether the request succeeded.
-        std::cout << "\n<-----REQ BUFFER----->\n" << request_buffer;
-        auto headers = HTTPRequestHeaders::from_raw(request_buffer);
+        std::cout << "\n<-----REQ BUFFER----->\n" << connection.get_request_buffer();
+        auto headers = HTTPRequestHeaders::from_raw(connection.get_request_buffer());
         if (!headers)
         {
             continue;
         }
 
-        std::string response;
+        std::string response; // might also need to make this a member variable for each connection
         
         // Handle particular request method (GET, POST, etc.)
         // Might somehow consider refactoring this into enum switch

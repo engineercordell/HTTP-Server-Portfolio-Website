@@ -9,6 +9,7 @@ private:
     int m_connect_fd{ -1 };
     INetAddr m_client_addr;
     char m_buffer[4096];
+    std::string m_request_buffer;
 
 public:
     HTTPConnectionSocket(HTTPServerSocket& server);
@@ -16,7 +17,10 @@ public:
 
     int get_fd() const { return m_connect_fd; }
     char* get_buffer() { return m_buffer; }
-    size_t get_buffer_size() { return sizeof(m_buffer); }
+    size_t get_buffer_size() const { return sizeof(m_buffer); }
+    const std::string& get_request_buffer() const { return m_request_buffer; }
+    void add_to_request_buffer(ssize_t size) { m_request_buffer.append(static_cast<const char*>(m_buffer), static_cast<size_t>(size)); }
+    bool request_complete() const { return m_request_buffer.find("\r\n\r\n") != std::string::npos; }
 };
 
 #endif
