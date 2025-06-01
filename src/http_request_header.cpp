@@ -32,10 +32,11 @@ void HTTPRequestHeaders::parse_request_line()
     m_request_method = req_line.substr(start, end); // retrieves req_line[0, 3) = 'GET'
 
     start = end + 1; // pos = 4
-    end = req_line.find(' ', start); // pos = 5 
-    std::cout << "request_target end: " << end << '\n';
+    // std::cout << "start: " << start << '\n';
+    end = req_line.find(' ', start); // pos = 5
+    // std::cout << "end: " << end << '\n';
     m_request_target = req_line.substr(start, end - start); // retrieves req_line[4, 5) = '\'
-    std::cout << "Request target (parse_request_line): " << m_request_target << '\n';
+    // std::cout << "Request target (parse_request_line): " << m_request_target << '\n';
 
     start = end + 1; // pos = 6
     end = req_line.find('\r', start); // pos = ...

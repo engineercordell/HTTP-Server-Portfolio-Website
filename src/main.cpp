@@ -21,9 +21,9 @@ int main()
     
     std::string request_buffer;
     ssize_t msg_size;
-    char buffer[4096];
-
+    
     while (true) {
+        // char buffer[4096];
         HTTPConnectionSocket connection { server };
 
         // Is there a concern that recv could potentially access data from different clients, which could accidentally bleed
@@ -32,9 +32,9 @@ int main()
 
         // Perhaps that should be addressed later..
 
-        while ((msg_size = recv(connection.get_fd(), buffer, sizeof(buffer), 0)) > 0) {
+        while ((msg_size = recv(connection.get_fd(), connection.get_buffer(), connection.get_buffer_size(), 0)) > 0) {
             // std::cout << "Received request:\n" << buffer;
-            request_buffer.append(buffer, msg_size); // append 4096 chars from buffer to request_buffer
+            request_buffer.append(connection.get_buffer(), msg_size); // append 4096 chars from buffer to request_buffer
             if (request_buffer.find("\r\n\r\n") != std::string::npos) {
                 break;
             }
@@ -51,6 +51,7 @@ int main()
         // Handle parsing HTTP request data here from the buffer..
         // ...but main should not be responsible for this
         // main should only be worried about whether the request succeeded.
+        std::cout << "\n<-----REQ BUFFER----->\n" << request_buffer;
         auto headers = HTTPRequestHeaders::from_raw(request_buffer);
         if (!headers)
         {
