@@ -12,27 +12,6 @@
 
 int main()
 {
-    // This entire I/O logic should probably be moved into the central while loop
-    std::ifstream htmlFile("public/home/index.html");
-    if (!htmlFile.is_open()) {
-        std::cerr << "Could not open file." << std::endl;
-        return 1;
-    }
-
-    std::stringstream html_file_buffer;
-    html_file_buffer << htmlFile.rdbuf();
-    std::string htmlContent = html_file_buffer.str();
-    htmlFile.close();
-
-    std::string header = 
-        "HTTP/1.0 200 OK\r\n"
-        "Content-Type: text/html\r\n"
-        "Content-Length: " + std::to_string(htmlContent.length()) + "\r\n"
-        "\r\n";
-
-    std::string response = header + htmlContent;
-    // std::cout << response << '\n';
-
     // Create server socket
     HTTPServerSocket server;
     INetAddr server_addr { 8081, "127.0.0.1" };
@@ -70,13 +49,15 @@ int main()
         }
 
         // Handle parsing HTTP request data here from the buffer..
-        // ...but main should not be responsible with this
+        // ...but main should not be responsible for this
         // main should only be worried about whether the request succeeded.
         auto headers = HTTPRequestHeaders::from_raw(request_buffer);
         if (!headers)
         {
             continue;
         }
+
+        std::string response;
         
         // Handle particular request method (GET, POST, etc.)
         // Might somehow consider refactoring this into enum switch
@@ -84,14 +65,47 @@ int main()
         {
             std::cout << "Start servicing..." << '\n';
 
-            // sanitize the request target by asking the question:
-            // IS THE REQ INSIDE THE /public FOLDER?
+            // obtain request target
+            std::filesystem::path request_target = headers->get_request_target(); // target is either '/' or '/../..' 
+            
+            // sanitize & validate request target
+            if (!Config::is_within_base_dir(request_target)) {
+                std::cerr << "Request target not within base directory.\n";
+                // Could perhaps add some later logic in here to reject the connecting client in future requests
+                // 403
+                continue;
+            }
 
-            std::filesystem::path request_target = headers->get_request_target(); // target is either / or 
-            std::filesystem::path full_path = Config::base_dir / request_target.relative_path();
+            // map root path to homepage
+            if (request_target == "/") {
+                request_target = Config::root_path; // check if root is being accessed
+            }
+            
+            std::ifstream web_file;
+            try {
+                web_file.open(request_target);
+                if (!web_file.is_open()) {
+                    throw std::runtime_error("File not found/could not be opened.\n");
+                }
+            } catch (const std::exception& e) {
+                std::cerr << "Web page doesn't exist or cannot be opened: " << e.what() << '\n';
+                // 404
+                continue;
+            }
 
-            // after request target dir is resolved, we attempt to open it
+            // web_content <-- web page data from server file
+            std::stringstream web_page_file_buffer;
+            web_page_file_buffer << web_file.rdbuf();
+            std::string web_content = web_page_file_buffer.str();
+            web_file.close();
+            
+            std::string header = 
+            "HTTP/1.0 200 OK\r\n"
+            "Content-Type: text/html\r\n"
+            "Content-Length: " + std::to_string(web_content.length()) + "\r\n"
+            "\r\n";
 
+            response = header + web_content;
         }
 
         send(connection.get_fd(), response.c_str(), response.length(), 0);
