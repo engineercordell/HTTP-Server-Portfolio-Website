@@ -14,7 +14,8 @@ std::optional<HTTPRequestHeaders> HTTPRequestHeaders::from_raw(std::string raw)
 
 HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
     : m_request { std::move(request) }
-{ 
+{
+    // std::cout << m_request << '\n';
     parse_request_line();
     parse_headers();
 }
@@ -32,9 +33,9 @@ void HTTPRequestHeaders::parse_request_line()
 
     start = end + 1; // pos = 4
     end = req_line.find(' ', start); // pos = 5 
-    // std::cout << "request_target end: " << end << '\n';
+    std::cout << "request_target end: " << end << '\n';
     m_request_target = req_line.substr(start, end - start); // retrieves req_line[4, 5) = '\'
-    // std::cout << request_target << '\n';
+    std::cout << "Request target (parse_request_line): " << m_request_target << '\n';
 
     start = end + 1; // pos = 6
     end = req_line.find('\r', start); // pos = ...

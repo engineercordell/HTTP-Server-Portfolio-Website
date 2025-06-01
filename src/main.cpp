@@ -40,7 +40,7 @@ int main()
             }
         }
 
-        std::ofstream httpRequest("../build/HTTP Request.txt");
+        std::ofstream httpRequest("build/HTTP Request.txt");
         if (httpRequest.is_open())
         {
             httpRequest << request_buffer;
@@ -67,6 +67,7 @@ int main()
 
             // obtain request target
             std::filesystem::path request_target = headers->get_request_target(); // target is either '/' or '/../..' 
+            std::cout << "Request target: " << request_target << '\n';
             
             // sanitize & validate request target
             if (!Config::is_within_base_dir(request_target)) {

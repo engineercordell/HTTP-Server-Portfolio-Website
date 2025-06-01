@@ -12,6 +12,7 @@ namespace Config
 
     bool is_within_base_dir(const std::filesystem::path& request)
     {
+        std::cout << "Request relative: " << request.relative_path() << '\n';
         std::filesystem::path normalized_path = std::filesystem::canonical(base_dir / request.relative_path());
         std::cout << "Normalized path: " << normalized_path << '\n';
         if (normalized_path.string().rfind(base_dir.string(), 0) != 0) {
