@@ -53,30 +53,33 @@ int main()
         
         // Handle particular request method (GET, POST, etc.)
         // Might somehow consider refactoring this into enum switch
-        if ((headers->get_request_method()).compare("GET") == 0)
+        if ((headers->get_request_method()) == "GET")
         {
             std::cout << "Start servicing..." << '\n';
 
             // obtain request target
             std::filesystem::path request_target = headers->get_request_target(); // target is either '/' or '/../..' 
             std::cout << "Request target: " << request_target << '\n';
+
+            // map root path to homepage
+            if (request_target == "/") {
+                request_target = "/home/index.html"; // check if root is being accessed
+            }
             
+            std::filesystem::path full_path = std::filesystem::weakly_canonical(Config::base_dir / request_target.string().substr(1));
+            std::cout << "Full path: " << full_path << '\n';
+
             // sanitize & validate request target
-            if (!Config::is_within_base_dir(request_target)) {
+            if (!Config::is_within_base_dir(full_path)) {
                 std::cerr << "Request target not within base directory.\n";
                 // Could perhaps add some later logic in here to reject the connecting client in future requests
                 // 403
                 continue;
             }
-
-            // map root path to homepage
-            if (request_target == "/") {
-                request_target = Config::root_path; // check if root is being accessed
-            }
             
             std::ifstream web_file;
             try {
-                web_file.open(request_target);
+                web_file.open(full_path);
                 if (!web_file.is_open()) {
                     throw std::runtime_error("File not found/could not be opened.\n");
                 }
@@ -94,7 +97,7 @@ int main()
             
             std::string header = 
             "HTTP/1.0 200 OK\r\n"
-            "Content-Type: text/html\r\n"
+            "Content-Type: \r\n"
             "Content-Length: " + std::to_string(web_content.length()) + "\r\n"
             "\r\n";
 
