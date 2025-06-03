@@ -9,6 +9,7 @@
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
 #include "http_request_header.hpp"
+#include "mime.hpp"
 
 int main()
 {
@@ -31,13 +32,13 @@ int main()
             }
         }
 
-        std::ofstream httpRequest("build/HTTP Request.txt");
-        if (httpRequest.is_open())
-        {
-            httpRequest << connection.get_request_buffer();
-            httpRequest.close();
-            std::cout << "HTTP request saved to HTTP Request.txt" << '\n';
-        }
+        // std::ofstream httpRequest("build/HTTP Request.txt");
+        // if (httpRequest.is_open())
+        // {
+        //     httpRequest << connection.get_request_buffer();
+        //     httpRequest.close();
+        //     std::cout << "HTTP request saved to HTTP Request.txt" << '\n';
+        // }
 
         // Handle parsing HTTP request data here from the buffer..
         // ...but main should not be responsible for this
@@ -83,25 +84,23 @@ int main()
                 if (!web_file.is_open()) {
                     throw std::runtime_error("File not found/could not be opened.\n");
                 }
-            } catch (const std::exception& e) {
-                std::cerr << "Web page doesn't exist or cannot be opened: " << e.what() << '\n';
+            } catch (const std::runtime_error& e) {
+                std::cerr << e.what() << '\n';
                 // 404
                 continue;
             }
-
-            // web_content <-- web page data from server file
-            std::stringstream web_page_file_buffer;
-            web_page_file_buffer << web_file.rdbuf();
-            std::string web_content = web_page_file_buffer.str();
-            web_file.close();
+            std::stringstream web_file_buffer; // create buffer to hold data for a web page stored in disk
+            web_file_buffer << web_file.rdbuf(); // read data from web page to buffer
+            std::string pay_load = web_file_buffer.str(); // store data in string
+            web_file.close(); // close the web file
             
             std::string header = 
             "HTTP/1.0 200 OK\r\n"
-            "Content-Type: \r\n"
-            "Content-Length: " + std::to_string(web_content.length()) + "\r\n"
+            "Content-Type: " + get_mime_type() + "\r\n"
+            "Content-Length: " + std::to_string(pay_load.length()) + "\r\n"
             "\r\n";
 
-            response = header + web_content;
+            response = header + pay_load;
         }
 
         send(connection.get_fd(), response.c_str(), response.length(), 0);
@@ -110,3 +109,4 @@ int main()
 
     return 0;
 }
+
