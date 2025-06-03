@@ -2,7 +2,8 @@
 #define MIME_HPP
 
 #include <string>
+#include <filesystem>
 
-std::string get_mime_type(const std::string& path);
+std::string get_mime_type(const std::filesystem::path& path);
 
 #endif

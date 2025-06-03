@@ -96,7 +96,7 @@ int main()
             
             std::string header = 
             "HTTP/1.0 200 OK\r\n"
-            "Content-Type: " + get_mime_type() + "\r\n"
+            "Content-Type: " + get_mime_type(full_path) + "\r\n"
             "Content-Length: " + std::to_string(pay_load.length()) + "\r\n"
             "\r\n";
 

@@ -1,7 +1,7 @@
 #include "mime.hpp"
 #include <unordered_map>
 
-std::string get_mime_type(const std::string& path)
+std::string get_mime_type(const std::filesystem::path& path)
 {
     static const std::unordered_map<std::string, std::string> mime_map = {
         { ".html", "text/html" },
@@ -16,16 +16,7 @@ std::string get_mime_type(const std::string& path)
         { ".txt", "text/plain" }
     };
 
-    std::size_t dot_idx = path.rfind('.');
-    if (dot_idx != std::string::npos)
-    {
-        std::string ext = path.substr(dot_idx);
-        auto it = mime_map.find(ext);
-        if (it != mime_map.end())
-        {
-            return it->second;
-        }
-    }
-
-    return "application/octet-stream";
+    std::string ext = path.extension().string();
+    auto it = mime_map.find(ext);
+    return (it != mime_map.end()) ? it->second : "application/octet-stream";
 }
