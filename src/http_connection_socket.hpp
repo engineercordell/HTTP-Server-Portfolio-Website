@@ -12,7 +12,7 @@ private:
     std::string m_request_buffer;
 
 public:
-    HTTPConnectionSocket(HTTPServerSocket& server);
+    HTTPConnectionSocket(const HTTPServerSocket& server);
     ~HTTPConnectionSocket();
 
     int get_fd() const { return m_connect_fd; }

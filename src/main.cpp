@@ -1,112 +1,20 @@
 #include <iostream>
-#include <unistd.h>
-#include <string>
-#include <cstring>
-#include <fstream>
-#include <sstream>
-#include "config.hpp"
 #include "http_server_socket.hpp"
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
-#include "http_request_header.hpp"
-#include "mime.hpp"
+#include "connection_handler.hpp"
 
 int main()
 {
-    // Create server socket
     HTTPServerSocket server;
-    INetAddr server_addr { 8081, "127.0.0.1" };
-
+    INetAddr server_addr{8081, "127.0.0.1"};
     server.bind_server(server_addr);
     server.listen_server();
     
     while (true) {
         HTTPConnectionSocket connection { server };
-        ssize_t msg_size;
-
-        while ((msg_size = recv(connection.get_fd(), connection.get_buffer(), connection.get_buffer_size(), 0)) > 0) {
-            // std::cout << "Received request:\n" << buffer;
-            connection.add_to_request_buffer(msg_size); // append 4096 chars from buffer to request_buffer
-            if (connection.request_complete()) {
-                break;
-            }
-        }
-
-        // std::ofstream httpRequest("build/HTTP Request.txt");
-        // if (httpRequest.is_open())
-        // {
-        //     httpRequest << connection.get_request_buffer();
-        //     httpRequest.close();
-        //     std::cout << "HTTP request saved to HTTP Request.txt" << '\n';
-        // }
-
-        // Handle parsing HTTP request data here from the buffer..
-        // ...but main should not be responsible for this
-        // main should only be worried about whether the request succeeded.
-        std::cout << "\n<-----REQ BUFFER----->\n" << connection.get_request_buffer();
-        auto headers = HTTPRequestHeaders::from_raw(connection.get_request_buffer());
-        if (!headers)
-        {
-            continue;
-        }
-
-        std::string response; // might also need to make this a member variable for each connection
-        
-        // Handle particular request method (GET, POST, etc.)
-        // Might somehow consider refactoring this into enum switch
-        if ((headers->get_request_method()) == "GET")
-        {
-            std::cout << "Start servicing..." << '\n';
-
-            // obtain request target
-            std::filesystem::path request_target = headers->get_request_target(); // target is either '/' or '/../..' 
-            std::cout << "Request target: " << request_target << '\n';
-
-            // map root path to homepage
-            if (request_target == "/") {
-                request_target = "/home/index.html"; // check if root is being accessed
-            }
-            
-            std::filesystem::path full_path = std::filesystem::weakly_canonical(Config::base_dir / request_target.string().substr(1));
-            std::cout << "Full path: " << full_path << '\n';
-
-            // sanitize & validate request target
-            if (!Config::is_within_base_dir(full_path)) {
-                std::cerr << "Request target not within base directory.\n";
-                // Could perhaps add some later logic in here to reject the connecting client in future requests
-                // 403
-                continue;
-            }
-            
-            std::ifstream web_file;
-            try {
-                web_file.open(full_path);
-                if (!web_file.is_open()) {
-                    throw std::runtime_error("File not found/could not be opened.\n");
-                }
-            } catch (const std::runtime_error& e) {
-                std::cerr << e.what() << '\n';
-                // 404
-                continue;
-            }
-            std::stringstream web_file_buffer; // create buffer to hold data for a web page stored in disk
-            web_file_buffer << web_file.rdbuf(); // read data from web page to buffer
-            std::string pay_load = web_file_buffer.str(); // store data in string
-            web_file.close(); // close the web file
-            
-            std::string header = 
-            "HTTP/1.0 200 OK\r\n"
-            "Content-Type: " + get_mime_type(full_path) + "\r\n"
-            "Content-Length: " + std::to_string(pay_load.length()) + "\r\n"
-            "\r\n";
-
-            response = header + pay_load;
-        }
-
-        send(connection.get_fd(), response.c_str(), response.length(), 0);
-        std::cout << "Response sent.\n";
+        handle_connection(connection);
     }
-
     return 0;
 }
 
