@@ -3,11 +3,12 @@
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
 #include "connection_handler.hpp"
+#include "config.hpp"
 
 int main()
 {
     HTTPServerSocket server;
-    INetAddr server_addr{8081, "127.0.0.1"};
+    INetAddr server_addr{Config::SERVER_PORT, "127.0.0.1"};
     server.bind_server(server_addr);
     server.listen_server();
     
