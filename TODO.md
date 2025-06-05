@@ -12,7 +12,8 @@ Lightweight HTTPS server written in C++
 - [ ] Guard against maliciously malformed headers
 - [ ] Refactor magic numbers in http_request_header.cpp
   - [ ] Consider std::isspace()
-- [ ] Handle how the construction of HTTPRequestHeader obj can throw and properly clean up
+- [✓] Handle how the construction of HTTPRequestHeader obj can throw and properly clean up
+- [ ] Implement a std::set<std::string> to act as an IP blacklist whenever an incoming connection is about to be accepted
 
 ### Completed Column ✓
 - [x] Completed task title  

@@ -13,6 +13,12 @@ int main()
     server.listen_server();
     
     while (true) {
+        // A connection is it's own independent, executing entity
+        // The server's job is to:
+            // 1. Listen for incoming connections
+            // 2. Accept connections
+            // 3. Handle accepted connections
+        
         HTTPConnectionSocket connection { server };
         handle_connection(connection);
     }
