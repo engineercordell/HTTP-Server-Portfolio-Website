@@ -6,14 +6,15 @@
 #include <thread>
 
 static constexpr int server_port = 8081;
+static int max_pending_connections = 12;
+static size_t pool_size = 12;
 
 int main()
 {
     HTTPServerSocket server;
     INetAddr server_addr{server_port, "127.0.0.1"};
     server.bind_server(server_addr);
-    server.listen_server();
-    std::cout << "Number of concurrent threads: " << std::thread::hardware_concurrency() << '\n';
+    server.listen_server(max_pending_connections);
     
     while (true) {
         // A connection is it's own independent, executing entity
@@ -21,8 +22,9 @@ int main()
             // 1. Listen for incoming connections
             // 2. Accept connections
             // 3. Handle accepted connections
-        
         HTTPConnectionSocket connection { server };
+        int arr[4]{0, 1};
+
         handle_connection(connection);
     }
     return 0;
