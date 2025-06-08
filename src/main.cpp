@@ -5,9 +5,9 @@
 #include "connection_handler.hpp"
 #include <thread>
 
-static constexpr int server_port = 8081;
-static int max_pending_connections = 12;
-static size_t pool_size = 12;
+constexpr int server_port = 8081;
+constexpr int max_pending_connections = 12;
+constexpr size_t pool_size = 12;
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
             // 2. Accept connections
             // 3. Handle accepted connections
         HTTPConnectionSocket connection { server };
-        int arr[4]{0, 1};
+        
 
         handle_connection(connection);
     }
