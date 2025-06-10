@@ -17,17 +17,18 @@ int main()
     server.listen_server(max_pending_connections);
     ThreadPool threads;
     
-    while (true) {
+    while (true) 
+    {
         // A connection is it's own independent, executing entity
         // The server's job is to:
             // 1. Listen for incoming connections
             // 2. Accept connections
             // 3. Handle accepted connections
         HTTPConnectionSocket connection { server };
-        // threads.queue_job()
-        
 
-        handle_connection(connection);
+        threads.queue_job([conn = std::move(connection)]() mutable {
+            handle_connection(std::move(conn));
+        });
     }
     return 0;
 }

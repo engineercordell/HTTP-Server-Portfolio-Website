@@ -3,6 +3,6 @@
 
 #include "http_connection_socket.hpp"
 
-void handle_connection(HTTPConnectionSocket connection);
+void handle_connection(HTTPConnectionSocket&& connection);
 
 #endif

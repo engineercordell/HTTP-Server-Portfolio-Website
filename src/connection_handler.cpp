@@ -2,7 +2,7 @@
 #include "http_request_header.hpp"
 #include "request_handler.hpp"
 
-void handle_connection(HTTPConnectionSocket connection)
+void handle_connection(HTTPConnectionSocket&& connection)
 {
     ssize_t msg_size;
     while ((msg_size = recv(connection.get_fd(), connection.get_buffer(), connection.get_buffer_size(), 0)) > 0) {

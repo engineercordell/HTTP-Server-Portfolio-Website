@@ -5,6 +5,7 @@
 #include <thread>
 #include <condition_variable>
 #include <queue>
+#include "http_connection_socket.hpp"
 
 class ThreadPool
 {
