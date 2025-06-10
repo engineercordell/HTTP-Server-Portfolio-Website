@@ -22,9 +22,8 @@ private:
 public:
     ThreadPool();
     void queue_job(const std::function<void()>& job);
+    bool busy();
     void stop();
-    void busy();
-
 };
 
 #endif
