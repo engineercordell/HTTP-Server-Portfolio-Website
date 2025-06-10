@@ -1,5 +1,6 @@
 #include "thread_pool.hpp"
 #include <thread>
+#include <iostream>
 
 const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency();
 
@@ -8,11 +9,12 @@ ThreadPool::ThreadPool()
     threads.reserve(num_threads); // allocate all needed mem upfront to prevent unnecessary reallocations
     for (size_t i = 0; i < num_threads; ++i)
     {
-        threads.emplace_back(&ThreadPool::thread_loop, this);
+        threads.emplace_back(&ThreadPool::thread_loop, this, i);
+        std::cout << "Thread " << i << " created.\n";
     }
 }
 
-void ThreadPool::thread_loop()
+void ThreadPool::thread_loop(int thread_idx)
 {
     while (true)
     {
@@ -20,13 +22,15 @@ void ThreadPool::thread_loop()
 
         { // critical section
             std::unique_lock<std::mutex> lock(queue_mutex); // unlocks at end of scope
-            queue_mutex_condition.wait(lock, [this] {
+            queue_mutex_condition.wait(lock, [this, thread_idx] {
+                std::cout << "Thread " << thread_idx << " waiting.\n";
                 return !jobs.empty() || should_terminate; // either the queue is empty, or the thread should be terminated
                 // if both false, unlocks mutex and puts thread to sleep (so other threads can push jobs)
                 // sleep until notify_one() called
                 // afterwards, predicate re-evaluated
                 // pred must return true to repossess lock
             });
+            // std::cout << "Thread not executing test.";
 
             if (should_terminate) return; // confirm that thread should be terminated
 

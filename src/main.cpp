@@ -15,6 +15,7 @@ int main()
     INetAddr server_addr{server_port, "127.0.0.1"};
     server.bind_server(server_addr);
     server.listen_server(max_pending_connections);
+    ThreadPool threads;
     
     while (true) {
         // A connection is it's own independent, executing entity
@@ -23,6 +24,7 @@ int main()
             // 2. Accept connections
             // 3. Handle accepted connections
         HTTPConnectionSocket connection { server };
+        // threads.queue_job()
         
 
         handle_connection(connection);

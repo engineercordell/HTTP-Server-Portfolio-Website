@@ -6,11 +6,10 @@
 #include <condition_variable>
 #include <queue>
 
-
 class ThreadPool
 {
 private:
-    void thread_loop();
+    void thread_loop(int thread_idx);
 
     std::queue<std::function<void()>> jobs; // Keep track of jobs
     std::vector<std::thread> threads; // Keep track of threads
