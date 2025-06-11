@@ -42,11 +42,11 @@ void ThreadPool::thread_loop(int thread_idx)
     }
 }
 
-void ThreadPool::queue_job(const std::function<void()>& job)
+void ThreadPool::queue_job(std::function<void()>&& job)
 {
     { // critical section
         std::unique_lock<std::mutex> lock(queue_mutex);
-        jobs.push(job);
+        jobs.push(std::move(job));
     } // lock automatically unlocked here
     queue_mutex_condition.notify_one();
 }

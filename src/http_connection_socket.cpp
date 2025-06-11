@@ -1,4 +1,5 @@
 #include "http_connection_socket.hpp"
+#include <cstring>
 
 HTTPConnectionSocket::HTTPConnectionSocket(const HTTPServerSocket& server)
 {
@@ -9,6 +10,40 @@ HTTPConnectionSocket::HTTPConnectionSocket(const HTTPServerSocket& server)
     }
     std::cout << "New client.\n";
 }
+
+HTTPConnectionSocket::HTTPConnectionSocket(HTTPConnectionSocket&& src) noexcept
+    : m_connect_fd{src.m_connect_fd},
+      m_client_addr{std::move(src.m_client_addr)}, // INetAddr needs move semantics
+      m_request_buffer{std::move(src.m_request_buffer)}
+{
+    // Copy buffer for now
+    std::memcpy(m_buffer, src.m_buffer, sizeof(src.m_buffer));
+
+    // Invalid original conn obj socket
+    src.m_connect_fd = -1;
+}
+
+HTTPConnectionSocket& HTTPConnectionSocket::operator=(HTTPConnectionSocket&& src) noexcept
+{
+    if (this != &src)
+    {
+        // Close current socket if needed
+        if (m_connect_fd != -1)
+        {
+            ::close(m_connect_fd);
+        }
+
+        m_connect_fd = src.m_connect_fd;
+        m_client_addr = std::move(src.m_client_addr);
+        m_request_buffer = std::move(src.m_request_buffer);
+        std::memcpy(m_buffer, src.m_buffer, sizeof(m_buffer));
+
+        src.m_connect_fd = -1;
+    }
+    return *this;
+}
+
+
 
 HTTPConnectionSocket::~HTTPConnectionSocket()
 {

@@ -17,6 +17,13 @@ public:
     INetAddr(unsigned short sin_port, const std::string& ip_addr);
     INetAddr() = default; // No custom work need be done in default constructor
 
+    // moved-from INetAddr is still in a valid but unspecified state
+    INetAddr(INetAddr&& src) noexcept;
+    INetAddr& operator=(INetAddr&& src) noexcept;
+
+    INetAddr(const INetAddr&) = delete;
+    INetAddr& operator=(const INetAddr&) = delete;
+
     const sockaddr* get_sock_addr() const {return reinterpret_cast<const sockaddr*>(&m_address); }
     sockaddr* get_sock_addr() { return reinterpret_cast<sockaddr*>(&m_address); } // const member function that should never manipulate the address of m_address
     socklen_t get_addrlen() { return m_addrlen; }

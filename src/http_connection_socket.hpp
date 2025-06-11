@@ -15,6 +15,9 @@ public:
     HTTPConnectionSocket(const HTTPServerSocket& server);
     ~HTTPConnectionSocket();
 
+    HTTPConnectionSocket(HTTPConnectionSocket&& src) noexcept;
+    HTTPConnectionSocket& operator=(HTTPConnectionSocket&& src) noexcept;
+
     HTTPConnectionSocket(const HTTPConnectionSocket&) = delete;
     HTTPConnectionSocket& operator=(const HTTPConnectionSocket&) = delete;
 
