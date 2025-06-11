@@ -19,15 +19,12 @@ int main()
     
     while (true) 
     {
-        // A connection is it's own independent, executing entity
-        // The server's job is to:
-            // 1. Listen for incoming connections
-            // 2. Accept connections
-            // 3. Handle accepted connections
         HTTPConnectionSocket connection { server };
 
-        threads.queue_job([conn = std::move(connection)]() mutable {
-            handle_connection(std::move(conn));
+        auto conn_ptr = std::make_shared<HTTPConnectionSocket>(std::move(connection));
+
+        threads.queue_job([conn_ptr]() mutable {
+            handle_connection(std::move(*conn_ptr));
         });
     }
     return 0;
