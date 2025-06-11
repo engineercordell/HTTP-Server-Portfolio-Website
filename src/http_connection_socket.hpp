@@ -15,6 +15,9 @@ public:
     HTTPConnectionSocket(const HTTPServerSocket& server);
     ~HTTPConnectionSocket();
 
+    HTTPConnectionSocket(const HTTPConnectionSocket&) = delete;
+    HTTPConnectionSocket& operator=(const HTTPConnectionSocket&) = delete;
+
     int get_fd() const { return m_connect_fd; }
     char* get_buffer() { return m_buffer; }
     size_t get_buffer_size() const { return sizeof(m_buffer); }
