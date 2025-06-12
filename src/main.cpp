@@ -4,17 +4,14 @@
 #include "http_connection_socket.hpp"
 #include "connection_handler.hpp"
 #include "thread_pool.hpp"
-
-constexpr int server_port = 8081;
-constexpr int max_pending_connections = 12;
-constexpr size_t pool_size = 12;
+#include "config.hpp"
 
 int main()
 {
     HTTPServerSocket server;
-    INetAddr server_addr{server_port, "127.0.0.1"};
+    INetAddr server_addr{Config::server_port, Config::ip_addr};
     server.bind_server(server_addr);
-    server.listen_server(max_pending_connections);
+    server.listen_server(Config::max_pending_connections);
     ThreadPool threads;
     
     while (true) 

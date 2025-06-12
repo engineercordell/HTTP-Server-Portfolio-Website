@@ -6,7 +6,6 @@ void handle_connection(HTTPConnectionSocket&& connection)
 {
     ssize_t msg_size;
     while ((msg_size = recv(connection.get_fd(), connection.get_buffer(), connection.get_buffer_size(), 0)) > 0) {
-        // std::cout << "Received request:\n" << buffer;
         connection.add_to_request_buffer(msg_size);
         if (connection.request_complete()) break;
     }

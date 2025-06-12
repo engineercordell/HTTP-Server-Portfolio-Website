@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++20 -g
+CXXFLAGS := -Wall -Wextra -std=c++20
 SRC_DIR := src
 BUILD_DIR := build
 TARGET := server

@@ -6,7 +6,6 @@
 #include "http_request_header.hpp"
 #include "http_response.hpp"
 
-
 std::string handle_request(HTTPRequestHeaders& headers)
 {
     std::string method = headers.get_request_method();
