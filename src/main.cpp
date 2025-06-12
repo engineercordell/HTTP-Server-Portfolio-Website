@@ -17,7 +17,7 @@ int main()
     
     while (true) 
     {
-        HTTPConnectionSocket connection { server };
+        HTTPConnectionSocket connection{server};
 
         auto conn_ptr = std::make_shared<HTTPConnectionSocket>(std::move(connection));
 

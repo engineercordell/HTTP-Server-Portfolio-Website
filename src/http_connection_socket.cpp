@@ -12,9 +12,9 @@ HTTPConnectionSocket::HTTPConnectionSocket(const HTTPServerSocket& server)
 }
 
 HTTPConnectionSocket::HTTPConnectionSocket(HTTPConnectionSocket&& src) noexcept
-    : m_connect_fd{src.m_connect_fd},
-      m_client_addr{std::move(src.m_client_addr)}, // INetAddr needs move semantics
-      m_request_buffer{std::move(src.m_request_buffer)}
+    : m_connect_fd { src.m_connect_fd },
+      m_client_addr { std::move(src.m_client_addr) }, // INetAddr needs move semantics
+      m_request_buffer { std::move(src.m_request_buffer) }
 {
     // Copy buffer for now
     std::memcpy(m_buffer, src.m_buffer, sizeof(src.m_buffer));

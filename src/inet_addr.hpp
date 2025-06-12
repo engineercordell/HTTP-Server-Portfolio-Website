@@ -10,7 +10,7 @@ class INetAddr
 {
 private:
     struct sockaddr_in m_address{}; // IPv4 interet domain socket address
-    socklen_t m_addrlen { sizeof(m_address) };
+    socklen_t m_addrlen{sizeof(m_address)};
 
 public:
     // sin_family should always be AF_INET since the class deals with IPv4 addr

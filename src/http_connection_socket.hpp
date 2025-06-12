@@ -6,7 +6,7 @@
 class HTTPConnectionSocket
 {
 private:
-    int m_connect_fd{ -1 };
+    int m_connect_fd { -1 };
     INetAddr m_client_addr;
     char m_buffer[4096];
     std::string m_request_buffer;

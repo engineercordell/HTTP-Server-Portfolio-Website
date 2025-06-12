@@ -4,7 +4,7 @@
 std::optional<HTTPRequestHeaders> HTTPRequestHeaders::from_raw(std::string raw)
 {
     try {
-        HTTPRequestHeaders headers { raw };
+        HTTPRequestHeaders headers{raw};
         return headers;
     } catch (const std::exception& e) {
         std::cout << "Failed to parse request: " << e.what() << '\n';
@@ -13,7 +13,7 @@ std::optional<HTTPRequestHeaders> HTTPRequestHeaders::from_raw(std::string raw)
 }
 
 HTTPRequestHeaders::HTTPRequestHeaders(std::string request)
-    : m_request { std::move(request) }
+    : m_request {std::move(request)}
 {
     parse_request_line();
     parse_headers();
