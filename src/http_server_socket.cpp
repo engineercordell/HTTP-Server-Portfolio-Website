@@ -1,11 +1,8 @@
 #include "http_server_socket.hpp"
 
 HTTPServerSocket::HTTPServerSocket(int domain, int type, int protocol)
-    : m_domain { domain }
-    , m_type { type }
-    , m_protocol { protocol }
 {
-    m_server_fd = socket(m_domain, m_type, m_protocol);
+    m_server_fd = socket(domain, type, protocol);
     if (m_server_fd < 1)
     {
         throw std::runtime_error("Socket creation failed.");
