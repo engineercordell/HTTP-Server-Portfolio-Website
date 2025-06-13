@@ -2,7 +2,7 @@
 #include <thread>
 #include <iostream>
 
-const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency();
+const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency() / 2;
 
 ThreadPool::ThreadPool()
 {
