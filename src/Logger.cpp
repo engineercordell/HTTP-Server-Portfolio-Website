@@ -66,7 +66,7 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
 
 void Logger::write(LogLevel level, const std::string& msg)
 {
-    if (level < current_level) return; // ignore these type of logs
+    if (level < current_level) return; // ignore everything below the current_level by returning
 
     std::string formatted = format_message(level, msg);
 

@@ -27,6 +27,7 @@ private:
 
 public:
     static Logger& get(); // return reference to this single Logger obj
+    ~Logger() { if(log_file.is_open()) log_file.close(); };
 
     void set_level(LogLevel level); // user can set LogLevel for all messages
     void enable_file_output(const std::string& filename); // user can enable output to a file named 'filename'
