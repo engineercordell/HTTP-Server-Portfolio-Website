@@ -5,7 +5,7 @@
 #include "connection_handler.hpp"
 #include "thread_pool.hpp"
 #include "config.hpp"
-#include "Logger.hpp"
+#include "logger.hpp"
 
 int main()
 {
