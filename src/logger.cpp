@@ -7,6 +7,11 @@
 
 Logger::Logger() {}
 
+Logger::~Logger()
+{
+    if(log_file.is_open()) log_file.close(); 
+}
+
 Logger& Logger::get()
 {
     static Logger logger;
@@ -41,7 +46,7 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
     std::ostringstream string_output_buffer;
 
     // append time,
-    string_output_buffer << "[" << std::put_time(std::localtime(&current_time), "%Y-%m-%d %H:%M:%S") << "]";
+    string_output_buffer << "[" << std::put_time(std::localtime(&current_time), "%Y-%m-%d %H:%M:%S") << "]\n";
 
 
     switch (level) // append log level,

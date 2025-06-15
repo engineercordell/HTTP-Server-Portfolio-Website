@@ -10,9 +10,12 @@
 int main()
 {
     HTTPServerSocket server;
+    LogMessage server{"Server started.", LogLevel::INFO};
+
     INetAddr server_addr{Config::server_port, Config::ip_addr};
     server.bind_server(server_addr);
     server.listen_server(Config::max_pending_connections);
+    
     ThreadPool handle_conn_threads;
     ThreadPool log_threads; // ?
     
