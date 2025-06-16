@@ -4,8 +4,12 @@
 #include <chrono>
 #include <iomanip>
 #include <ctime>
+#include <thread>
 
-Logger::Logger() {}
+Logger::Logger()
+{
+    logger_thread = std::thread{logging_thread_function};
+}
 
 Logger::~Logger()
 {
@@ -21,6 +25,11 @@ Logger& Logger::get()
 void Logger::set_level(LogLevel level)
 {
     current_level = level;
+}
+
+void logging_thread_function()
+{
+
 }
 
 void Logger::enable_file_output(const std::string& filename)
@@ -45,11 +54,11 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
 
     std::ostringstream string_output_buffer;
 
-    // append time,
+    // append time
     string_output_buffer << "[" << std::put_time(std::localtime(&current_time), "%Y-%m-%d %H:%M:%S") << "]\n";
 
-
-    switch (level) // append log level,
+    // append log level
+    switch (level) 
     {
         case LogLevel::DEBUG:
             string_output_buffer << " [DEBUG] ";
@@ -71,14 +80,18 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
 
 void Logger::write(LogLevel level, const std::string& msg)
 {
-    if (level < current_level) return; // ignore everything below the current_level by returning
+    // ignore everything below the current_level by returning
+    if (level < current_level) return; 
 
+    // obtain string of formatted msg
     std::string formatted = format_message(level, msg);
 
-    std::lock_guard<std::mutex> lock(log_mutex);
+    // mutex locked: thread logs to shared output file
+    std::lock_guard<std::mutex> lock(log_mutex); // automatically unlocks when write() returns
     std::cout << formatted << std::endl; // output to terminal
     if (log_to_file && log_file.is_open())
     {
         log_file << formatted << std::endl;
     }
+    // mutex unlocked
 }

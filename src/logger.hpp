@@ -4,6 +4,10 @@
 #include <string>
 #include <fstream>
 #include <mutex>
+#include <condition_variable>
+#include <queue>
+#include <thread>
+#include <atomic>
 
 enum class LogLevel
 {
@@ -29,13 +33,21 @@ private:
     Logger();
     ~Logger();
 
-    std::string format_message(LogLevel level, const std::string& msg);
-    void write(LogLevel level, const std::string& msg);
+    // assemble log msg string
+    std::string format_message(LogLevel level, const std::string& msg); 
+    // write to terminal and/or file
+    void write(LogLevel level, const std::string& msg); 
+    void logging_thread_function();
 
     LogLevel current_level = LogLevel::DEBUG; // by default
     std::ofstream log_file; // be able to read from log_file stream if one choooses
-    bool log_to_file = false; // do not automatically log to file
+    bool log_to_file = false;
+
     std::mutex log_mutex; // enable thread safety when writing to file
+    std::condition_variable queue_cv; // control producer threads attempting to enqueue log messages
+    std::queue<LogMessage> log_message_queue; 
+    std::thread logger_thread; // consumer thread to process enqueued log messages
+    std::atomic<bool> running;
 
 public:
     static Logger& get(); // obtain Logger obj from anywhere without instantiation
