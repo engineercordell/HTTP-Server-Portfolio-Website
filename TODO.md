@@ -15,8 +15,12 @@ Lightweight HTTPS server written in C++
   - [ ] Consider std::isspace()
 - [✓] Handle how the construction of HTTPRequestHeader obj can throw and properly clean up
 - [ ] Add persistent connections or HTTP/1.1 features
-- [ ] Start parsing .css/.js files to support full page serving
+- [✓] Start parsing .css/.js files to support full page serving
 - [ ] Refactor toward epoll or select() for async IO
+
+## Features
+- [ ] Change log files at runtime
+- [ ] Rotate logs based on date, size, time, etc.
 
 ### Completed Column ✓
 - [x] Completed task title  

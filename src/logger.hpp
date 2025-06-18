@@ -42,11 +42,11 @@ private:
     // should strictly monitor the queue by popping and shifting the iterator
     void logging_thread_function();
 
-    LogLevel current_level = LogLevel::DEBUG; // by default
+    std::atomic<LogLevel> current_level = LogLevel::DEBUG; // by default
     std::ofstream log_file; // be able to read from log_file stream if one choooses
     bool log_to_file = false;
 
-    std::mutex log_mutex; // enable thread safety when writing to file
+    std::mutex queue_mutex; // enable thread safety when writing to file
     std::condition_variable queue_cv; // control producer threads attempting to enqueue log messages
     std::queue<LogMessage> log_message_queue; 
     std::thread logger_thread; // consumer thread to process enqueued log messages
