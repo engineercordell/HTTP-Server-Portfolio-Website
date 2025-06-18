@@ -10,7 +10,7 @@
 int main()
 {
     HTTPServerSocket server;
-    Logger::get().enable_file_output("log.txt");
+    Logger::get().enable_file_output(Config::get_log_path());
     Logger::get().info("Server started");
 
     INetAddr server_addr{Config::server_port, Config::ip_addr};
