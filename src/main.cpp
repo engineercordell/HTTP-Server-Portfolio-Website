@@ -11,7 +11,7 @@ int main()
 {
     HTTPServerSocket server;
     // Logger::get().enable_file_output(Config::get_log_path());
-    Logger::get().info("Server started");
+    Logger::get().info("Server starting up on " + server.get_server_addr().to_string());
 
     server.listen_server(Config::max_pending_connections);
     // std::cout << server.get_server_addr() << '\n';

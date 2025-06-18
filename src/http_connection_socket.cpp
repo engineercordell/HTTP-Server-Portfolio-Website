@@ -43,8 +43,6 @@ HTTPConnectionSocket& HTTPConnectionSocket::operator=(HTTPConnectionSocket&& src
     return *this;
 }
 
-
-
 HTTPConnectionSocket::~HTTPConnectionSocket()
 {
     if (m_connect_fd >= 0) {

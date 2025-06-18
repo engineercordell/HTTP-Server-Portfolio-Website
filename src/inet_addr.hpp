@@ -35,6 +35,7 @@ public:
     const std::string& get_ip() const { return m_ip_addr; }
     uint16_t get_port() const { return m_port; }
 
+    const std::string to_string() const { return m_ip_addr + ":" + std::to_string(m_port); }
     friend std::ostream& operator<<(std::ostream& out, const INetAddr& addr);
 };
 
