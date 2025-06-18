@@ -8,12 +8,14 @@
 #include <unistd.h>
 #include <iostream>
 #include "inet_addr.hpp"
+#include "config.hpp"
 
 class HTTPServerSocket
 {
 
 private:
     int m_server_fd { -1 };
+    INetAddr m_server_addr{Config::server_port, Config::ip_addr};
 
 public:
     HTTPServerSocket();
@@ -24,7 +26,6 @@ public:
     HTTPServerSocket& operator=(const HTTPServerSocket&) = delete;
 
     int get_fd() const { return m_server_fd; } 
-    void bind_server(INetAddr& addr);
     void listen_server(int backlog = 3);
 };
 
