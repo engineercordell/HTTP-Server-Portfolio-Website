@@ -10,11 +10,11 @@
 int main()
 {
     HTTPServerSocket server;
-    Logger::get().enable_file_output(Config::get_log_path());
+    // Logger::get().enable_file_output(Config::get_log_path());
     Logger::get().info("Server started");
-    std::cout << server << '\n';
 
     server.listen_server(Config::max_pending_connections);
+    // std::cout << server.get_server_addr() << '\n';
 
     ThreadPool handle_conn_threads;
     

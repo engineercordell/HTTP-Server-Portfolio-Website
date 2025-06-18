@@ -27,8 +27,7 @@ public:
 
     int get_fd() const { return m_server_fd; } 
     void listen_server(int backlog = 3);
-
-    friend std::ostream& operator<<(std::ostream& out, const HTTPServerSocket& server);
+    const INetAddr& get_server_addr() { return m_server_addr; }
 };
 
 #endif

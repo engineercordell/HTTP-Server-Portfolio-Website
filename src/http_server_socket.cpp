@@ -3,8 +3,16 @@
 HTTPServerSocket::HTTPServerSocket(int domain, int type, int protocol)
 {
     m_server_fd = socket(domain, type, protocol);
-    if (m_server_fd < 1) throw std::runtime_error("Socket creation failed.");
-    if (bind(m_server_fd, m_server_addr.get_sock_addr(), m_server_addr.get_addrlen()) < 0) std::runtime_error("bind() failed");
+    if (m_server_fd < 1) throw std::runtime_error("Socket creation failed.\n");
+    if (bind(m_server_fd, m_server_addr.get_sock_addr(), m_server_addr.get_addrlen()) < 0) throw std::runtime_error("bind() failed");
+    
+    sockaddr_in actual_addr{};
+    socklen_t addrlen = sizeof(actual_addr);
+
+    if (getsockname(m_server_fd, reinterpret_cast<sockaddr*>(&actual_addr), &addrlen) < 0)
+        throw std::runtime_error("getsockname() failed\n");
+
+    m_server_addr = INetAddr(actual_addr);
 }
 
 HTTPServerSocket::HTTPServerSocket()
@@ -19,12 +27,5 @@ HTTPServerSocket::~HTTPServerSocket()
 
 void HTTPServerSocket::listen_server(int backlog)
 {
-    if (listen(m_server_fd, backlog) < 0) std::runtime_error("listen() failed");
-    std::cout << "Listening on port...\n";
-}
-
-std::ostream& operator<<(std::ostream& out, const HTTPServerSocket& server)
-{
-    out << server.m_server_addr.get_sock_addr() << ":" << server.m_server_addr.get_port();
-    return out;
+    if (listen(m_server_fd, backlog) < 0) throw std::runtime_error("listen() failed\n");
 }
