@@ -1,14 +1,13 @@
 #include "http_connection_socket.hpp"
 #include <cstring>
+#include "logger.hpp"
 
 HTTPConnectionSocket::HTTPConnectionSocket(const HTTPServerSocket& server)
 {
     m_connect_fd = accept(server.get_fd(), m_client_addr.get_sock_addr(), m_client_addr.get_addrlen_ptr());
-    if (m_connect_fd < 0)
-    {
-        std::runtime_error("accept() failed");
-    }
-    std::cout << "New client.\n";
+    if (m_connect_fd < 0) std::runtime_error("accept() failed");
+
+    Logger::get().info("Accepted new connection from " + m_client_addr.to_string());
 }
 
 HTTPConnectionSocket::HTTPConnectionSocket(HTTPConnectionSocket&& src) noexcept
@@ -47,6 +46,7 @@ HTTPConnectionSocket::~HTTPConnectionSocket()
 {
     if (m_connect_fd >= 0) {
         ::close(m_connect_fd); // don't throw in destructor
+        Logger::get().info("Connection closed with " + m_client_addr.to_string());
     }   
 }
 

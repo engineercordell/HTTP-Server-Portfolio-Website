@@ -11,8 +11,8 @@
 
 int main()
 {
-    std::signal(SIGINT, handle_sigint);
-    
+    // std::signal(SIGINT, handle_sigint);
+
     HTTPServerSocket server;
     // Logger::get().enable_file_output(Config::get_log_path());
     Logger::get().info("Server starting up on " + server.get_server_addr().to_string());

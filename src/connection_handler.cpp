@@ -1,6 +1,7 @@
 #include "connection_handler.hpp"
 #include "http_request_header.hpp"
 #include "request_handler.hpp"
+#include "logger.hpp"
 
 void handle_connection(HTTPConnectionSocket&& connection)
 {
@@ -11,11 +12,11 @@ void handle_connection(HTTPConnectionSocket&& connection)
     }
 
     // Handle parsing HTTP request data here from the buffer..
-    std::cout << "\n<-----REQ BUFFER----->\n" << connection.get_request_buffer();
+    // std::cout << "\n<-----REQ BUFFER----->\n" << connection.get_request_buffer();
     auto headers = HTTPRequestHeaders::from_raw(connection.get_request_buffer());
     if (!headers) return;
 
     std::string response = handle_request(*headers); // might also need to make this a member variable for each connection
     send(connection.get_fd(), response.c_str(), response.length(), 0);
-    std::cout << "Response sent.\n";
+    // std::cout << "Response sent.\n";
 }
