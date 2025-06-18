@@ -10,6 +10,7 @@
 int main()
 {
     HTTPServerSocket server;
+    Logger& log_obj = Logger::get();
     // Logger::get().info("Server started");
 
     INetAddr server_addr{Config::server_port, Config::ip_addr};

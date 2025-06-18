@@ -6,14 +6,38 @@
 #include <ctime>
 #include <thread>
 
-Logger::Logger()
+void Logger::logging_thread_function()
 {
-    logger_thread = std::thread{logging_thread_function};
+    while (true)
+    {
+        std::cout << "Logger thread executing...\n";
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+
+        std::unique_lock<std::mutex> lock{log_mutex};
+        queue_cv.wait(lock, [this] {
+            return !running || !log_message_queue.empty(); // if not running or if queue isn't empty, return
+        });
+
+        if(!running) break;
+
+        // LogMessage log = std::move(log_message_queue.front());
+        log_message_queue.pop();
+
+        lock.unlock();
+    }
+}
+
+Logger::Logger() 
+    : logger_thread(&Logger::logging_thread_function, this)
+    , running{true}
+{
 }
 
 Logger::~Logger()
 {
-    if(log_file.is_open()) log_file.close(); 
+    if (log_file.is_open()) log_file.close(); // close file
+    if (logger_thread.joinable()) logger_thread.join(); // wait for it to finish
+    running = false;
 }
 
 Logger& Logger::get()
@@ -27,30 +51,21 @@ void Logger::set_level(LogLevel level)
     current_level = level;
 }
 
-void logging_thread_function()
-{
-
-}
-
 void Logger::enable_file_output(const std::string& filename)
 {
     log_file.open(filename, std::ios::app);
-    if (log_file.is_open())
-    {
-        log_to_file = true;
-    }
+    if (log_file.is_open()) log_to_file = true;
     // otherwise error, failed to open log, defaulting to false
 }
 
-void Logger::debug(const std::string& msg) { write(LogLevel::DEBUG, msg); }
-void Logger::info(const std::string& msg) { write(LogLevel::INFO, msg); }
-void Logger::warning(const std::string& msg) { write(LogLevel::WARNING, msg); }
-void Logger::error(const std::string& msg) { write(LogLevel::ERROR, msg); }
+void Logger::debug(const std::string& msg) { log(LogLevel::DEBUG, msg); }
+void Logger::info(const std::string& msg) { log(LogLevel::INFO, msg); }
+void Logger::warning(const std::string& msg) { log(LogLevel::WARNING, msg); }
+void Logger::error(const std::string& msg) { log(LogLevel::ERROR, msg); }
 
-std::string Logger::format_message(LogLevel level, const std::string& msg)
+std::string Logger::format_message(const LogMessage& msg)
 {
-    auto now = std::chrono::system_clock::now();
-    std::time_t current_time = std::chrono::system_clock::to_time_t(now);
+    std::time_t current_time = std::chrono::system_clock::to_time_t(msg.timestamp);
 
     std::ostringstream string_output_buffer;
 
@@ -58,7 +73,7 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
     string_output_buffer << "[" << std::put_time(std::localtime(&current_time), "%Y-%m-%d %H:%M:%S") << "]\n";
 
     // append log level
-    switch (level) 
+    switch (msg.level) 
     {
         case LogLevel::DEBUG:
             string_output_buffer << " [DEBUG] ";
@@ -74,17 +89,18 @@ std::string Logger::format_message(LogLevel level, const std::string& msg)
             break;
     }
 
-    string_output_buffer << msg; // and append message by user
+    string_output_buffer << msg.message; // and append message by user
     return string_output_buffer.str(); // output as string
 }
 
-void Logger::write(LogLevel level, const std::string& msg)
+void Logger::log(LogLevel level, const std::string& msg)
 {
     // ignore everything below the current_level by returning
     if (level < current_level) return; 
 
     // obtain string of formatted msg
-    std::string formatted = format_message(level, msg);
+    LogMessage log{msg, level};
+    std::string formatted = format_message(log);
 
     // mutex locked: thread logs to shared output file
     std::lock_guard<std::mutex> lock(log_mutex); // automatically unlocks when write() returns

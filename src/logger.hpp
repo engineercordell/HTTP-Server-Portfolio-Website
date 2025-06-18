@@ -30,13 +30,16 @@ struct LogMessage
 class Logger
 {
 private:
-    Logger();
-    ~Logger();
+    Logger(); // should not be able to instantiate static obj
+    ~Logger(); // should not be able to be manually deleted via 'delete'
 
     // assemble log msg string
-    std::string format_message(LogLevel level, const std::string& msg); 
-    // write to terminal and/or file
-    void write(LogLevel level, const std::string& msg); 
+    std::string format_message(const LogMessage& msg); 
+
+    // log to terminal and/or file
+    void log(LogLevel level, const std::string& msg); 
+    
+    // should strictly monitor the queue by popping and shifting the iterator
     void logging_thread_function();
 
     LogLevel current_level = LogLevel::DEBUG; // by default
@@ -55,6 +58,7 @@ public:
     void set_level(LogLevel level); // user can set LogLevel for all messages
     void enable_file_output(const std::string& filename); // user can enable output to file 'filename'
     
+    // public api to enqueue LogMessage
     void info(const std::string& msg); // user can log info msgs
     void error(const std::string& msg); // user can log errors msgs
     void debug(const std::string& msg); // user can log debug msgs
