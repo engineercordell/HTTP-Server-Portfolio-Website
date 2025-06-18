@@ -1,4 +1,5 @@
 #include <iostream>
+#include <csignal>
 #include "http_server_socket.hpp"
 #include "inet_addr.hpp"
 #include "http_connection_socket.hpp"
@@ -6,9 +7,12 @@
 #include "thread_pool.hpp"
 #include "config.hpp"
 #include "logger.hpp"
+#include "handle_signal.hpp"
 
 int main()
 {
+    std::signal(SIGINT, handle_sigint);
+    
     HTTPServerSocket server;
     // Logger::get().enable_file_output(Config::get_log_path());
     Logger::get().info("Server starting up on " + server.get_server_addr().to_string());
@@ -28,5 +32,7 @@ int main()
             handle_connection(std::move(*conn_ptr));
         });
     }
+
+    Logger::get().info("Shutting down server...");
     return 0;
 }
