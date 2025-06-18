@@ -22,3 +22,9 @@ void HTTPServerSocket::listen_server(int backlog)
     if (listen(m_server_fd, backlog) < 0) std::runtime_error("listen() failed");
     std::cout << "Listening on port...\n";
 }
+
+std::ostream& operator<<(std::ostream& out, const HTTPServerSocket& server)
+{
+    out << server.m_server_addr.get_sock_addr() << ":" << server.m_server_addr.get_port();
+    return out;
+}

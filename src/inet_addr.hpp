@@ -9,7 +9,7 @@
 class INetAddr
 {
 private:
-    struct sockaddr_in m_address{}; // IPv4 interet domain socket address
+    struct sockaddr_in m_address{}; // IPv4 internet domain socket address
     socklen_t m_addrlen{sizeof(m_address)};
 
 public:

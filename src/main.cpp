@@ -12,6 +12,7 @@ int main()
     HTTPServerSocket server;
     Logger::get().enable_file_output(Config::get_log_path());
     Logger::get().info("Server started");
+    std::cout << server << '\n';
 
     server.listen_server(Config::max_pending_connections);
 
