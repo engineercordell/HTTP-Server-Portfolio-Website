@@ -36,7 +36,7 @@ void HTTPRequestHeaders::parse_request_line()
     // Retrieve protocol version
     start = end + 1;
     end = req_line.find('\r', start);
-    m_protocol_vers = std::stof(req_line.substr(start + 5, end - start)); // retrives req_line[6, ...) = HTTP/1.1
+    m_protocol_vers = req_line.substr(start + 5, end - start); // retrives req_line[6, ...) = HTTP/1.1
 }
 
 void HTTPRequestHeaders::parse_headers()

@@ -12,7 +12,7 @@ private:
     std::string m_request{};
     std::string m_request_method{};
     std::string m_request_target{};
-    float m_protocol_vers{};
+    std::string m_protocol_vers{};
     std::unordered_map<std::string, std::string> m_headers{};
 
     HTTPRequestHeaders(std::string request);
@@ -25,7 +25,7 @@ public:
 
     const std::string& get_request_method() const { return m_request_method; }
     const std::string& get_request_target() const { return m_request_target; }
-    float get_protocol_vers() const { return m_protocol_vers; }
+    const std::string& get_protocol_vers() const { return m_protocol_vers; }
 };
 
 #endif
