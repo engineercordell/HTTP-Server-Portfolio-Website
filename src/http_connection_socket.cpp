@@ -1,5 +1,5 @@
-#include "http_connection_socket.hpp"
 #include <cstring>
+#include "http_connection_socket.hpp"
 #include "logger.hpp"
 
 HTTPConnectionSocket::HTTPConnectionSocket(const HTTPServerSocket& server)

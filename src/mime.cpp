@@ -1,5 +1,5 @@
-#include "mime.hpp"
 #include <unordered_map>
+#include "mime.hpp"
 
 std::string get_mime_type(const std::filesystem::path& path)
 {

@@ -1,10 +1,10 @@
 #ifndef HTTP_REQUEST_HEADERS_HPP
 #define HTTP_REQUEST_HEADERS_HPP
 
-#include "http_connection_socket.hpp"
 #include <unordered_map>
 #include <variant>
 #include <optional>
+#include "http_connection_socket.hpp"
 
 class HTTPRequestHeaders
 {

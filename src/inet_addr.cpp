@@ -1,5 +1,5 @@
-#include "inet_addr.hpp"
 #include <iostream>
+#include "inet_addr.hpp"
 
 INetAddr::INetAddr(uint16_t sin_port, const std::string& ip_addr)
     : m_ip_addr{ip_addr}

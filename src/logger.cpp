@@ -1,10 +1,9 @@
-#include "logger.hpp"
-
 #include <iostream>
 #include <chrono>
 #include <iomanip>
 #include <ctime>
 #include <thread>
+#include "logger.hpp"
 
 void Logger::logging_thread_function()
 {
