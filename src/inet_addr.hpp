@@ -28,6 +28,7 @@ public:
     INetAddr& operator=(const INetAddr&) = delete;
 
     const sockaddr_in& get_sock_addr_in() const { return m_address; }
+    // const sockaddr_in* get_sock_addr_in() {return reinterpret_cast<const sockaddr_in*>(&m_address); }
     const sockaddr* get_sock_addr() const { return reinterpret_cast<const sockaddr*>(&m_address); }
     sockaddr* get_sock_addr() { return reinterpret_cast<sockaddr*>(&m_address); } // const member function that should never manipulate the address of m_address
     socklen_t get_addrlen() { return m_addrlen; }
