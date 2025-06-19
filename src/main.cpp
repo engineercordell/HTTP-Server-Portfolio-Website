@@ -20,7 +20,7 @@ int main()
     server.listen_server(Config::max_pending_connections);
     // std::cout << server.get_server_addr() << '\n';
 
-    ThreadPool handle_conn_threads;
+    ThreadPool handle_conn_threads{"Connection"};
     
     while (true) 
     {

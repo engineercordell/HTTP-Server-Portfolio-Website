@@ -10,6 +10,7 @@
 class ThreadPool
 {
 private:
+    std::string m_thread_type;
     void thread_loop(int thread_idx);
 
     std::queue<std::function<void()>> jobs; // Keep track of jobs
@@ -20,7 +21,7 @@ private:
     static const unsigned int num_threads;
     
 public:
-    ThreadPool();
+    ThreadPool(const std::string& thread_type);
     void queue_job(std::function<void()>&& job);
     bool busy();
     void stop();

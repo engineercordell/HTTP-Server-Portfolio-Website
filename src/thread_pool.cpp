@@ -1,16 +1,18 @@
-#include "thread_pool.hpp"
 #include <thread>
 #include <iostream>
+#include "thread_pool.hpp"
+#include "logger.hpp"
 
 const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency() / 2;
 
-ThreadPool::ThreadPool()
+ThreadPool::ThreadPool(const std::string& thread_type)
+    : m_thread_type{thread_type}
 {
     threads.reserve(num_threads); // allocate all needed mem upfront to prevent unnecessary reallocations
     for (size_t i = 0; i < num_threads; ++i)
     {
         threads.emplace_back(&ThreadPool::thread_loop, this, i);
-        std::cout << "Thread " << i << " created.\n";
+        // std::cout << "Thread " << i << " created.\n";
     }
 }
 
@@ -23,7 +25,7 @@ void ThreadPool::thread_loop(int thread_idx)
         { // critical section
             std::unique_lock<std::mutex> lock(queue_mutex); // unlocks at end of scope
             queue_mutex_condition.wait(lock, [this, thread_idx] {
-                std::cout << "Thread " << thread_idx << " waiting.\n";
+                // std::cout << "Thread " << thread_idx << " waiting.\n";
                 return !jobs.empty() || should_terminate; // either the queue is empty, or the thread should be terminated
                 // if both false, unlocks mutex and puts thread to sleep (so other threads can push jobs)
                 // sleep until notify_one() called
@@ -37,6 +39,8 @@ void ThreadPool::thread_loop(int thread_idx)
             job = jobs.front();
             jobs.pop();
         } // lock automatically unlock here
+
+        Logger::get().debug(m_thread_type + " thread #" + std::to_string(thread_idx) + " picked up task.");
 
         job();
     }
