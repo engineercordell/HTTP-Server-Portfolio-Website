@@ -18,6 +18,14 @@
         0 20%, 
         10% 0
     );
+    --nav-right-shape: polygon(
+        0 0, 
+        0 100%, 
+        90% 100%, 
+        100% 80%, 
+        100% 20%, 
+        90% 0 
+    );
 }
 
 section {
@@ -59,15 +67,32 @@ body {
     display: flex;
     gap: 3rem;
     padding: 1rem 2rem;
-    background: black;
     transition: 0.3s ease;
     z-index: 1;
+
+    --r: 9px; /* control the rounded part*/
+    --s: 20px; /* control the size of the cut */
+    --a: 50deg; /* control the depth of the curvature*/
+    --p: 50%; /* control the position */
+
+    --nav-border-color: #4b4d51;
 }
 
 .nav-bar.left {
     position: relative;
-    background-color: #4b4d51;
+    background-color: var(--nav-border-color);
     clip-path: var(--nav-left-shape);
+
+    border-radius: var(--r);
+    --_m:,#000 calc(100% - 1px),#0000;
+    --_r:var(--r) at calc(100% - var(--r));
+    --_d:(var(--s) + var(--r))*cos(var(--a));
+    mask:
+        radial-gradient(var(--_r) calc(var(--p) + var(--_d)) var(--_m)),
+        radial-gradient(var(--_r) calc(var(--p) - var(--_d)) var(--_m)),
+        radial-gradient(var(--s) at calc(100% + sin(var(--a))*var(--s)) var(--p),
+        #0000 100%,#000 calc(100% + 1px)) calc(var(--r)*(sin(var(--a)) - 1)) 0 no-repeat,
+        linear-gradient(#000 calc(var(--p) - var(--_d)),#0000 0 calc(var(--p) + var(--_d)),#000 0);
 }
 
 .nav-bar.left::before {
@@ -81,10 +106,54 @@ body {
     clip-path: var(--nav-left-shape);
     z-index: -1;
     
+    border-radius: var(--r);
+    --_m:,#000 calc(100% - 1px),#0000;
+    --_r:var(--r) at calc(100% - var(--r));
+    --_d:(var(--s) + var(--r))*cos(var(--a));
+    mask:
+        radial-gradient(var(--_r) calc(var(--p) + var(--_d)) var(--_m)),
+        radial-gradient(var(--_r) calc(var(--p) - var(--_d)) var(--_m)),
+        radial-gradient(var(--s) at calc(100% + sin(var(--a))*var(--s)) var(--p),
+        #0000 100%,#000 calc(100% + 1px)) calc(var(--r)*(sin(var(--a)) - 1)) 0 no-repeat,
+        linear-gradient(#000 calc(var(--p) - var(--_d)),#0000 0 calc(var(--p) + var(--_d)),#000 0);
 }
 
 .nav-bar.right {
-    border-radius: 0 40px 40px 0;
+    position: relative;
+    background-color: var(--nav-border-color);
+    clip-path: var(--nav-right-shape);
+    
+    border-radius: var(--r);
+    --_m:,#000 calc(100% - 1px),#0000;
+    --_d:(var(--s) + var(--r))*cos(var(--a));
+    mask:
+        radial-gradient(var(--r) at var(--r) calc(var(--p) + var(--_d)) var(--_m)),
+        radial-gradient(var(--r) at var(--r) calc(var(--p) - var(--_d)) var(--_m)),
+        radial-gradient(var(--s) at calc(-1*sin(var(--a))*var(--s)) var(--p),
+          #0000 100%,#000 calc(100% + 1px)) calc(var(--r)*(1 - sin(var(--a)))) 0 no-repeat,
+        linear-gradient(#000 calc(var(--p) - var(--_d)),#0000 0 calc(var(--p) + var(--_d)),#000 0);
+}
+
+.nav-bar.right::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: calc(100% - 1px);
+    height: calc(100% - 2px);
+    background-color: black;
+    clip-path: var(--nav-right-shape);
+    z-index: -1;
+    
+    border-radius: var(--r);
+    --_m:,#000 calc(100% - 1px),#0000;
+    --_d:(var(--s) + var(--r))*cos(var(--a));
+    mask:
+        radial-gradient(var(--r) at var(--r) calc(var(--p) + var(--_d)) var(--_m)),
+        radial-gradient(var(--r) at var(--r) calc(var(--p) - var(--_d)) var(--_m)),
+        radial-gradient(var(--s) at calc(-1*sin(var(--a))*var(--s)) var(--p),
+          #0000 100%,#000 calc(100% + 1px)) calc(var(--r)*(1 - sin(var(--a)))) 0 no-repeat,
+        linear-gradient(#000 calc(var(--p) - var(--_d)),#0000 0 calc(var(--p) + var(--_d)),#000 0);
 }
 
 .nav-bar a {
