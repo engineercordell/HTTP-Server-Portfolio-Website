@@ -8,10 +8,10 @@
 :root {
     --bg: #000000;
     --text: #f5f5f5;
-    --accent: #7c06ae;
-    --glow: #00ffff;
+    --accent: #3e0158;
+    --glow: #8a01c5;
     --nav-left-shape: polygon(
-        100% 0px, 
+        100% 0, 
         100% 100%, 
         10% 100%, 
         0 80%, 
@@ -28,6 +28,16 @@
     );
 }
 
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -500;
+}
+
 section {
     background-color: rgba(255, 255, 255, 0.03);
     border: 2px solid var(--accent);
@@ -35,7 +45,6 @@ section {
     padding: 2rem;
     margin: 2rem auto;
     max-width: 900px;
-
     box-shadow: 0 0 12px var(--glow);
     color: var(--text);
 }
@@ -57,9 +66,8 @@ body {
 
 .cyber-nav {
     display: flex;
-    position: relative;
     align-items: center;
-    gap: 0;
+    font-family: Tektur
 }
 
 .nav-bar {
@@ -70,7 +78,7 @@ body {
     transition: 0.3s ease;
     z-index: 1;
 
-    --r: 9px; /* control the rounded part*/
+    --r: 10px; /* control the rounded part*/
     --s: 20px; /* control the size of the cut */
     --a: 50deg; /* control the depth of the curvature*/
     --p: 50%; /* control the position */
@@ -79,9 +87,12 @@ body {
 }
 
 .nav-bar.left {
-    position: relative;
     background-color: var(--nav-border-color);
     clip-path: var(--nav-left-shape);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+      
 
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
@@ -100,11 +111,12 @@ body {
     position: absolute;
     top: 1px;
     left: 1px;
-    width: calc(100% - 1px);
-    height: calc(100% - 2px);
+    width: 428px;
+    height: 51px;
     background-color: black;
     clip-path: var(--nav-left-shape);
     z-index: -1;
+    
     
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
@@ -119,9 +131,11 @@ body {
 }
 
 .nav-bar.right {
-    position: relative;
     background-color: var(--nav-border-color);
     clip-path: var(--nav-right-shape);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
@@ -139,8 +153,8 @@ body {
     position: absolute;
     top: 1px;
     left: 1px;
-    width: calc(100% - 1px);
-    height: calc(100% - 2px);
+    width: 475px;
+    height: 51px;
     background-color: black;
     clip-path: var(--nav-right-shape);
     z-index: -1;
@@ -159,12 +173,15 @@ body {
 .nav-bar a {
     text-decoration: none;
     color: var(--text);
-    /* font-weight: bold; */
 }
 
 .nav-bar a:hover {
     color: var(--glow);
-    text-shadow: 0 0 5px var(--glow);
+    text-shadow: 
+            2px 2px 5px var(--glow),
+            -2px 2px 5px var(--glow),
+            2px -2px 5px var(--glow),
+            -2px -2px 5px var(--glow);
     transition: 0.25s;
 }
 
@@ -172,7 +189,8 @@ body {
     display: flex;
     width: 45px;
     height: 45px;
-    background: purple;
+    min-width: 45px;
+    background: var(--accent);
     border-radius: 50%;
     border: 2px solid var(--glow);
     box-shadow: 0 0 20px var(--glow);
@@ -182,3 +200,8 @@ body {
     color: var(--text);
     z-index: 2;
 }
+
+/* 
+In the case of a font retrieval failure, I will need to adjust
+navbar size automatically to accomodate for increase/shrink in size of text
+*/
