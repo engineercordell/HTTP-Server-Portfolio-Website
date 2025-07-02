@@ -201,7 +201,3 @@ body {
     z-index: 2;
 }
 
-/* 
-In the case of a font retrieval failure, I will need to adjust
-navbar size automatically to accomodate for increase/shrink in size of text
-*/

@@ -1,12 +1,12 @@
 # HTTPS Server
 Lightweight HTTPS server written in C++
 
-### Security
+## Security
 - [✓] Prevent servicing a file that's outside of 'public/'
 - [ ] Implement a std::set<std::string> to act as an IP blacklist whenever an incoming connection is about to be accepted
 - [ ] Guard against maliciously malformed headers
 
-### Optimizations
+## Optimizations
 - [ ] Optimize header parsing loop  
   - [ ] Call find() once to obtain all LF
 - [✓] Use a case-insensitive map (std::unordered_map<std::string, std::string, ci_hash, ci_equal>).
@@ -22,5 +22,7 @@ Lightweight HTTPS server written in C++
 - [ ] Change log files at runtime
 - [ ] Rotate logs based on date, size, time, etc.
 
-### Completed Column ✓
-- [x] Completed task title  
+## Website
+- [ ] In the case of a font retrieval failure, I will need to adjust navbar size automatically to accomodate for increase/shrink in size of text
+- [ ] Ensure video replays when clicking back on tab
+- [ ] Sci-fi noises
