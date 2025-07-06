@@ -10,22 +10,14 @@
     --text: #f5f5f5;
     --accent: #3e0158;
     --glow: #8a01c5;
-    --nav-left-shape: polygon(
-        100% 0, 
-        100% 100%, 
-        10% 100%, 
-        0 80%, 
-        0 20%, 
-        10% 0
-    );
-    --nav-right-shape: polygon(
-        0 0, 
-        0 100%, 
-        90% 100%, 
-        100% 80%, 
-        100% 20%, 
-        90% 0 
-    );
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body, html {
+    overflow-x: hidden;
 }
 
 video {
@@ -34,66 +26,57 @@ video {
     left: 0;
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     object-fit: cover;
     z-index: -500;
 }
 
-section {
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 2px solid var(--accent);
-    border-radius: 12px;
-    padding: 2rem;
-    margin: 2rem auto;
-    max-width: 900px;
-    box-shadow: 0 0 12px var(--glow);
-    color: var(--text);
-}
-
-section:hover {
-    box-shadow: 0 0 20px var(--glow), 0 0 40px var(--accent);
-    transform: scale(1.01);
-    transition: all 0.3s ease;
-}
-
 body {
-    display: flex;
     background-color: var(--bg);
     color: var(--text);
     font-family: 'Inter', sans-serif;
     justify-content: center;
-    padding: 0.25rem;
 }
 
 .cyber-nav {
+    padding: 0.25rem;
+    justify-content: center; /* center nav bar wrt webpage */
     display: flex;
     align-items: center;
-    font-family: Tektur
+    font-family: Tektur;
 }
 
 .nav-bar {
     position: relative;
     display: flex;
+    justify-content: center; /* center contents in each nav bar */
     gap: 3rem;
     padding: 1rem 2rem;
     transition: 0.3s ease;
     z-index: 1;
-
     --r: 10px; /* control the rounded part*/
     --s: 20px; /* control the size of the cut */
     --a: 50deg; /* control the depth of the curvature*/
     --p: 50%; /* control the position */
-
     --nav-border-color: #4b4d51;
+    --nav-width: 475px;
+    --nav-height: 52px;
 }
 
 .nav-bar.left {
+    width: var(--nav-width);
+    height: var(--nav-height);
     background-color: var(--nav-border-color);
-    clip-path: var(--nav-left-shape);
+    clip-path: polygon(
+        var(--nav-width) 0,      /* right top */
+        var(--nav-width) var(--nav-height),   /* right bottom */
+        48px var(--nav-height),    /* bottom inward notch */
+        0 42px,       /* left bottom inset */
+        0 10px,       /* left top inset */
+        48px 0        /* top inward notch */
+    );
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-      
-
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
     --_r:var(--r) at calc(100% - var(--r));
@@ -111,13 +94,18 @@ body {
     position: absolute;
     top: 1px;
     left: 1px;
-    width: 428px;
-    height: 51px;
+    right: 1px;
+    bottom: 0.5px;
     background-color: black;
-    clip-path: var(--nav-left-shape);
+    clip-path: polygon(
+        var(--nav-width) 0,      /* right top */
+        var(--nav-width) var(--nav-height),   /* right bottom */
+        48px 50.5px,    /* bottom inward notch */
+        0 40.5px,       /* left bottom inset */
+        0 10px,       /* left top inset */
+        48px 0        /* top inward notch */
+    );
     z-index: -1;
-    
-    
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
     --_r:var(--r) at calc(100% - var(--r));
@@ -131,12 +119,19 @@ body {
 }
 
 .nav-bar.right {
+    width: var(--nav-width);
+    height: var(--nav-height);
     background-color: var(--nav-border-color);
-    clip-path: var(--nav-right-shape);
+    clip-path: polygon(
+        0 0, 
+        0 var(--nav-height), 
+        427px var(--nav-height), 
+        var(--nav-width) 42px, 
+        var(--nav-width) 10px, 
+        427px 0
+    );
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
-    
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
     --_d:(var(--s) + var(--r))*cos(var(--a));
@@ -153,12 +148,18 @@ body {
     position: absolute;
     top: 1px;
     left: 1px;
-    width: 475px;
-    height: 51px;
+    right: 1px;
+    bottom: 0.5px;
     background-color: black;
-    clip-path: var(--nav-right-shape);
+    clip-path: polygon(
+        0 0, 
+        0 var(--nav-height), 
+        427.5px 50.5px, 
+        var(--nav-width) 40px, 
+        var(--nav-width) 10px, 
+        427.5px 0
+    );
     z-index: -1;
-    
     border-radius: var(--r);
     --_m:,#000 calc(100% - 1px),#0000;
     --_d:(var(--s) + var(--r))*cos(var(--a));
@@ -178,10 +179,10 @@ body {
 .nav-bar a:hover {
     color: var(--glow);
     text-shadow: 
-            2px 2px 5px var(--glow),
-            -2px 2px 5px var(--glow),
-            2px -2px 5px var(--glow),
-            -2px -2px 5px var(--glow);
+            2px 2px 7px var(--glow),
+            -2px 2px 7px var(--glow),
+            2px -2px 7px var(--glow),
+            -2px -2px 7px var(--glow);
     transition: 0.25s;
 }
 
@@ -198,6 +199,44 @@ body {
     justify-content: center;
     font-family: 'Orbitron', sans-serif;
     color: var(--text);
-    z-index: 2;
+    z-index: 1;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border: 1px solid gray;
+    box-shadow: 0 0 12px var(--glow);
+    color: var(--text);
+}
+
+.section:hover {
+    box-shadow: 0 0 20px var(--glow), 0 0 40px var(--accent);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+.landing {
+    width: 1100px;
+    height: 300px;
+    padding: 1.5rem;
+    margin: 1rem auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.terminal-container {
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    border-right: 2px solid var(--text);
 }
 
