@@ -17,7 +17,9 @@ html {
 }
 
 body, html {
-    overflow-x: hidden;
+    overflow-x: visible;
+    width: 100%;
+    height: 100%;
 }
 
 video {
@@ -26,7 +28,6 @@ video {
     left: 0;
     width: 100%;
     height: 100%;
-    min-height: 100vh;
     object-fit: cover;
     z-index: -500;
 }
@@ -39,9 +40,11 @@ body {
 }
 
 .cyber-nav {
-    padding: 0.25rem;
-    justify-content: center; /* center nav bar wrt webpage */
     display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     align-items: center;
     font-family: Tektur;
 }
@@ -64,6 +67,7 @@ body {
 }
 
 .nav-bar.left {
+    margin-left: auto;
     width: var(--nav-width);
     height: var(--nav-height);
     background-color: var(--nav-border-color);
@@ -119,6 +123,7 @@ body {
 }
 
 .nav-bar.right {
+    margin-right: auto;
     width: var(--nav-width);
     height: var(--nav-height);
     background-color: var(--nav-border-color);
@@ -210,6 +215,7 @@ body {
     border: 1px solid gray;
     box-shadow: 0 0 12px var(--glow);
     color: var(--text);
+    box-sizing: border-box;
 }
 
 .section:hover {
@@ -219,8 +225,8 @@ body {
 }
 
 .landing {
-    width: 1100px;
     height: 300px;
+    max-width: 80vw;
     padding: 1.5rem;
     margin: 1rem auto;
     background-color: rgba(0, 0, 0, 0.8);
@@ -236,7 +242,12 @@ body {
     color: var(--text);
     white-space: nowrap;
     overflow: hidden;
-    width: 0;
     border-right: 2px solid var(--text);
 }
+
+/* .section h1, .section p, .terminal-container {
+    max-width: 90vw;
+    width: 100%;
+    word-break: break-word;
+} */
 
