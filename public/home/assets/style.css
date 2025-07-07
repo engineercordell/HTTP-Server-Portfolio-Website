@@ -227,19 +227,35 @@ body {
 .landing {
     height: 300px;
     max-width: 80vw;
-    padding: 1.5rem;
     margin: 1rem auto;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .terminal-container {
-    font-family: 'Courier New', monospace;
+    font-family: 'Tektur', monospace;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text);
+    padding-top: 2.5rem;
+    display: inline-block;
+    border-radius: 8px;
+    margin: 2rem auto;
+    text-shadow: 0 0 5px var(--glow);
+}
+
+.cursor {
+    display: inline-block;
+    width: 1ch;
+    animation: blink 0.8s step-end infinite;
+    color: var(--text);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    60% { opacity: 0; } 
 }
 
 .terminal-text {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 1.5rem;
-    color: var(--text);
     white-space: nowrap;
     overflow: hidden;
     border-right: 2px solid var(--text);

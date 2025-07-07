@@ -1,14 +1,20 @@
-const message = "Visitor Detected...Greetings!";
-let i = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(startTypingAnimation, 1500, "Visitor Detected", 75);
+    setTimeout(startTypingAnimation, 100, "...", 500);
+    setTimeout(startTypingAnimation, 100, "Greetings!", 1000);
+});
 
-function type()
-{
-    if (i < message.length)
-    {
-        document.getElementById("typewriter").innerHTML += message.charAt(i);
-        i++;
-        setTimeout(type, 80);
+function startTypingAnimation(text, timeout) {
+    const target = document.getElementById("terminal-text");
+    let index = 0;
+
+    function typeChar(timeout) {
+        if (index < text.length) {
+            target.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeChar, timeout);
+        }
     }
-}
 
-window.onload = type;
+    typeChar(timeout);
+}
