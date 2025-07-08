@@ -1,20 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(startTypingAnimation, 1500, "Visitor Detected", 75);
-    setTimeout(startTypingAnimation, 100, "...", 500);
-    setTimeout(startTypingAnimation, 100, "Greetings!", 1000);
+document.addEventListener('DOMContentLoaded', async () => {
+    await sleep(1500);
+    await typeText("Visitor detected", 40, "terminal-text");
+    await sleep(1000);
+    await typeText("...", 300, "terminal-text");
+    await sleep(1000);
+    await typeText("executing", 40, "terminal-text");
+    await typeText("\u00A0greetings.exe", 40, "terminal-text-program");
 });
 
-function startTypingAnimation(text, timeout) {
-    const target = document.getElementById("terminal-text");
-    let index = 0;
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    function typeChar(timeout) {
-        if (index < text.length) {
-            target.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeChar, timeout);
+function typeText(text, charDelay, elemID) {
+    return new Promise((resolve) => {
+        const target = document.getElementById(elemID);
+        let index = 0;
+
+        function typeChar() {
+            if (index < text.length) {
+                target.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeChar, charDelay);
+            } else {
+                resolve();
+            }
         }
-    }
 
-    typeChar(timeout);
+        typeChar();
+    });
 }
