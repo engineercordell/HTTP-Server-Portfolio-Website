@@ -277,21 +277,26 @@ body {
     text-shadow: 0 0 5px var(--glow);
 }
 
-.terminal-hello {
+.terminal-line {
     display: flex;
-    justify-content: left;
-    
+    flex-wrap: wrap;
 }
 
-.terminal-line {
-    max-width: 100%;
-    display: inline-block;
+.text-wrapper {
+    display: block;
+    word-break: break-word;
     white-space: normal;
-    word-break: break-all;
+    overflow-wrap: break-word;
+    text-align: left;
+    width: 740px;
+}
+
+.prompt {
+    color: blue;
+    flex-shrink: 0;
 }
 
 .cursor {
-    display: inline-block;
     width: 1ch;
     animation: blink 0.8s step-end infinite;
     color: var(--text);
@@ -305,8 +310,4 @@ body {
 #terminal-text-program {
     color: green;
     text-shadow: none;
-}
-
-.prompt {
-    display: inline;
 }

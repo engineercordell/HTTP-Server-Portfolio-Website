@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await sleep(1000);
     await typeText("...", 300, "terminal-text");
     await sleep(1000);
-    await typeText("executing", 40, "terminal-text");
+    await typeText(" executing", 40, "terminal-text");
     await typeText("\u00A0greetings.exe", 40, "terminal-text-program");
 });
 
