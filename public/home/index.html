@@ -28,19 +28,35 @@
         </div>
         </nav>
 
-        <video class="background-pcb" autoplay muted loop playsinline>
-            <source src="background-pcb.mp4" type="video/mp4">
-        </video>
-
+        <div class="video-container">
+            <video class="background-pcb" autoplay muted loop playsinline>
+                <source src="background-pcb.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        
         <main>
             <section id="home" class="section landing">
                 <div class="terminal-landing">
-                    <div class="terminal-line">
+                    <div class="terminal-command">
                         <span class="text-wrapper">
                             <span class="prompt">~</span><span>$</span>
-                            <span id="terminal-text"></span><span id="terminal-text-program"></span><span class="cursor">_</span>
+                            <span id="terminal-command-text"></span><span id="terminal-command-program"></span><span id="terminal-command-ellipsis"></span><span class="cursor">_</span>
                         </span>
                     </div>
+                </div>
+            </section>
+            <section id="about-me" class="section about-me">
+                <div class="caption-text">
+                    <h1 id="about-me-title">About Me</h1>
+                    <p>My name is Cordell Palmer. In December 2024, I graduated from Georgia Institute of Technology
+                        with a Bachelor of Science in Mechanical Engineering and a Minor in Computer Science, with a focus on Machine Learning.
+                        Despite my background being primarily rooted in mechanical systems, my true passion lies at the intersection of hardware, 
+                        software, and AI.
+                    </p>
+                </div>
+                <div class="my-img">
+
                 </div>
             </section>
         </main>
