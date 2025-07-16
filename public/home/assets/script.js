@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await sleep(500);
 
 
-    const terminal = document.querySelector('.terminal-landing');
+    const terminal = document.querySelector('.terminal-text');
     let oldCursor = document.querySelector('.cursor');
     oldCursor.remove();
     const descLine = document.createElement('div');
