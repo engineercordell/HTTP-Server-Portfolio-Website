@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </span>
     `;
     terminal.appendChild(descLine);
-    await typeText("Hello there, I'm Cordell. A multifaceted engineer and Georgia Tech graduate.", 20, "terminal-desc-text");
+    await typeText("Hello there, I'm Cordell. A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text");
     oldCursor = document.querySelector('.cursor');
     oldCursor.remove();
 
