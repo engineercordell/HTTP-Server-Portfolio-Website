@@ -324,6 +324,10 @@ main {
     flex-shrink: 1;
 }
 
+.dollar {
+    white-space: pre-wrap;
+}
+
 .cursor {
     width: 1ch;
     animation: blink 0.8s step-end infinite;
@@ -422,11 +426,11 @@ main {
 #about-body-1 >.my-img {
     position: relative;
     width: 500px;
-    max-height: 500px;
+    min-height: 500px;
     /* background-image: url('your-img.jpg');
     background-size: cover;
     background-position: center; */
-    align-self: stretch;
+    
     background-color: rgb(50, 48, 50);
     clip-path: polygon(
         0 25px,
@@ -471,7 +475,7 @@ main {
     position: relative;
     padding: 1rem 2rem;
     max-width: 70vw;
-    min-height: 300px;
+    min-height: 460px;
     background-color: rgba(50, 48, 50, 0.9);
     z-index: 0;
     clip-path: polygon(
