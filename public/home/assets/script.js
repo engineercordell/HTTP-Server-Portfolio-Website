@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', async () => {
     await sleep(750);
-    await typeText("Visitor detected", 40, "terminal-command-text", "about-cursor");
+    await typeText("Visitor detected", 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
-    await typeText("...", 300, "terminal-command-text", "about-cursor");
+    await typeText("...", 300, "terminal-command-text", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
-    await typeText("executing", 40, "terminal-command-text", "about-cursor");
-    await typeText("\u00A0greetings.exe", 40, "terminal-command-program", "about-cursor");
-    await typeText("...", 40, "terminal-command-ellipsis", "about-cursor");
+    await typeText("executing", 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
+    await typeText("\u00A0greetings.exe", 40, "terminal-command-program", "terminal-cursor", terminalCancelToken);
+    await typeText("...", 40, "terminal-command-ellipsis", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
 
     const terminal = document.querySelector('.terminal-text');
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </span>
     `;
     terminal.appendChild(descLine);
-    await typeText("Hello there, I'm Cordell. A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text", "about-cursor");
+    await typeText("Hello there, I'm Cordell. A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text", "terminal-cursor", terminalCancelToken);
 
     const aboutLine = document.createElement('div');
     aboutLine.classList.add('terminal-more');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </span>
     `;
     terminal.appendChild(aboutLine);
-    await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "about-cursor");
+    await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
 });
 
 // about-me listener
@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
   observer.observe(aboutSection);
 });
 
-let typingCanceled = false;
+// let typingCanceled = false;
+const terminalCancelToken = { canceled: false };
+const aboutCancelToken = { canceled: false };
 
 let aboutHasAnimated = false;
 async function handleAboutMeReveal(entries) {
@@ -50,10 +52,10 @@ async function handleAboutMeReveal(entries) {
   if (entry.isIntersecting && !aboutHasAnimated) {
     aboutHasAnimated = true;
 
-    await typeText("./about-me", 50, "about-command", "about-cursor");
+    await typeText("./about-me", 50, "about-command", "about-cursor", aboutCancelToken);
     await sleep(200);
 
-    await typeText("Background", 1, "about-back-head", "about-cursor");
+    await typeText("Background", 1, "about-back-head", "about-cursor", aboutCancelToken);
 
     await typeText(`
         Hey there—My name is Cordell Palmer. In December 2024, I graduated from Georgia Tech 
@@ -61,16 +63,16 @@ async function handleAboutMeReveal(entries) {
         During my undergraduate years, I was able to cultivate a broad set of skills, having obtained proficiency in areas such as
         CAD modeling/3D printing, structural analysis, software and hardware programming, AI, robotics, and wide range of electrical and mechanical
         data analysis/manufacturing tools. Despite my background being primarily rooted in mechanical systems, my true passion lies at the intersection of hardware, 
-        software, and AI development.`, 1, "about-line-1", "about-cursor");
+        software, and AI development.`, 1, "about-line-1", "about-cursor", aboutCancelToken);
 
     await typeText(`
         Since graduation I've deeply immersed myself in systems development, having written the HTTP server that
         runs this website from scratch in C++ with barebones kernel APIs. The journey to enrich my understanding of networking, memory, and 
         OS-level architecture has sparked an ever evolving passion in all things embedded systems, FPGAs, digital circuitry, and future-forward
         technologies like graphene semiconductors.
-        `, 1, "about-line-2", "about-cursor");
+        `, 1, "about-line-2", "about-cursor", aboutCancelToken);
 
-    await typeText("In short: I enjoy building things that closely interact with our world, and this is only the beginning.", 1, "about-line-3", "about-cursor");
+    await typeText("In short: I enjoy building things that closely interact with our world, and this is only the beginning.", 1, "about-line-3", "about-cursor", aboutCancelToken);
   }
 
 
@@ -82,22 +84,20 @@ function sleep(ms) {
 }
 
 document.getElementById("about-background").addEventListener("click", () => {
-    typingCanceled = true;
+    aboutCancelToken.canceled = true;
 
-    const aboutLine1 = document.querySelector(".about-line-1");
+    const aboutLine1 = document.getElementById("about-line-1");
     aboutLine1.textContent = sections["about-section"][2].text;
-    const aboutLine2 = document.querySelector(".about-line-2");
+    const aboutLine2 = document.getElementById("about-line-2");
     aboutLine2.textContent = sections["about-section"][3].text;
-    const aboutLine3 = document.querySelector(".about-line-3");
+    const aboutLine3 = document.getElementById("about-line-3");
     aboutLine3.textContent = sections["about-section"][4].text;
 
-    setTimeout(() => {
-        const lastCursor = document.getElementById("about-cursor");
-        if (lastCursor) lastCursor.remove();
-    }, 100);
+    const lastCursor = document.getElementById("about-cursor");
+    if (lastCursor) lastCursor.remove();
 });
 
-async function typeText(text, delay, targetID, cursorID, removeCursorOnEnd = true) {
+async function typeText(text, delay, targetID, cursorID, removeCursorOnEnd = true, cancelToken) {
     const targetEl = document.getElementById(targetID);
 
     const oldCursor = document.getElementById(cursorID);
@@ -109,7 +109,7 @@ async function typeText(text, delay, targetID, cursorID, removeCursorOnEnd = tru
     targetEl.appendChild(cursorSpan);
 
     for (let i = 0; i < text.length; i++) {
-        if (typingCanceled) {
+        if (cancelToken?.canceled) {
             targetEl.insertAdjacentText("beforeend", text.slice(i));
             break;
         }
