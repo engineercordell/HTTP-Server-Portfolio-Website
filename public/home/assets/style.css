@@ -474,8 +474,6 @@ main {
 .div-style {
     position: relative;
     padding: 1rem 2rem;
-    max-width: 70vw;
-    min-height: 460px;
     background-color: rgba(50, 48, 50, 0.9);
     z-index: 0;
     clip-path: polygon(
@@ -510,6 +508,8 @@ main {
 
 #about-background {
     width: 100%;
+    max-width: 70vw;
+    min-height: 460px;
 }
 
 #about-background > p {
@@ -525,8 +525,22 @@ main {
     padding-top: 1rem;
 }
 
-.misc-about {
-    width: 400px;
-    height: 500px;
+#hobbies {
+    min-height: 240px;
+    max-width: 25vw;
 }
 
+.hobbies-text {
+    padding-bottom: 0.5rem;
+}
+
+.hobbies-list {
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+#learn {
+    align-self: start;
+    min-height: 240px;
+    min-width: 40vw;
+}

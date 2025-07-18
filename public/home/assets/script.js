@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let aboutHasAnimated = false;
-
+let typeAboutCanceled = false;
 async function handleAboutMeReveal(entries) {
   const entry = entries[0];
   if (entry.isIntersecting && !aboutHasAnimated) {
@@ -60,7 +60,7 @@ async function handleAboutMeReveal(entries) {
     await typeTextAdvanced("./about-me", 50, "about-command", true);
     await sleep(200);
 
-    await typeTextAdvanced("Background", 5, "about-back-head", true);
+    await typeTextAdvanced("Background", 1, "about-back-head", true);
 
     await typeTextAdvanced(`
         Hey there—My name is Cordell Palmer. In December 2024, I graduated from Georgia Tech 
@@ -68,7 +68,7 @@ async function handleAboutMeReveal(entries) {
         During my undergraduate years, I was able to cultivate a broad set of skills, having obtained proficiency in areas such as
         CAD modeling/3D printing, structural analysis, software and hardware programming, AI, robotics, and wide range of electrical and mechanical
         data analysis/manufacturing tools. Despite my background being primarily rooted in mechanical systems, my true passion lies at the intersection of hardware, 
-        software, and AI development.`, 5, "about-line-1", true);
+        software, and AI development.`, 1, "about-line-1", true);
 
     await typeTextAdvanced(`
         Since graduation I've deeply immersed myself in systems development, having written the HTTP server that
@@ -77,8 +77,10 @@ async function handleAboutMeReveal(entries) {
         technologies like graphene semiconductors.
         `, 5, "about-line-2", true);
 
-    await typeTextAdvanced("In short: I enjoy building things that closely interact with our world, and this is only the beginning.", 5, "about-line-3", true);
+    await typeTextAdvanced("In short: I enjoy building things that closely interact with our world, and this is only the beginning.", 1, "about-line-3", true);
   }
+
+
 }
 
 
