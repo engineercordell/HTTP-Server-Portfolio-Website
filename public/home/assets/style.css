@@ -228,7 +228,7 @@ main {
     
 }
 
-.terminal-panel {
+#terminal-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -256,7 +256,7 @@ main {
     );
 }
 
-.terminal-panel::before {
+#terminal-panel::before {
     content: '';
     position: absolute;
     top: 2px;
@@ -279,13 +279,13 @@ main {
     z-index: -2;
 }
 
-.terminal-panel:hover {
+#terminal-panel:hover {
     box-shadow: 0 0 5px white, 0 0 5px white;
     transform: scale(1.01);
     transition: all 0.3s ease;
 }
 
-.terminal-text {
+#terminal-text {
     max-width: 90%;
     height: 100%;
     font-size: 2rem;
@@ -295,7 +295,7 @@ main {
     padding-top: 7rem;
 }
 
-.terminal-command {
+#terminal-command {
     display: flex;
     flex-wrap: wrap;
     max-width: 770px;
