@@ -4,6 +4,13 @@ let hobbiesCancelToken = { canceled: false };
 let aboutHasAnimated = false;
 let hobbiesHasAnimated = false;
 
+const hobbies = [
+    "🏋️ Gym/Weightlifting",
+    "📕 Reading",
+    "🎮 Playing Video Games",
+    "📺 Watching Anime"
+];
+
 // when page is loaded, 'terminal' animation plays
 document.addEventListener('DOMContentLoaded', async () => {
     await sleep(750);
@@ -104,7 +111,7 @@ async function handleHobbiesReveal(entries) {
 
         await typeText("Hobbies", 50, "hobbies-header", "hobbies-cursor", hobbiesCancelToken);
         await typeText("Engineering can be exhausting, so I enjoy winding down in the following ways:", 1, "hobbies-text", "hobbies-cursor", hobbiesCancelToken);
-        await typeListItems(".hobbies-list", 1, 200, "hobbies-cursor", hobbiesCancelToken);
+        await typeListItems("hobbies-list", hobbies, "hobbies-item", 1, 200, "hobbies-cursor", hobbiesCancelToken);
     }
 }
 
@@ -133,17 +140,26 @@ async function typeText(text, delay, targetID, cursorID, cancelToken, removeCurs
     }
 }
 
-async function typeListItems(selector, speed = 5, delayBetween = 200, cursor, token) {
-    const items = document.querySelectorAll(`${selector} .text`);
-    for (const item of items) {
-        const originalText = item.textContent;
-        item.textContent = "";
-        await typeText(originalText, speed, item, cursor, token);
+async function typeListItems(listID, listItems, listItemClassName, charDelay, delayBetween, cursorID, token) {
+    const listContainer = document.getElementById(listID);
+
+    listContainer.innerHTML = "";
+
+    for (const text of listItems) {
+        const li = document.createElement("li");
+        li.classList.add(listItemClassName);
+
+        const emoji = document.createElement("span");
+        emoji.classList.add("emoji");
+        emoji.textContent = text.slice(0, 2);
+
+        li.appendChild(emoji);
+        listContainer.appendChild(li);
+
+        await typeText(text.slice(2), charDelay, li.id = crypto.randomUUID(), cursorID, token);
         await sleep(delayBetween);
     }
 }
-
-// each 'section/content-div' will have it's own typeText() to dynamically write to it
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

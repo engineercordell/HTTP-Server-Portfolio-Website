@@ -530,11 +530,11 @@ main {
     max-width: 25vw;
 }
 
-.hobbies-text {
+#hobbies-text {
     padding-bottom: 0.5rem;
 }
 
-.hobbies-list {
+#hobbies-list {
     line-height: 30px;
     margin-bottom: 20px;
 }
