@@ -1,8 +1,10 @@
 let terminalCancelToken = { canceled: false };
 let aboutCancelToken = { canceled: false };
 let hobbiesCancelToken = { canceled: false };
+let learnCancelToken = { canceled: false };
 let aboutHasAnimated = false;
 let hobbiesHasAnimated = false;
+let learnHasAnimated = false;
 
 const hobbies = [
     "🏋️ Gym/Weightlifting",
@@ -10,7 +12,17 @@ const hobbies = [
     "🎮 Playing Video Games",
     "📺 Watching Anime"
 ];
-
+const learn = [
+    "🧠 Computer Systems: A Programmer's Perspective — Finished!",
+    "📘 Operating Systems: Three Easy Pieces (OSTEP) — In Progress",
+    "📘 Operating Systems: Principles and Practice — In Progress",
+    "📘 xv6: Unix-like OS — Tinkering in progress",
+    "📘 Linux Kernel Development (Third Edition) — In Progress",
+    "📘 Computer Architecture: A Quantitative Approach (Hennesey and Patterson) — Coming up next",
+    "📡 TCP/IP Illustrated — Coming up next",
+    "💡 Crafting Interpreters — Long-term goal",
+    "🔧 Makefiles & Build Systems — Practicing with this HTTP server"
+];
 // when page is loaded, 'terminal' animation plays
 document.addEventListener('DOMContentLoaded', async () => {
     await sleep(750);
@@ -45,19 +57,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     terminal.appendChild(aboutLine);
     await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
 });
-
 // when page is loaded, add observers
 document.addEventListener('DOMContentLoaded', () => {
   const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.3 });
   const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.3 });
+  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.3});
 
   const aboutSection = document.getElementById('about-me');
   aboutObserver.observe(aboutSection);
-
   const hobbiesSection = document.getElementById('hobbies');
   hobbiesObserver.observe(hobbiesSection);
+  const learnSection = document.getElementById('learn');
+  learnObserver.observe(learnSection);
 });
-
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
 
@@ -76,6 +88,12 @@ document.getElementById("hobbies").addEventListener("click", async () => {
 
     const lastHobbiesCursor = document.getElementById("about-cursor");
     if (lastHobbiesCursor) lastHobbiesCursor.remove();
+});
+document.getElementById("learn").addEventListener("click", async () => {
+    learnCancelToken.canceled = true;
+
+    const lastLearnCursor = document.getElementById("learn-cursor");
+    if (lastLearnCursor) lastLearnCursor.remove();
 });
 
 async function handleAboutMeReveal(entries) {
@@ -103,7 +121,6 @@ async function handleAboutMeReveal(entries) {
     await sleep(200);
   }
 }
-
 async function handleHobbiesReveal(entries) {
     const entry = entries[0];
     if (entry.isIntersecting && !hobbiesHasAnimated) {
@@ -112,6 +129,16 @@ async function handleHobbiesReveal(entries) {
         await typeText("Hobbies", 50, "hobbies-header", "hobbies-cursor", hobbiesCancelToken);
         await typeText("Engineering can be exhausting, so I enjoy winding down in the following ways:", 1, "hobbies-text", "hobbies-cursor", hobbiesCancelToken);
         await typeListItems("hobbies-list", hobbies, "hobbies-item", 1, 200, "hobbies-cursor", hobbiesCancelToken);
+    }
+}
+async function handleLearningReveal(entries) {
+    const entry = entries[0];
+    if (entry.isIntersecting && !learnHasAnimated) {
+        learnHasAnimated = true;
+
+        await typeText("Currently Learning", 50, "learn-header", "learn-cursor", learnCancelToken);
+        await typeText("Here's a list of topics/books I'm interested in learning/have learned:", 1, "learn-text", "learn-cursor", learnCancelToken);
+        await typeListItems("learn-list", learn, "learn-item", 1, 200, "learn-cursor", learnCancelToken);
     }
 }
 

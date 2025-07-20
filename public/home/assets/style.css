@@ -527,7 +527,9 @@ main {
 
 #hobbies {
     min-height: 240px;
-    max-width: 25vw;
+    min-width: 25vw;
+    max-width: 30vw;
+    align-self: start;
 }
 
 #hobbies-text {
