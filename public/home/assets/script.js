@@ -2,9 +2,11 @@ let terminalCancelToken = { canceled: false };
 let aboutCancelToken = { canceled: false };
 let hobbiesCancelToken = { canceled: false };
 let learnCancelToken = { canceled: false };
+let skillsCancelToken = { canceled: false };
 let aboutHasAnimated = false;
 let hobbiesHasAnimated = false;
 let learnHasAnimated = false;
+let skillsHasAnimated = false;
 
 const hobbies = [
     "🏋️ Gym/Weightlifting",
@@ -62,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.3 });
   const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.3 });
   const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.3});
+  const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.3 });
 
   const aboutSection = document.getElementById('about-me');
   aboutObserver.observe(aboutSection);
@@ -69,6 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
   hobbiesObserver.observe(hobbiesSection);
   const learnSection = document.getElementById('learn');
   learnObserver.observe(learnSection);
+  const skillsSection = document.getElementById('skills');
+  skillsObserver.observe(skillsSection);
 });
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
@@ -139,6 +144,15 @@ async function handleLearningReveal(entries) {
         await typeText("Currently Learning", 50, "learn-header", "learn-cursor", learnCancelToken);
         await typeText("Here's a list of topics/books I'm interested in learning/have learned:", 1, "learn-text", "learn-cursor", learnCancelToken);
         await typeListItems("learn-list", learn, "learn-item", 1, 200, "learn-cursor", learnCancelToken);
+    }
+}
+async function handleSkillsReveal(entries) {
+    const entry = entries[0];
+    if (entry.isIntersecting && !skillsHasAnimated) {
+        skillsHasAnimated = true;
+
+        await typeText("./skills --list", 50, "skills-command", "skills-cursor", skillsCancelToken);
+        sleep(200);
     }
 }
 
