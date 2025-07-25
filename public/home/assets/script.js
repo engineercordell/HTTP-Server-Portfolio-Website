@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 document.addEventListener('DOMContentLoaded', () => {
   const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.3 });
   const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.3 });
-  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.3});
+  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.3 });
   const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.3 });
 
   const aboutSection = document.getElementById('about-me');
@@ -146,13 +146,24 @@ async function handleLearningReveal(entries) {
         await typeListItems("learn-list", learn, "learn-item", 1, 200, "learn-cursor", learnCancelToken);
     }
 }
-async function handleSkillsReveal(entries) {
+async function handleSkillsReveal(entries, observer) {
     const entry = entries[0];
     if (entry.isIntersecting && !skillsHasAnimated) {
         skillsHasAnimated = true;
 
         await typeText("./skills --list", 50, "skills-command", "skills-cursor", skillsCancelToken);
-        sleep(200);
+        await sleep(200);
+
+        const skillsSec = document.getElementById('skills');
+        const categories = skillsSec.querySelectorAll('skill-category');
+
+        skillsSec.classList.add('reveal');
+
+        // categories.forEach((cat, i) => {
+        //     setTimeout(() => {
+        //         cat.classList.add('visible');
+        //     }, 800 + i * 300);
+        // });
     }
 }
 
