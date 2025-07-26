@@ -669,13 +669,19 @@ main {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-}
-
-.skill.animating {
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.skill.visible:hover {
-    transform: scale(1.05);
+/* .skill.animating {
+    
+} */
+
+.hover-ready {
+    transition-delay: 0s !important;
+}
+
+.skill.visible.hover-ready:hover {
+    transform: scale(1.05) !important;
     font-weight: bold;
+    transition: transform 0.1s ease !important;
 }
