@@ -158,7 +158,6 @@ async function handleSkillsReveal(entries) {
         const skillColumns = skillsGrid.querySelectorAll('.skill-column');
 
         let baseDelay = 0;
-        // let maxDelay = 0;
 
         skillColumns.forEach((column) => {
             const category = column.querySelector('.skill-category');
@@ -172,6 +171,7 @@ async function handleSkillsReveal(entries) {
 
             skills.forEach((skill, skillIndex) => {
                 const delay = baseDelay + skillIndex * 0.1;
+                skill.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
                 skill.style.transitionDelay = `${delay}s`;
                 skill.classList.add('visible');
 
@@ -181,19 +181,7 @@ async function handleSkillsReveal(entries) {
             });
 
             baseDelay += skills.length * 0.1 + 0.3;
-            // const columnDelay = baseDelay + skills.length * 0.1 + 0.3;
-            // if (columnDelay > maxDelay) maxDelay = columnDelay;
-            // baseDelay = columnDelay;
         });
-
-        // document.querySelectorAll('.skill.visible').forEach(skill => {
-        //     skill.style.transitionDelay = '0s';
-        // });
-        // setTimeout(() => {
-        //     document.querySelectorAll('.skill.visible').forEach(skill => {
-        //         skill.style.transition = 'transform 0.1s ease';
-        //     });
-        // }, maxDelay * 1000);
     }
 }
 
