@@ -146,7 +146,7 @@ async function handleLearningReveal(entries) {
         await typeListItems("learn-list", learn, "learn-item", 1, 200, "learn-cursor", learnCancelToken);
     }
 }
-async function handleSkillsReveal(entries, observer) {
+async function handleSkillsReveal(entries) {
     const entry = entries[0];
     if (entry.isIntersecting && !skillsHasAnimated) {
         skillsHasAnimated = true;
@@ -154,16 +154,42 @@ async function handleSkillsReveal(entries, observer) {
         await typeText("./skills --list", 50, "skills-command", "skills-cursor", skillsCancelToken);
         await sleep(200);
 
-        const skillsSec = document.getElementById('skills');
-        const categories = skillsSec.querySelectorAll('skill-category');
+        const skillsGrid = document.getElementById('skills-grid');
+        const skillColumns = skillsGrid.querySelectorAll('.skill-column');
 
-        skillsSec.classList.add('reveal');
+        let baseDelay = 0;
+        let maxDelay = 0;
 
-        // categories.forEach((cat, i) => {
-        //     setTimeout(() => {
-        //         cat.classList.add('visible');
-        //     }, 800 + i * 300);
+        skillColumns.forEach((column) => {
+            const category = column.querySelector('.skill-category');
+            const skills = column.querySelectorAll('.skill');
+
+            category.style.transition = 'opacity 1s ease, transform 1s ease';
+            category.style.transitionDelay = `${baseDelay}s`;
+            category.classList.add('visible');
+
+            baseDelay += 0.1;
+
+            skills.forEach((skill, skillIndex) => {
+                const delay = baseDelay + skillIndex * 0.1;
+                skill.style.transitionDelay = `${delay}s`;
+                skill.classList.add('animating', 'visible');
+            });
+
+            const columnDelay = baseDelay + skills.length * 0.1 + 0.3;
+            // baseDelay += skills.length * 0.1 + 0.3;
+            if (columnDelay > maxDelay) maxDelay = columnDelay;
+            baseDelay = columnDelay;
+        });
+
+        // document.querySelectorAll('.skill.visible').forEach(skill => {
+        //     skill.style.transitionDelay = '0s';
         // });
+        setTimeout(() => {
+            document.querySelectorAll('.skill.visible').forEach(skill => {
+                skill.style.transition = 'transform 0.1s ease';
+            });
+        }, maxDelay * 1000);
     }
 }
 
