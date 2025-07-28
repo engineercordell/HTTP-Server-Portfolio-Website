@@ -25,6 +25,8 @@ const learn = [
     "💡 Crafting Interpreters — Long-term goal",
     "🔧 Makefiles & Build Systems — Practicing with this HTTP server"
 ];
+
+
 // when page is loaded, 'terminal' animation plays
 document.addEventListener('DOMContentLoaded', async () => {
     await sleep(750);
