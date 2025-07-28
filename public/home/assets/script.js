@@ -163,7 +163,7 @@ async function handleSkillsReveal(entries) {
 
         skillColumns.forEach((column) => {
             const category = column.querySelector('.skill-category');
-            const skills = column.querySelectorAll('.skill');
+            const skills = column.querySelectorAll('.skill-transform-wrapper');
 
             category.style.transition = 'opacity 1s ease, transform 1s ease';
             category.style.transitionDelay = `${baseDelay}s`;

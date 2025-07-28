@@ -609,6 +609,8 @@ main {
 }
 
 .skill-div-style {
+    position: relative; /* Make sure tooltip positioning is anchored */
+    overflow: visible;
     padding: 1rem 2rem;
     z-index: 0;
     background: rgb(0, 0, 0);
@@ -647,9 +649,10 @@ main {
 }
 
 .skill {
-    position: relative;
-    display: inline-block;
-    width: 80%;
+    position: relative; /* Make sure tooltip positioning is anchored */
+    overflow: visible;
+    display: block;
+    width: 100%;
     height: 100%;
     min-height: 2rem;
     cursor: help;
@@ -657,15 +660,20 @@ main {
     align-content: center;
 }
 
+.skill-transform-wrapper {
+    width: 80%;
+    height: 100%;
+}
+
 .skill-category,
-.skill {
+.skill-transform-wrapper {
     opacity: 0;
     transform: translateY(-20px);
     pointer-events: none;
 }
 
 .skill-category.visible,
-.skill.visible {
+.skill-transform-wrapper.visible {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -673,8 +681,8 @@ main {
 
 .skill-tooltip {
     position: absolute;
-    /*! bottom: 125%; */
-    /*! left: 50%; */
+    bottom: 125%;
+    left: 50%;
     transform: translateX(-50%);
     width: max-content;
     max-width: 200px;
@@ -695,13 +703,13 @@ main {
     transition-delay: 0s !important;
 }
 
-.skill.visible.hover-ready:hover {
+.skill-transform-wrapper.visible.hover-ready:hover {
     transform: scale(1.05) !important;
     font-weight: bold;
     transition: transform 0.1s ease !important;
 }
 
-.skill.visible.hover-ready:hover .skill-tooltip {
+.skill-transform-wrapper.visible.hover-ready:hover .skill-tooltip {
     opacity: 1;
     visibility: visible;
 }
