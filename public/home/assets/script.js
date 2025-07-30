@@ -36,7 +36,7 @@ const skills = {
             </ul>`
     },
     "C": {
-        years: 6,
+        years: 2,
         description:
             `<ul>
                 <li>- First learned via Arduino projects in high school; solidified through architecture courses in college.</li>
@@ -79,6 +79,14 @@ const skills = {
                 <li>- Project was never completed due to academic workload, but solidified foundational C# skills.</li>
             </ul>`
     },
+    "MATLAB": {
+        years: 5,
+        description:
+            `<ul>
+                <li>- Used across 6+ mechanical engineering courses for simulation, control systems, and data analysis.</li>
+                <li>- Applied in robotics, PID tuning, force mechanics, GPS navigation, and experimental lab reporting.</li>
+            </ul>`
+    },
     "HTML": {
         years: 4,
         description:
@@ -104,6 +112,143 @@ const skills = {
                 <li>- Gained proficiency via The Odin Project and freeCodeCamp.</li>
                 <li>- Comfortable with DOM manipulation, event handling, and async logic.</li>
                 <li>- Used throughout this portfolio site to enhance interactivity and UI behavior.</li>
+            </ul>`
+    },
+    "ESP32": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Used as the central microcontroller for my Capstone project.</li>
+                <li>- Handled TEC and fan control, Bluetooth/WiFi communication, and live data plotting.</li>
+                <li>- Served as an access point to remotely control the system via a client interface.</li>
+            </ul>`
+    },
+    "Raspberry Pi": {
+        years: 1, // Even if it's been a while, this reflects that one significant project
+        description:
+            `<ul>
+                <li>- First used during high school science fair project to control a remote-access live-streamed security camera system.</li>
+                <li>- Gained foundational experience with Linux-based single-board computing and camera integration.</li>
+            </ul>`
+    },
+    "Arduino": {
+        years: 3,
+        description:
+            `<ul>
+                <li>- Built an autonomous robot in middle school for a science fair using Arduino.</li>
+                <li>- Later used it in a college design course to build and program a robot for a sponsor-backed design competition.</li>
+                <li>- Familiar with integrating sensors, motors, and prototyping embedded systems using the Arduino IDE.</li>
+            </ul>`
+    },
+    "Oscilloscope": {
+        years: 2,
+        description:
+            `<ul>
+                <li>- Used regularly in ECE 3741 to measure, analyze, and debug analog and mixed-signal circuits.</li>
+                <li>- Applied in lab settings for building op-amp filters, rectifiers, speaker amplifiers, and more.</li>
+            </ul>`
+    },
+    "Function Generator": {
+        years: 2,
+        description:
+            `<ul>
+                <li>- Used in conjunction with oscilloscopes in ECE lab courses to test circuit response to various waveforms.</li>
+                <li>- Provided stimulus signals for filters, comparators, and other analog designs during op-amp labs.</li>
+            </ul>`
+    },
+    "PyTorch": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Used as a high-level framework to implement neural networks and image transformation tasks.</li>
+                <li>- Supplemented assignments involving CNNs, Random Forests, and deep learning workflows.</li>
+            </ul>`
+    },
+    "TensorFlow": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Employed in parallel with PyTorch to explore deep learning architectures and optimization.</li>
+                <li>- Utilized in image-based analysis and supervised learning pipelines.</li>
+            </ul>`
+    },
+    "NumPy": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Used extensively for vectorized computation and matrix operations across all ML assignments.</li>
+                <li>- Enabled fast, memory-efficient implementations of clustering, regression, and image processing.</li>
+            </ul>`
+    },
+    "Matplotlib": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Used to visualize data distributions, loss curves, and clustering results.</li>
+                <li>- Plotted training accuracy and model outputs across multiple ML experiments.</li>
+            </ul>`
+    },
+    "Pandas": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Utilized for dataset manipulation, preprocessing, and feature selection tasks.</li>
+            </ul>`
+    },
+        "SolidWorks": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Learned in ME 1670 for sketching and 3D modeling, including projects like a rubber band crossbow and a rocket-propelled scooter.</li>
+                <li>- Applied across undergrad, including capstone and Machine Design, to model mechanical components and assemblies for analysis and prototyping.</li>
+            </ul>`
+    },
+    "Autodesk Inventor": {
+        years: 1,
+        description:
+            `<ul>
+                <li>- Introduced during high school engineering courses alongside manual sketching and basic GD&T concepts.</li>
+                <li>- Practiced 3D modeling fundamentals before transitioning fully to SolidWorks in college.</li>
+            </ul>`
+    },
+    "Ultimaker Cura": {
+        years: 3,
+        description:
+            `<ul>
+                <li>- Used extensively in ME 2110 to slice 3D models for printing functional parts for a robotics design project.</li>
+                <li>- Familiar with printer settings and print optimization for PLA components.</li>
+            </ul>`
+    },
+    "Laser Cutting": {
+        years: 3,
+        description:
+            `<ul>
+                <li>- Experience dating back to high school and further developed in ME 2110 to fabricate custom MDF robot chassis.</li>
+                <li>- Comfortable preparing cut files and operating laser equipment for structural and aesthetic parts.</li>
+            </ul>`
+    },
+    "Soldering": {
+        years: 5,
+        description:
+            `<ul>
+                <li>- Began in middle school wiring autonomous robots for science fair projects; continued through college-level robotics and capstone design.</li>
+                <li>- Proficient in soldering wires and SMD components onto PCBs; built motor controller harnesses using MOSFETs.</li>
+            </ul>`
+    },
+    "Mill & Shop Tools": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Hands-on experience with drill presses, table saws, band saws, and cutting tools.</li>
+                <li>- Developed during ME 2110 and further refined during prototyping instructor training sessions.</li>
+            </ul>`
+    },
+    "Technical Drawings": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Introduced to engineering drawings in high school; expanded in ME 1670 with practice in GD&T, tolerancing, and BOM preparation.</li>
+                <li>- Used to communicate precise design intent for fabrication and team collaboration.</li>
             </ul>`
     }
 }
