@@ -25,7 +25,134 @@ const learn = [
     "💡 Crafting Interpreters — Long-term goal",
     "🔧 Makefiles & Build Systems — Practicing with this HTTP server"
 ];
+const skills = {
+    "C++": {
+        years: 2,
+        description: 
+            `<ul>
+                <li>- Built a multithreaded HTTP server and capstone software using C++.</li>
+                <li>- Applied in Arduino projects and systems-level programming.</li>
+                <li>- Currently my primary low-level development language.</li>
+            </ul>`
+    },
+    "C": {
+        years: 6,
+        description:
+            `<ul>
+                <li>- First learned via Arduino projects in high school; solidified through architecture courses in college.</li>
+                <li>- Extensively used in class labs, assignments, and built a mini-game for the GBA emulator.</li>
+                <li>- Used extensively in Computer Organization projects (see below).</li>
+            </ul>`
+    },
+    "Assembly": {
+        years: 2,
+        description:
+            `<ul>
+                <li>- Learned LC-3 to understand CPU architecture, instruction sets, and memory systems.</li>
+                <li>- Built a simulated word-addressable CPU in CircuitSim using Assembly logic.</li>
+            </ul>`
+    },
+    "Python": {
+        years: 6,
+        description:
+            `<ul>
+                <li>- Used across AI/ML courses to implement search, inference, and learning algorithms.</li>
+                <li>- Built deep learning models and automated scripts (e.g., class registration).</li>
+                <li>- First learned via personal projects in high school.</li>
+            </ul>`
+    },
+    "Java": {
+        years: 9, 
+        description:
+            `<ul>
+                <li>- First language I taught myself in-depth and applied through FIRST Robotics in high school.</li>
+                <li>- Used to update Minecraft mods like Tinkers' Construct and plugins (e.g., Avatar plugin).</li>
+                <li>- Utilized in college courses: Intro to OOP and Data Structures & Algorithms.</li>
+            </ul>`
+    },
+    "C#": {
+        years: 3,
+        description:
+            `<ul>
+                <li>- Learned primarily to develop mods for Terraria using tModLoader.</li>
+                <li>- Gained familiarity with object-oriented patterns and game scripting.</li>
+                <li>- Project was never completed due to academic workload, but solidified foundational C# skills.</li>
+            </ul>`
+    },
+    "HTML": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Studied extensively through freeCodeCamp and The Odin Project.</li>
+                <li>- Deepened understanding of semantic HTML and accessibility practices.</li>
+                <li>- This portfolio site is my first formal showcase of accumulated web dev knowledge.</li>
+            </ul>`
+    },
+    "CSS": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Learned via freeCodeCamp and The Odin Project alongside HTML and JS.</li>
+                <li>- Focused heavily on layout systems (Flexbox, Grid) and visual effects.</li>
+                <li>- Used advanced techniques like <code>clip-path</code> and <code>mask</code> on this site.</li>
+            </ul>`
+    },
+    "JavaScript": {
+        years: 4,
+        description:
+            `<ul>
+                <li>- Gained proficiency via The Odin Project and freeCodeCamp.</li>
+                <li>- Comfortable with DOM manipulation, event handling, and async logic.</li>
+                <li>- Used throughout this portfolio site to enhance interactivity and UI behavior.</li>
+            </ul>`
+    }
+}
 
+// Returns first color to apply background color and second color to apply skill color
+function getExperienceColor(yoe) {
+    switch (yoe) {
+        case 1:
+            return ["novice", "white"];
+        case 2:
+        case 3:
+            return ["beginner", "green"];
+        case 4:
+            return ["proficient", "blue"];
+        case 5:
+            return ["expert", "purple"];
+        default:
+            return ["master", "gold"];
+    }
+}
+
+document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
+    const skillDiv = wrapper.querySelector(".skill");
+    const tooltip = wrapper.querySelector(".skill-tooltip");
+    const skillObj = skills[skillDiv.dataset.skill];
+
+    if (!skillObj) return;
+
+    const [backColor, skillObjColor] = getExperienceColor(skillObj.years);
+
+    skillDiv.addEventListener('mouseenter', () => {
+        skillDiv.classList.add(`hover-${backColor}`);
+        skillDiv.style.backgroundColor = skillObjColor;
+        tooltip.style.backgroundColor = skillObjColor;
+        tooltip.innerHTML = `
+            <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
+            <br>
+            <br>
+            <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
+        `;
+        tooltip.style.opacity = 1;
+    });
+
+    skillDiv.addEventListener('mouseleave', () => {
+        skillDiv.style.backgroundColor = '';
+        skillDiv.classList.remove(`hover-${backColor}`);
+        tooltip.style.opacity = 0;
+    });
+});
 
 // when page is loaded, 'terminal' animation plays
 document.addEventListener('DOMContentLoaded', async () => {
