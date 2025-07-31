@@ -3,10 +3,12 @@ let aboutCancelToken = { canceled: false };
 let hobbiesCancelToken = { canceled: false };
 let learnCancelToken = { canceled: false };
 let skillsCancelToken = { canceled: false };
+let projectsCancelToken = { canceled: false };
 let aboutHasAnimated = false;
 let hobbiesHasAnimated = false;
 let learnHasAnimated = false;
 let skillsHasAnimated = false;
+let projectsHasAnimated = false;
 
 const hobbies = [
     "🏋️ Gym/Weightlifting",
@@ -253,52 +255,6 @@ const skills = {
     }
 }
 
-// Returns first color to apply background color and second color to apply skill color
-function getExperienceColor(yoe) {
-    switch (yoe) {
-        case 1:
-            return ["novice", "white"];
-        case 2:
-        case 3:
-            return ["beginner", "green"];
-        case 4:
-            return ["proficient", "blue"];
-        case 5:
-            return ["expert", "purple"];
-        default:
-            return ["master", "gold"];
-    }
-}
-
-document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
-    const skillDiv = wrapper.querySelector(".skill");
-    const tooltip = wrapper.querySelector(".skill-tooltip");
-    const skillObj = skills[skillDiv.dataset.skill];
-
-    if (!skillObj) return;
-
-    const [backColor, skillObjColor] = getExperienceColor(skillObj.years);
-
-    skillDiv.addEventListener('mouseenter', () => {
-        skillDiv.classList.add(`hover-${backColor}`);
-        skillDiv.style.backgroundColor = skillObjColor;
-        tooltip.style.backgroundColor = skillObjColor;
-        tooltip.innerHTML = `
-            <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
-            <br>
-            <br>
-            <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
-        `;
-        tooltip.style.opacity = 1;
-    });
-
-    skillDiv.addEventListener('mouseleave', () => {
-        skillDiv.style.backgroundColor = '';
-        skillDiv.classList.remove(`hover-${backColor}`);
-        tooltip.style.opacity = 0;
-    });
-});
-
 // when page is loaded, 'terminal' animation plays
 document.addEventListener('DOMContentLoaded', async () => {
     await sleep(750);
@@ -335,10 +291,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 // when page is loaded, add observers
 document.addEventListener('DOMContentLoaded', () => {
-  const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.3 });
-  const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.3 });
-  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.3 });
-  const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.3 });
+  const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.2 });
+  const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.2 });
+  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.1 });
+  const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.1 });
+  const projectsObserver = new IntersectionObserver(handleProjectsReveal, { threshold: 0.1 });
 
   const aboutSection = document.getElementById('about-me');
   aboutObserver.observe(aboutSection);
@@ -348,6 +305,8 @@ document.addEventListener('DOMContentLoaded', () => {
   learnObserver.observe(learnSection);
   const skillsSection = document.getElementById('skills');
   skillsObserver.observe(skillsSection);
+  const projectsSection = document.getElementById('projects');
+  projectsObserver.observe(projectsSection);
 });
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
@@ -355,7 +314,6 @@ document.getElementById('terminal-panel').addEventListener("click", async () => 
     const lastTerminalCursor = document.getElementById("terminal-cursor");
     if (lastTerminalCursor) lastTerminalCursor.remove();
 });
-// 'about-background' is clicked
 document.getElementById("about-background").addEventListener("click", async () => {
     aboutCancelToken.canceled = true;
 
@@ -373,6 +331,35 @@ document.getElementById("learn").addEventListener("click", async () => {
 
     const lastLearnCursor = document.getElementById("learn-cursor");
     if (lastLearnCursor) lastLearnCursor.remove();
+});
+// set up each skill event listener
+document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
+    const skillDiv = wrapper.querySelector(".skill");
+    const tooltip = wrapper.querySelector(".skill-tooltip");
+    const skillObj = skills[skillDiv.dataset.skill];
+
+    if (!skillObj) return;
+
+    const [backColor, skillObjColor] = getExperienceColor(skillObj.years);
+
+    skillDiv.addEventListener('mouseenter', () => {
+        skillDiv.classList.add(`hover-${backColor}`);
+        skillDiv.style.backgroundColor = skillObjColor;
+        tooltip.style.backgroundColor = skillObjColor;
+        tooltip.innerHTML = `
+            <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
+            <br>
+            <br>
+            <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
+        `;
+        tooltip.style.opacity = 1;
+    });
+
+    skillDiv.addEventListener('mouseleave', () => {
+        skillDiv.style.backgroundColor = '';
+        skillDiv.classList.remove(`hover-${backColor}`);
+        tooltip.style.opacity = 0;
+    });
 });
 
 async function handleAboutMeReveal(entries) {
@@ -426,7 +413,12 @@ async function handleSkillsReveal(entries) {
         skillsHasAnimated = true;
 
         await typeText("./skills --list", 50, "skills-command", "skills-cursor", skillsCancelToken);
-        await sleep(200);
+
+        const skillOverview = document.getElementById('skill-overview');
+
+        skillOverview.classList.remove('overview-wrapper-hidden');
+        skillOverview.classList.add('overview-wrapper');
+        await sleep(1000);
 
         const skillsGrid = document.getElementById('skills-grid');
         const skillColumns = skillsGrid.querySelectorAll('.skill-column');
@@ -456,6 +448,14 @@ async function handleSkillsReveal(entries) {
 
             baseDelay += skills.length * 0.1 + 0.3;
         });
+    }
+}
+async function handleProjectsReveal(entries) {
+    const entry = entries[0];
+    if (entry.isIntersecting && !projectsHasAnimated) {
+        projectsHasAnimated = true;
+
+        await typeText("./projects --list", 50, "projects-command", "projects-cursor", projectsCancelToken);
     }
 }
 
@@ -507,4 +507,20 @@ async function typeListItems(listID, listItems, listItemClassName, charDelay, de
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+// Returns first color to apply background color and second color to apply skill color
+function getExperienceColor(yoe) {
+    switch (yoe) {
+        case 1:
+            return ["novice", "white"];
+        case 2:
+        case 3:
+            return ["beginner", "green"];
+        case 4:
+            return ["proficient", "blue"];
+        case 5:
+            return ["expert", "purple"];
+        default:
+            return ["master", "gold"];
+    }
 }
