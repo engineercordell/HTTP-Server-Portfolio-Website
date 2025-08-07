@@ -472,12 +472,22 @@ async function handleProjectsReveal(entries) {
 
         await typeText("./projects --list", 50, "projects-command", "projects-cursor", projectsCancelToken);
 
-        const skillOverview = document.getElementById('projects-overview');
+        const projectOverview = document.getElementById('projects-overview');
 
-        skillOverview.classList.remove('overview-wrapper-hidden');
-        skillOverview.classList.add('overview-wrapper');
+        projectOverview.classList.remove('overview-wrapper-hidden');
+        projectOverview.classList.add('overview-wrapper');
         // await typeText("") <-- CONSIDER ADDING THIS
-        await sleep(1000);
+        await sleep(500);
+
+        delay = 0;
+
+        const projectCards = document.getElementById('projects-grid').querySelectorAll('.project-card-hidden');
+        projectCards.forEach((card) => {
+            card.classList.remove('project-card-hidden');
+            card.classList.add('project-card');
+            card.style.transitionDelay = `${delay}s`;
+            delay += 0.5;
+        });
     }
 }
 
