@@ -279,12 +279,6 @@ main {
     z-index: -2;
 }
 
-#terminal-panel:hover {
-    box-shadow: 0 0 5px white, 0 0 5px white;
-    transform: scale(1.01);
-    transition: all 0.3s ease;
-}
-
 #terminal-text {
     max-width: 90%;
     height: 100%;
@@ -812,8 +806,196 @@ main {
     background: gold;
 }
 
+/* PROJECTS */
+
 .section.projects {
     box-sizing: border-box;
     margin: 1rem;
     min-height: 100vh;
+}
+
+#projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 0 1rem;
+    --proj_corner_size: 30px;
+}
+
+@media (min-width: 768px) {
+    #projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        --proj_corner_size: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+        --proj_corner_size: 25px;
+    }
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.project-header {
+    position: relative;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem 2rem;
+    z-index: 0;
+    background: white;
+    clip-path: polygon(
+        0 15px,
+        15px 0,
+        calc(100% - 15px) 0,
+        100% 15px,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        15px 100%,
+        0 calc(100% - 15px)
+    );
+    opacity: 0.97;
+}
+
+.project-header::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 1px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(29, 12, 33, 1) 99%);
+    clip-path: polygon(
+        0 15px,
+        15px 0,
+        calc(100% - 15px) 0,
+        100% 15px,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        15px 100%,
+        0 calc(100% - 15px)
+    );
+}
+
+.project-img-wrapper {
+    position: relative;
+    padding: 2px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    z-index: 0;
+    background-color: white;
+    clip-path: polygon(
+        0 var(--proj_corner_size),
+        var(--proj_corner_size) 0,
+        calc(100% - var(--proj_corner_size)) 0,
+        100% var(--proj_corner_size),
+        100% calc(100% - var(--proj_corner_size)),
+        calc(100% - var(--proj_corner_size)) 100%,
+        var(--proj_corner_size) 100%,
+        0 calc(100% - var(--proj_corner_size))
+    );
+}
+
+.project-img-wrapper:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px var(--accent);
+}
+
+.project-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    clip-path: inherit;
+}
+
+.project-overlay {
+    position: absolute;
+    display: flex;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    gap: 0.5rem;
+    cursor: default;
+}
+
+.proj-description-wrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0 0.5rem;
+}
+
+.project-img-wrapper:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-img-wrapper.expanded .project-overlay {
+    opacity: 1;
+}
+
+.proj-button {
+    display: inline-flex;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding: 0.8rem 1.7rem;
+    margin-top: 1rem;
+    z-index: 0;
+    background: white;
+    text-decoration: none;
+    color: var(--text);
+    gap: 0.3rem;
+    clip-path: polygon(
+        0 10px,
+        10px 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0 calc(100% - 10px)
+    );
+    opacity: 0.97;
+}
+
+.proj-button::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 1px;
+    background: black;
+    clip-path: polygon(
+        0 10px,
+        10px 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0 calc(100% - 10px)
+    );
+}
+
+.proj-button:hover {
+    font-weight: bold;
+    transition: 0.2s;
+    transform: scale(1.05);
+}
+
+.github-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
 }

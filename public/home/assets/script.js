@@ -307,6 +307,20 @@ document.addEventListener('DOMContentLoaded', () => {
   skillsObserver.observe(skillsSection);
   const projectsSection = document.getElementById('projects');
   projectsObserver.observe(projectsSection);
+
+  const cards = document.querySelectorAll('.project-card');
+  const isTouch = window.matchMedia('(pointer: coarse)').matches;
+  if (isTouch) {
+    cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (!card.classList.contains('expanded')) {
+                e.preventDefault();
+                cards.forEach(c => c.classList.remove('expanded'));
+                card.classList.add('expanded');
+            }
+        });
+    });
+  }
 });
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
@@ -418,6 +432,7 @@ async function handleSkillsReveal(entries) {
 
         skillOverview.classList.remove('overview-wrapper-hidden');
         skillOverview.classList.add('overview-wrapper');
+        // await typeText("") <-- CONSIDER ADDING THIS
         await sleep(1000);
 
         const skillsGrid = document.getElementById('skills-grid');
@@ -456,6 +471,13 @@ async function handleProjectsReveal(entries) {
         projectsHasAnimated = true;
 
         await typeText("./projects --list", 50, "projects-command", "projects-cursor", projectsCancelToken);
+
+        const skillOverview = document.getElementById('projects-overview');
+
+        skillOverview.classList.remove('overview-wrapper-hidden');
+        skillOverview.classList.add('overview-wrapper');
+        // await typeText("") <-- CONSIDER ADDING THIS
+        await sleep(1000);
     }
 }
 
