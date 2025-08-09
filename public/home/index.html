@@ -10,21 +10,21 @@
     </head>
     <body>
         <nav class="cyber-nav">
-        <div class="nav-bar left">
-            <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">Home</a>
-            <a href="#about-me">About Me</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-        </div>
-        <div class="nav-circle">
-            <span>CP</span>
-        </div>
-        <div class="nav-bar right">
-            <a href="#resume">Resume</a>
-            <a href="#linkedin">LinkedIn</a>
-            <a href="#github">GitHub</a>
-            <a href="#contact">Contact Me</a>
-        </div>
+            <div class="nav-bar left">
+                <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">Home</a>
+                <a href="#about-me">About Me</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+            </div>
+            <div class="nav-circle">
+                <span>CP</span>
+            </div>
+            <div class="nav-bar right">
+                <a href="#resume">Resume</a>
+                <a href="#linkedin">LinkedIn</a>
+                <a href="#github">GitHub</a>
+                <a href="#contact">Contact Me</a>
+            </div>
         </nav>
 
         <div class="video-container">
@@ -215,81 +215,106 @@
                     </div>
                 </div>
             </section>
-            <section id="projects" class="section projects">
-                <h1 id="projects-head" class="section-head">
-                    <span class="prompt">~</span><span>$&nbsp;</span>
-                    <span id="projects-command"></span>
-                </h1>
-                <div id="projects-overview" class="overview-wrapper-hidden" style="margin-left: 1rem; margin-top: 2rem;">
-                    <div>🛠️Here's an overview of some of my most significant academic undertakings both recently and during college.</div>
-                </div>
-                <div id="projects-grid">
-                    <div class="project-card-hidden">
-                        <h2 class="project-header">HTTP Server in Modern C++</h2>
-                        <div class="project-img-wrapper">
-                            <img src="home/http-server-cpp.png" alt="HTTP Server thumbnail" class="project-img">
-                            <div class="project-overlay">
-                                <div class="proj-description-wrapper">
-                                    <p>A lightweight multithreaded HTTP server written from scratch using socket programming and thread pools in modern C++ designed to run the backend of this portfolio website.</p>
+            <section class="section projects-container">
+                <section id="projects" class="section projects">
+                    <h1 id="projects-head" class="section-head">
+                        <span class="prompt">~</span><span>$&nbsp;</span>
+                        <span id="projects-command"></span>
+                    </h1>
+                    <div id="projects-overview" class="overview-wrapper-hidden" style="margin-left: 1rem; margin-top: 2rem;">
+                        <div>🛠️Here's an overview of some of my most significant academic undertakings both recently and during college.</div>
+                    </div>
+                    <div id="projects-grid">
+                        <div class="project-card-hidden">
+                            <h2 class="project-header">HTTP Server in Modern C++</h2>
+                            <div class="project-img-wrapper">
+                                <img src="home/http-server-cpp.png" alt="HTTP Server thumbnail" class="project-img">
+                                <div class="project-overlay">
+                                    <div class="proj-description-wrapper">
+                                        <p>A lightweight multithreaded HTTP server written from scratch using socket programming and thread pools in modern C++ designed to run the backend of this portfolio website.</p>
+                                    </div>
+                                    <a href="https://github.com/ceejayalexander/https-server-cpp" target="_blank" class="proj-button">
+                                        <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+                                        </svg>
+                                        View on GitHub
+                                    </a>
                                 </div>
-                                <a href="https://github.com/ceejayalexander/https-server-cpp" target="_blank" class="proj-button">
-                                    <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
-                                    </svg>
-                                     View on GitHub
-                                </a>
+                            </div>
+                        </div>
+                        <div class="project-card-hidden">
+                            <h2 class="project-header">My Portfolio Website</h2>
+                            <div class="project-img-wrapper">
+                                <img src="home/chip.png" alt="Portfolio website thumbnail" class="project-img">
+                                <div class="project-overlay">
+                                    <div class="proj-description-wrapper">
+                                        <p>An overview of the code that makes up this portfolio website written purely w/ HTML + CSS + JavaScript (no frameworks) is also available on the HTTP Server GitHub page.</p>
+                                    </div>
+                                    <a href="https://github.com/ceejayalexander/https-server-cpp" target="_blank" class="proj-button">
+                                        <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+                                        </svg>
+                                        View on GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-hidden">
+                            <h2 class="project-header">Capstone Project</h2>
+                            <div class="project-img-wrapper">
+                                <img src="home/capstone.png" alt="capstone thumbnail" class="project-img">
+                                <div class="project-overlay">
+                                    <div class="proj-description-wrapper">
+                                        <p>Our capstone project involved designing a temperature-regulating bed capable of dynamic heating and cooling using TECs and airflow control. I led the entire electronics subsystem — designing circuits, programming the ESP32 microcontroller, integrating temperature sensors, implementing fan/TEC control logic, and building the app necessary to remotely control and monitor the bed's thermal activity.</p>
+                                    </div>
+                                    <a id="capstone-button" class="proj-button">
+                                        Learn More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-hidden">
+                            <h2 class="project-header">Recession Predictor Project</h2>
+                            <div class="project-img-wrapper">
+                                <img src="home/ml-proj.png" alt="capstone thumbnail" class="project-img">
+                                <div class="project-overlay">
+                                    <div class="proj-description-wrapper">
+                                        <p>Here's a compilation of more modular, low-level projects I worked on after graduation which follows the material learned in my school's CS 2200 class curriculum.</p>
+                                    </div>
+                                    <a href="https://github.com/ceejayalexander/Systems-Programming" target="_blank" class="proj-button">
+                                        <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+                                        </svg>
+                                        View on GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card-hidden">
+                            <h2 class="project-header">Systems Programming Projects</h2>
+                            <div class="project-img-wrapper">
+                                <img src="home/systems.jpg" alt="capstone thumbnail" class="project-img">
+                                <div class="project-overlay">
+                                    <div class="proj-description-wrapper">
+                                        <p>Here's a compilation of more modular, low-level projects I worked on after graduation which follows the material learned in my school's CS 2200 class curriculum.</p>
+                                    </div>
+                                    <a href="https://github.com/ceejayalexander/Systems-Programming" target="_blank" class="proj-button">
+                                        <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
+                                        </svg>
+                                        View on GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="project-card-hidden">
-                        <h2 class="project-header">My Portfolio Website</h2>
-                        <div class="project-img-wrapper">
-                            <img src="home/chip.png" alt="Portfolio website thumbnail" class="project-img">
-                            <div class="project-overlay">
-                                <div class="proj-description-wrapper">
-                                    <p>An overview of the code that makes up this portfolio website written purely w/ HTML + CSS + JavaScript (no frameworks) is also available on the HTTP Server GitHub page.</p>
-                                </div>
-                                <a href="https://github.com/ceejayalexander/https-server-cpp" target="_blank" class="proj-button">
-                                    <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
-                                    </svg>
-                                     View on GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card-hidden">
-                        <h2 class="project-header">Capstone Project</h2>
-                        <div class="project-img-wrapper">
-                            <img src="home/capstone.png" alt="capstone thumbnail" class="project-img">
-                            <div class="project-overlay">
-                                <div class="proj-description-wrapper">
-                                    <p>Our capstone project involved designing a temperature-regulating bed capable of dynamic heating and cooling using TECs and airflow control. I led the entire electronics subsystem — designing circuits, programming the ESP32 microcontroller, integrating temperature sensors, implementing fan/TEC control logic, and building the app necessary to remotely control and monitor the bed's thermal activity.</p>
-                                </div>
-                                <a href="https://github.com/ceejayalexander/https-server-cpp" target="_blank" class="proj-button">
-                                    Learn More
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card-hidden">
-                        <h2 class="project-header">Systems Programming Projects</h2>
-                        <div class="project-img-wrapper">
-                            <img src="home/systems.jpg" alt="capstone thumbnail" class="project-img">
-                            <div class="project-overlay">
-                                <div class="proj-description-wrapper">
-                                    <p>Here's a compilation of more modular, low-level projects I worked on after graduation which follows the material learned in my school's CS 2200 class curriculum.</p>
-                                </div>
-                                <a href="https://github.com/ceejayalexander/Systems-Programming" target="_blank" class="proj-button">
-                                    <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1 .1 2 .7 2.5.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A10.9 10.9 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/>
-                                    </svg>
-                                    View on GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </section>
+                <section id="capstone-details" class="section project">
+                    <h1 id="capstone-header" class="section-head">
+                        <span class="prompt">~</span><span>$&nbsp;</span>
+                        <span id="capstone-command"></span>
+                    </h1>
+                </section>
             </section>
         </main>
     </body>

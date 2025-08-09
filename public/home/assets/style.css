@@ -216,6 +216,8 @@ main {
 }
 
 .section {
+    position: relative;
+    min-height: 100vh;
     color: var(--text);
     overflow-wrap: normal;
 }
@@ -543,7 +545,6 @@ main {
 .section.skills {
     box-sizing: border-box;
     margin: 1rem;
-    min-height: 100vh;
 }
 
 .overview-wrapper {
@@ -808,20 +809,50 @@ main {
 
 /* PROJECTS */
 
+.section.projects-container > section {
+
+}
+
 .section.projects {
     box-sizing: border-box;
     margin: 1rem;
-    min-height: 100vh;
+}
+
+#projects {
+    transition: opacity 0.5s ease-out, transform 1s ease, visibility 0s linear 0.5s;
+}
+
+.learn-more-hide {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+#capstone-details {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s ease, transform 1s ease, visibility 0s linear 0.5s;
+}
+
+#capstone-details.capstone-show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0s;
 }
 
 #projects-grid {
+    --proj_corner_size: 30px;
+
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
     margin-top: 2rem;
     padding: 0 1rem;
-    --proj_corner_size: 30px;
 }
+
+
 
 @media (min-width: 768px) {
     #projects-grid {
@@ -1000,6 +1031,7 @@ main {
     font-weight: bold;
     transition: 0.2s;
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .github-icon {

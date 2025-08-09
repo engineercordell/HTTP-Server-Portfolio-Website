@@ -9,6 +9,7 @@ let hobbiesHasAnimated = false;
 let learnHasAnimated = false;
 let skillsHasAnimated = false;
 let projectsHasAnimated = false;
+let capstoneHasAnimated = false;
 
 const hobbies = [
     "🏋️ Gym/Weightlifting",
@@ -345,6 +346,22 @@ document.getElementById("learn").addEventListener("click", async () => {
 
     const lastLearnCursor = document.getElementById("learn-cursor");
     if (lastLearnCursor) lastLearnCursor.remove();
+});
+
+const projects = document.getElementById("projects");
+document.getElementById("capstone-button").addEventListener("click", async () => {
+    projects.classList.add('learn-more-hide');
+    await sleep(1000);
+    projects.style.display = 'none';
+    document.getElementById("capstone-details").classList.add('capstone-show');
+
+    if (!capstoneHasAnimated) {
+        capstoneHasAnimated = true;
+
+        await sleep(500);
+        await typeText("./capstone --view", 50, "capstone-command", "capstone-cursor", projectsCancelToken);
+    }
+
 });
 // set up each skill event listener
 document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
