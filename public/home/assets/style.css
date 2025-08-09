@@ -218,6 +218,8 @@ main {
 .section {
     position: relative;
     min-height: 100vh;
+    box-sizing: border-box;
+    margin: 1rem;
     color: var(--text);
     overflow-wrap: normal;
 }
@@ -404,8 +406,6 @@ main {
 /* ABOUT ME */
 
 .section.about-me {
-    box-sizing: border-box;
-    margin: 1rem;
     min-height: 130vh;
 }
 
@@ -541,11 +541,6 @@ main {
 }
 
 /* SKILLS */
-
-.section.skills {
-    box-sizing: border-box;
-    margin: 1rem;
-}
 
 .overview-wrapper {
     position: relative;
@@ -809,20 +804,24 @@ main {
 
 /* PROJECTS */
 
+/* Specifically target sections in the projects section */
 .section.projects-container > section {
-
-}
-
-.section.projects {
     box-sizing: border-box;
     margin: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 2rem);
 }
 
 #projects {
     transition: opacity 0.5s ease-out, transform 1s ease, visibility 0s linear 0.5s;
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
 }
 
-.learn-more-hide {
+#projects.learn-more-hide {
     visibility: hidden;
     opacity: 0;
     transform: translateX(-100%);
@@ -840,6 +839,7 @@ main {
     opacity: 1;
     transform: translateX(0);
     transition-delay: 0s;
+    position: relative;
 }
 
 #projects-grid {
@@ -851,8 +851,6 @@ main {
     margin-top: 2rem;
     padding: 0 1rem;
 }
-
-
 
 @media (min-width: 768px) {
     #projects-grid {
@@ -1038,4 +1036,14 @@ main {
     width: 18px;
     height: 18px;
     fill: currentColor;
+}
+
+.capstone-content {
+    display: flex;
+    justify-content: center;
+}
+
+#capstone-title {
+    margin-top: 2rem;
+    width: fit-content;
 }

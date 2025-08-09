@@ -348,12 +348,17 @@ document.getElementById("learn").addEventListener("click", async () => {
     if (lastLearnCursor) lastLearnCursor.remove();
 });
 
-const projects = document.getElementById("projects");
+
 document.getElementById("capstone-button").addEventListener("click", async () => {
+    const projects = document.getElementById("projects");
+    const capstone = document.getElementById("capstone-details");
+    
     projects.classList.add('learn-more-hide');
+
     await sleep(1000);
-    projects.style.display = 'none';
-    document.getElementById("capstone-details").classList.add('capstone-show');
+    projects.style.position = 'absolute';
+
+    capstone.classList.add('capstone-show');
 
     if (!capstoneHasAnimated) {
         capstoneHasAnimated = true;
