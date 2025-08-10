@@ -1041,6 +1041,7 @@ main {
 .capstone-content {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 #capstone-title {
