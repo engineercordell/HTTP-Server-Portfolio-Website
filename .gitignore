@@ -13,6 +13,7 @@ server
 *.jpg
 *.mp4
 *.pdf
+*.pptx
 
 # VSCode Settings
 .vscode/
