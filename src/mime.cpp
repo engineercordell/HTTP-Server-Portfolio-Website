@@ -13,7 +13,8 @@ std::string get_mime_type(const std::filesystem::path& path)
         { ".jpeg", "image/jpeg" },
         { ".svg", "image/svg+xml" },
         { ".json", "application/json" },
-        { ".txt", "text/plain" }
+        { ".txt", "text/plain" },
+        { ".pdf", "application/pdf" }
     };
 
     std::string ext = path.extension().string();

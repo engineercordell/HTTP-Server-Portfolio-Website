@@ -25,8 +25,8 @@ Lightweight HTTPS server written in C++
 ## Website
 - [ ] In the case of a font retrieval failure, I will need to adjust navbar size automatically to accomodate for increase/shrink in size of text
 - [ ] Ensure video replays when clicking back on tab
-- [ ] Sci-fi noises
-- [ ] About Me Sections
-  - [ ] Hobbies
-  - [ ] Currently Learning
+- [✓] About Me Sections
+  - [✓] Hobbies
+  - [✓] Currently Learning
+- [ ] Handle embedded content
   
