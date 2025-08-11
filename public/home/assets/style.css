@@ -816,31 +816,28 @@ main {
 }
 
 #projects {
-    transition: opacity 0.5s ease-out, transform 1s ease, visibility 0s linear 0.5s;
+    transition: opacity 0.5s ease, transform 1s ease, visibility 0s linear 0.5s;
     opacity: 1;
     transform: translateX(0);
     position: relative;
 }
 
 #projects.learn-more-hide {
-    visibility: hidden;
     opacity: 0;
     transform: translateX(-100%);
 }
 
 #capstone-details {
-    visibility: hidden;
     opacity: 0;
     transform: translateX(-100%);
-    transition: opacity 0.5s ease, transform 1s ease, visibility 0s linear 0.5s;
+    transition: opacity 0.5s ease, transform 1s ease;
+    pointer-events: none;
 }
 
 #capstone-details.capstone-show {
-    visibility: visible;
     opacity: 1;
     transform: translateX(0);
-    transition-delay: 0s;
-    position: relative;
+    pointer-events: auto;
 }
 
 #projects-grid {

@@ -355,25 +355,24 @@ document.getElementById("capstone-button").addEventListener("click", async () =>
     projects.classList.add('learn-more-hide');
 
     await sleep(1000);
-    projects.style.position = 'absolute';
-
     capstone.classList.add('capstone-show');
 
     if (!capstoneHasAnimated) {
         capstoneHasAnimated = true;
-
         await sleep(500);
         await typeText("./capstone --view", 50, "capstone-command", "capstone-cursor", projectsCancelToken);
     }
 });
+
 document.getElementById("back-button").addEventListener("click", async () => {
     capstone.classList.remove('capstone-show');
 
     await sleep(1000);
-    projects.style.position = 'relative';
-    
     projects.classList.remove('learn-more-hide');
 });
+
+
+
 // set up each skill event listener
 document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
     const skillDiv = wrapper.querySelector(".skill");
