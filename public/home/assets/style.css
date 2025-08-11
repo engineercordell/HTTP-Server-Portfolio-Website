@@ -1103,3 +1103,13 @@ main {
         align-items: center;
     }
 }
+
+/* #back-button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+} */
+
+#back-button:hover {
+    color: var(--glow);
+    background-color: var(--glow);
+    transform: scale(1.05);
+}
