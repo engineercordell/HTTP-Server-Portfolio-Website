@@ -348,11 +348,10 @@ document.getElementById("learn").addEventListener("click", async () => {
     if (lastLearnCursor) lastLearnCursor.remove();
 });
 
+const projects = document.getElementById("projects");
+const capstone = document.getElementById("capstone-details");
 
 document.getElementById("capstone-button").addEventListener("click", async () => {
-    const projects = document.getElementById("projects");
-    const capstone = document.getElementById("capstone-details");
-    
     projects.classList.add('learn-more-hide');
 
     await sleep(1000);
@@ -366,7 +365,14 @@ document.getElementById("capstone-button").addEventListener("click", async () =>
         await sleep(500);
         await typeText("./capstone --view", 50, "capstone-command", "capstone-cursor", projectsCancelToken);
     }
+});
+document.getElementById("back-button").addEventListener("click", async () => {
+    capstone.classList.remove('capstone-show');
 
+    await sleep(1000);
+    projects.style.position = 'relative';
+    
+    projects.classList.remove('learn-more-hide');
 });
 // set up each skill event listener
 document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
