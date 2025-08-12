@@ -341,8 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isTouch) {
         cards.forEach(card => {
             card.addEventListener('click', (e) => {
-                if (!card.classList.contains('expanded')) {
-                    e.preventDefault();
+                if (e.target.closest('a, button')) return;
+
+                if (card.classList.contains('expanded')) {
+                    card.classList.remove('expanded');
+                } else {
                     cards.forEach(c => c.classList.remove('expanded'));
                     card.classList.add('expanded');
                 }

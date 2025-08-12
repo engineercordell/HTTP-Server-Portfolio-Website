@@ -938,9 +938,9 @@ main {
     );
 }
 
-.project-img-wrapper:hover {
+.project-img-wrapper:hover, 
+.project-img-wrapper.expanded {
     transform: scale(1.03);
-    box-shadow: 0 0 25px var(--accent);
 }
 
 .project-img {
@@ -972,12 +972,14 @@ main {
     padding: 0 0.5rem;
 }
 
-.project-img-wrapper:hover .project-overlay {
+.project-img-wrapper:hover .project-overlay,
+.project-img-wrapper.expanded .project-overlay {
     opacity: 1;
 }
 
-.project-img-wrapper.expanded .project-overlay {
-    opacity: 1;
+.project-img-wrapper:hover .proj-button,
+.project-img-wrapper.expanded .proj-button {
+    pointer-events: auto;
 }
 
 .proj-button {
@@ -990,6 +992,7 @@ main {
     z-index: 0;
     background: white;
     text-decoration: none;
+    pointer-events: none;
     color: var(--text);
     gap: 0.3rem;
     clip-path: polygon(

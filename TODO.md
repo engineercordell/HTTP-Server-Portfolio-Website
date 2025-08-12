@@ -4,11 +4,11 @@ Lightweight HTTPS server written in C++
 ## MUST DO 
 - [✓] Add a 'back button' for 'learn more' button
 - [✓] (UNNCESSARY) Create animation for 'learn more' button
-- [ ] Enable toggle on 'Skills' section for mobile devices
 - [ ] Make 'Projects' section mobile-friendly
+- [ ] Enable toggle on 'Skills' section for mobile devices
 - [ ] Make 'Skills' section mobile-friendly
-- [ ] Make 'About Me' section mobile-friendly
 - [ ] Make the navigation bar mobile-friendly by shrinking to hold two ellipsis on each side and when clicked trigger the drop down on a particular side
+- [ ] Make 'About Me' section mobile-friendly
 - [ ] Ensure landing page terminal is mobile-friendly
 - [ ] Add icons and links for 'LinkedIn' and 'GitHub' on navigation bar
 - [ ] Resume should download resume
