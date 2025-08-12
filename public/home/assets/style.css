@@ -1041,9 +1041,14 @@ main {
     align-items: center;
 }
 
-.capstone-header-wrapper {
+.youtube-icon {
+    color: red;
+}
+
+.ml-proj-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2rem;
 }
 
 #capstone-title {
@@ -1112,4 +1117,8 @@ main {
     color: var(--glow);
     background-color: var(--glow);
     transform: scale(1.05);
+}
+
+#ml-proj {
+    padding: 0.5rem;
 }

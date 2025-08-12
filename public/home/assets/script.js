@@ -350,18 +350,13 @@ document.getElementById("learn").addEventListener("click", async () => {
 
 const projects = document.getElementById("projects");
 const capstone = document.getElementById("capstone-details");
+const backButton = document.getElementById("back-button");
 
 document.getElementById("capstone-button").addEventListener("click", async () => {
     projects.classList.add('learn-more-hide');
 
     await sleep(1000);
     capstone.classList.add('capstone-show');
-
-    if (!capstoneHasAnimated) {
-        capstoneHasAnimated = true;
-        await sleep(500);
-        await typeText("./capstone --view", 50, "capstone-command", "capstone-cursor", projectsCancelToken);
-    }
 });
 
 document.getElementById("back-button").addEventListener("click", async () => {

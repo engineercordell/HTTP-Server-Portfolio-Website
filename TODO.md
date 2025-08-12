@@ -3,8 +3,8 @@ Lightweight HTTPS server written in C++
 
 ## MUST DO 
 - [✓] Add a 'back button' for 'learn more' button
-- [ ] Create animation for 'learn more' button
-- [ ] Enable toggle on 'Skills' section
+- [✓] (UNNCESSARY) Create animation for 'learn more' button
+- [ ] Enable toggle on 'Skills' section for mobile devices
 - [ ] Make 'Skills' section mobile-friendly
 - [ ] Make 'About Me' section mobile-friendly
 - [ ] Make the navigation bar mobile-friendly by shrinking to hold two ellipsis on each side and when clicked trigger the drop down on a particular side
