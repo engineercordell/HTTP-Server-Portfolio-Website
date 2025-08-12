@@ -5,6 +5,7 @@ Lightweight HTTPS server written in C++
 - [✓] Add a 'back button' for 'learn more' button
 - [✓] (UNNCESSARY) Create animation for 'learn more' button
 - [ ] Enable toggle on 'Skills' section for mobile devices
+- [ ] Make 'Projects' section mobile-friendly
 - [ ] Make 'Skills' section mobile-friendly
 - [ ] Make 'About Me' section mobile-friendly
 - [ ] Make the navigation bar mobile-friendly by shrinking to hold two ellipsis on each side and when clicked trigger the drop down on a particular side
@@ -17,7 +18,7 @@ Lightweight HTTPS server written in C++
 - [ ] Add 'Contact Me' section
 
 ## Future Projects to Add
-- [ ] Recession Predictor Proj
+- [✓] Recession Predictor Proj
 - [ ] Machine Learning Projs
 - [ ] Intro to AI Projs
 - [ ] Machine Design Projs 2 & 3

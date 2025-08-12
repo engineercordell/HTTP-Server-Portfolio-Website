@@ -803,6 +803,8 @@ main {
     background: gold;
 }
 
+
+
 /* PROJECTS */
 
 /* Specifically target sections in the projects section */
@@ -1028,6 +1030,16 @@ main {
     cursor: pointer;
 }
 
+.youtube-icon {
+    color: red;
+}
+
+.ml-proj-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
 .github-icon {
     width: 18px;
     height: 18px;
@@ -1039,16 +1051,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.youtube-icon {
-    color: red;
-}
-
-.ml-proj-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
 }
 
 #capstone-title {
@@ -1108,10 +1110,6 @@ main {
         align-items: center;
     }
 }
-
-/* #back-button {
-    transition: background-color 0.3s ease, transform 0.2s ease;
-} */
 
 #back-button:hover {
     color: var(--glow);

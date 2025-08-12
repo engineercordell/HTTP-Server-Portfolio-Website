@@ -292,36 +292,63 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 // when page is loaded, add observers
 document.addEventListener('DOMContentLoaded', () => {
-  const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.2 });
-  const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.2 });
-  const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.1 });
-  const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.1 });
-  const projectsObserver = new IntersectionObserver(handleProjectsReveal, { threshold: 0.1 });
+    const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.2 });
+    const hobbiesObserver = new IntersectionObserver(handleHobbiesReveal, { threshold: 0.2 });
+    const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.1 });
+    const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.1 });
+    const projectsObserver = new IntersectionObserver(handleProjectsReveal, { threshold: 0.1 });
 
-  const aboutSection = document.getElementById('about-me');
-  aboutObserver.observe(aboutSection);
-  const hobbiesSection = document.getElementById('hobbies');
-  hobbiesObserver.observe(hobbiesSection);
-  const learnSection = document.getElementById('learn');
-  learnObserver.observe(learnSection);
-  const skillsSection = document.getElementById('skills');
-  skillsObserver.observe(skillsSection);
-  const projectsSection = document.getElementById('projects');
-  projectsObserver.observe(projectsSection);
+    const aboutSection = document.getElementById('about-me');
+    aboutObserver.observe(aboutSection);
+    const hobbiesSection = document.getElementById('hobbies');
+    hobbiesObserver.observe(hobbiesSection);
+    const learnSection = document.getElementById('learn');
+    learnObserver.observe(learnSection);
+    const skillsSection = document.getElementById('skills');
+    skillsObserver.observe(skillsSection);
+    const projectsSection = document.getElementById('projects');
+    projectsObserver.observe(projectsSection);
 
-  const cards = document.querySelectorAll('.project-card');
-  const isTouch = window.matchMedia('(pointer: coarse)').matches;
-  if (isTouch) {
-    cards.forEach(card => {
-        card.addEventListener('click', (e) => {
-            if (!card.classList.contains('expanded')) {
-                e.preventDefault();
-                cards.forEach(c => c.classList.remove('expanded'));
-                card.classList.add('expanded');
-            }
+    // Skills Mobile Device Event Listeners
+    const skillsGrid = document.getElementById('skills-grid');
+
+    const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    if (isTouchDevice) {
+        const allSkills = skillsGrid.querySelectorAll('.skill-transform-wrapper');
+        allSkills.forEach(skill => {
+            skill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tooltip = skill.querySelector('.skill-tooltip');
+
+                document.querySelectorAll('.skill-tooltip.active').forEach(t => {
+                    if (t !== tooltip) t.classList.remove('active');
+                });
+
+                tooltip.classList.toggle('active');
+            });
         });
-    });
-  }
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.skill-tooltip.active').forEach(t => {
+                t.classList.remove('active');
+            });
+        });
+    }
+
+    // Projects Mobile Device Event Listeners
+    const cards = document.querySelectorAll('.project-img-wrapper');
+    const isTouch = window.matchMedia('(pointer: coarse) and (pointer: coarse)').matches;
+    if (isTouch) {
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (!card.classList.contains('expanded')) {
+                    e.preventDefault();
+                    cards.forEach(c => c.classList.remove('expanded'));
+                    card.classList.add('expanded');
+                }
+            });
+        });
+    }
 });
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
@@ -448,16 +475,16 @@ async function handleSkillsReveal(entries) {
     if (entry.isIntersecting && !skillsHasAnimated) {
         skillsHasAnimated = true;
 
+        const skillsGrid = document.getElementById('skills-grid');
+
         await typeText("./skills --list", 50, "skills-command", "skills-cursor", skillsCancelToken);
 
         const skillOverview = document.getElementById('skill-overview');
-
         skillOverview.classList.remove('overview-wrapper-hidden');
         skillOverview.classList.add('overview-wrapper');
-        // await typeText("") <-- CONSIDER ADDING THIS
+
         await sleep(1000);
 
-        const skillsGrid = document.getElementById('skills-grid');
         const skillColumns = skillsGrid.querySelectorAll('.skill-column');
 
         let baseDelay = 0;
@@ -498,7 +525,7 @@ async function handleProjectsReveal(entries) {
 
         projectOverview.classList.remove('overview-wrapper-hidden');
         projectOverview.classList.add('overview-wrapper');
-        // await typeText("") <-- CONSIDER ADDING THIS
+
         await sleep(500);
 
         delay = 0;
