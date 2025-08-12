@@ -1114,10 +1114,55 @@ main {
     }
 }
 
+#back-button {
+    display: inline-flex;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding: 0.8rem 1.7rem;
+    margin-top: 1rem;
+    z-index: 0;
+    background: white;
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--text);
+    gap: 0.3rem;
+    clip-path: polygon(
+        0 10px,
+        10px 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0 calc(100% - 10px)
+    );
+    opacity: 0.97;
+}
+
+#back-button::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 1px;
+    background: black;
+    clip-path: polygon(
+        0 10px,
+        10px 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        10px 100%,
+        0 calc(100% - 10px)
+    );
+}
+
 #back-button:hover {
     color: var(--glow);
     background-color: var(--glow);
     transform: scale(1.05);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #ml-proj {
