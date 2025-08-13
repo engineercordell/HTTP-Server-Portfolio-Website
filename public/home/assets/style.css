@@ -136,13 +136,15 @@ main {
     width: var(--nav-width);
     height: var(--nav-height);
     background-color: var(--nav-border-color);
+    --nav-width: 475px;
+    --cut-point: calc(var(--nav-width) - 48px); /* adjust for the notch */
     clip-path: polygon(
         0 0, 
         0 var(--nav-height), 
-        427px var(--nav-height), 
+        var(--cut-point) var(--nav-height), 
         var(--nav-width) 42px, 
         var(--nav-width) 10px, 
-        427px 0
+        var(--cut-point) 0
     );
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -168,10 +170,10 @@ main {
     clip-path: polygon(
         0 0, 
         0 var(--nav-height), 
-        427.5px 50.5px, 
+        var(--cut-point) calc(var(--nav-height) - 2px), 
         var(--nav-width) 40px, 
         var(--nav-width) 10px, 
-        427.5px 0
+        calc(var(--cut-point) - 1px) 0
     );
     z-index: -1;
     border-radius: var(--r);
@@ -219,10 +221,17 @@ main {
 @media (max-width: 1360px) {
     .cyber-nav {
         justify-content: center;
+        z-index: 1000;
     }
-    
+
     .nav-bar.left,
     .nav-bar.right {
+        --nav-width: 100px;
+        width: var(--nav-width);
+    }
+    
+    .nav-bar.left a,
+    .nav-bar.right a {
         display: none;
     }
     
@@ -265,12 +274,16 @@ main {
     width: 250px;
     height: 100%;
     background: black;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
     transition: right 0.3s ease;
     z-index: 500;
+}
+
+.mobile-wrapper {
+    margin-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.5rem;
 }
 
 body.menu-open .mobile-menu {
