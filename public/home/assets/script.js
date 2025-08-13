@@ -10,6 +10,7 @@ let learnHasAnimated = false;
 let skillsHasAnimated = false;
 let projectsHasAnimated = false;
 let capstoneHasAnimated = false;
+const isTouch = window.matchMedia('(pointer: coarse) and (pointer: coarse)').matches;
 
 const hobbies = [
     "🏋️ Gym/Weightlifting",
@@ -309,35 +310,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectsSection = document.getElementById('projects');
     projectsObserver.observe(projectsSection);
 
-    // Skills Mobile Device Event Listeners
-    const skillsGrid = document.getElementById('skills-grid');
-
-    const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-    if (isTouchDevice) {
-        const allSkills = skillsGrid.querySelectorAll('.skill-transform-wrapper');
-        allSkills.forEach(skill => {
-            skill.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const tooltip = skill.querySelector('.skill-tooltip');
-
-                document.querySelectorAll('.skill-tooltip.active').forEach(t => {
-                    if (t !== tooltip) t.classList.remove('active');
-                });
-
-                tooltip.classList.toggle('active');
-            });
-        });
-
-        document.addEventListener('click', () => {
-            document.querySelectorAll('.skill-tooltip.active').forEach(t => {
-                t.classList.remove('active');
-            });
-        });
-    }
-
     // Projects Mobile Device Event Listeners
     const cards = document.querySelectorAll('.project-img-wrapper');
-    const isTouch = window.matchMedia('(pointer: coarse) and (pointer: coarse)').matches;
     if (isTouch) {
         cards.forEach(card => {
             card.addEventListener('click', (e) => {
@@ -378,26 +352,6 @@ document.getElementById("learn").addEventListener("click", async () => {
     if (lastLearnCursor) lastLearnCursor.remove();
 });
 
-const projects = document.getElementById("projects");
-const capstone = document.getElementById("capstone-details");
-const backButton = document.getElementById("back-button");
-
-document.getElementById("capstone-button").addEventListener("click", async () => {
-    projects.classList.add('learn-more-hide');
-
-    await sleep(1000);
-    capstone.classList.add('capstone-show');
-});
-
-document.getElementById("back-button").addEventListener("click", async () => {
-    capstone.classList.remove('capstone-show');
-
-    await sleep(1000);
-    projects.classList.remove('learn-more-hide');
-});
-
-
-
 // set up each skill event listener
 document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
     const skillDiv = wrapper.querySelector(".skill");
@@ -408,24 +362,72 @@ document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
 
     const [backColor, skillObjColor] = getExperienceColor(skillObj.years);
 
-    skillDiv.addEventListener('mouseenter', () => {
-        skillDiv.classList.add(`hover-${backColor}`);
-        skillDiv.style.backgroundColor = skillObjColor;
-        tooltip.style.backgroundColor = skillObjColor;
-        tooltip.innerHTML = `
-            <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
-            <br>
-            <br>
-            <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
-        `;
-        tooltip.style.opacity = 1;
-    });
+    if (isTouch) {
+        skillDiv.addEventListener('click', (e) => {
+            e.stopPropagation();
 
-    skillDiv.addEventListener('mouseleave', () => {
-        skillDiv.style.backgroundColor = '';
-        skillDiv.classList.remove(`hover-${backColor}`);
-        tooltip.style.opacity = 0;
-    });
+            const isAlreadyActive = tooltip.classList.contains('active');
+
+            document.querySelectorAll('.skill-tooltip.active').forEach(t => {                
+                const parentWrapper = t.closest('.skill-transform-wrapper');
+                const parentSkillDiv = parentWrapper.querySelector('.skill');
+                const parentSkillObj = skills[parentSkillDiv.dataset.skill];
+                const [parentBackColor] = getExperienceColor(parentSkillObj.years);
+
+                parentSkillDiv.style.backgroundColor = '';
+                parentSkillDiv.classList.remove(`hover-${parentBackColor}`, 'active');
+                t.style.opacity = 0;
+                t.classList.remove('active');
+            });
+
+            if (!isAlreadyActive) {
+                skillDiv.classList.add(`hover-${backColor}`, 'active');
+                skillDiv.style.backgroundColor = skillObjColor;
+                tooltip.style.backgroundColor = skillObjColor;
+                tooltip.innerHTML = `
+                    <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
+                    <br>
+                    <br>
+                    <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
+                `;
+                tooltip.style.opacity = 1;
+                tooltip.classList.add('active');
+            }
+        });
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.skill-tooltip.active').forEach(t => {
+                const parentWrapper = t.closest('.skill-transform-wrapper');
+                const parentSkillDiv = parentWrapper.querySelector('.skill');
+                const parentSkillObj = skills[parentSkillDiv.dataset.skill];
+                const [parentBackColor] = getExperienceColor(parentSkillObj.years);
+
+                parentSkillDiv.style.backgroundColor = '';
+                parentSkillDiv.classList.remove(`hover-${parentBackColor}`, 'active');
+                t.style.opacity = 0;
+                t.classList.remove('active');
+            });
+        });
+    } else {
+        skillDiv.addEventListener('mouseenter', () => {
+            skillDiv.classList.add(`hover-${backColor}`);
+            skillDiv.style.backgroundColor = skillObjColor;
+            tooltip.style.backgroundColor = skillObjColor;
+            tooltip.innerHTML = `
+                <span style="color: ${skillObjColor}; font-weight: bold;">${skillObj.years} Years of Experience</span>
+                <br>
+                <br>
+                <span style="display: inline-block; text-align: left;">${skillObj.description}</span>
+            `;
+            tooltip.style.opacity = 1;
+        });
+
+        skillDiv.addEventListener('mouseleave', () => {
+            skillDiv.style.backgroundColor = '';
+            skillDiv.classList.remove(`hover-${backColor}`);
+            tooltip.style.opacity = 0;
+        });
+    }
 });
 
 async function handleAboutMeReveal(entries) {
@@ -517,6 +519,21 @@ async function handleSkillsReveal(entries) {
         });
     }
 }
+const projects = document.getElementById("projects");
+const capstone = document.getElementById("capstone-details");
+const backButton = document.getElementById("back-button");
+document.getElementById("capstone-button").addEventListener("click", async () => {
+    projects.classList.add('learn-more-hide');
+
+    await sleep(1000);
+    capstone.classList.add('capstone-show');
+});
+document.getElementById("back-button").addEventListener("click", async () => {
+    capstone.classList.remove('capstone-show');
+
+    await sleep(1000);
+    projects.classList.remove('learn-more-hide');
+});
 async function handleProjectsReveal(entries) {
     const entry = entries[0];
     if (entry.isIntersecting && !projectsHasAnimated) {

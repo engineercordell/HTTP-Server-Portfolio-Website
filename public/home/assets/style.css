@@ -774,12 +774,14 @@ main {
     transition: transform 0.1s ease !important;
 }
 
-.skill-transform-wrapper.visible.hover-ready:hover .skill-tooltip {
+.skill-transform-wrapper.visible.hover-ready:hover .skill-tooltip,
+.skill-transform-wrapper.visible.hover-ready .skill-tooltip.active {
     opacity: 1;
     visibility: visible;
 }
 
-.skill-transform-wrapper.visible.hover-ready:hover .skill {
+.skill-transform-wrapper.visible.hover-ready:hover .skill,
+.skill-transform-wrapper.visible.hover-ready .skill.active {
     font-weight: bold;
 }
 
@@ -802,8 +804,6 @@ main {
 .skill.hover-master::before {
     background: gold;
 }
-
-
 
 /* PROJECTS */
 
