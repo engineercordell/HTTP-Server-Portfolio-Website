@@ -291,6 +291,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     terminal.appendChild(aboutLine);
     await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
 });
+const navCircle = document.querySelector('.nav-circle');
+const body = document.body;
+
+navCircle.addEventListener('click', () => {
+    navCircle.classList.toggle('hamburger');
+    body.classList.toggle('menu-open');
+})
 // when page is loaded, add observers
 document.addEventListener('DOMContentLoaded', () => {
     const aboutObserver = new IntersectionObserver(handleAboutMeReveal, { threshold: 0.2 });
