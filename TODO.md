@@ -7,7 +7,7 @@ Lightweight HTTPS server written in C++
 - [✓] Make 'Projects' section mobile-friendly
 - [✓] Enable toggle on 'Skills' section for mobile devices
 - [✓] Make 'Skills' section mobile-friendly
-- [ ] Make the navigation bar mobile-friendly
+- [✓] Make the navigation bar mobile-friendly
 - [ ] Add icons and links for 'LinkedIn' and 'GitHub' on navigation bar
 - [ ] Make 'About Me' section mobile-friendly
 - [ ] Ensure landing page terminal is mobile-friendly

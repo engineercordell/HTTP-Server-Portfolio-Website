@@ -203,6 +203,7 @@ main {
 }
 
 .nav-circle {
+    position: relative;
     display: flex;
     width: 45px;
     height: 45px;
@@ -240,55 +241,74 @@ main {
         animation: pulse 2s infinite;
     }
 
-    .nav-circle span {
-        display: block;
-        transition: opacity 0.3s ease;
+    .nav-circle .cp-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1rem;
+        color: var(--text);
+        animation: cpFade 4s infinite;
     }
 
-    .nav-circle.hamburger span {
-        opacity: 0;
-    }
-
-    .nav-circle.hamburger::before,
-    .nav-circle.hamburger::after,
-    .nav-circle.hamburger div {
-        content: "";
-        display: block;
+    .nav-circle .bar {
+        position: absolute;
+        left: 50%;
         width: 20px;
         height: 2px;
         background: var(--text);
-        margin: 4px auto;
-        transition: transform 0.3s ease;
+        opacity: 0;
+        transform: translate(-50%, 50%);
+        animation: barFade 4s infinite;
+    }
+
+    .nav-circle .bar:nth-child(2) { top: 35%; }
+    .nav-circle .bar:nth-child(3) { top: 45%; }
+    .nav-circle .bar:nth-child(4) { top: 58%; }
+
+    @keyframes cpFade {
+        0%, 40% { opacity: 1; }
+        50%, 90% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @keyframes barFade {
+        0%, 40% { opacity: 0; }
+        50%, 90% { opacity: 1; }
+        100% { opacity: 0; }
     }
 
     @keyframes pulse {
-        0%, 100% { box-shadow: 0 0 20px var(--glow); }
-        50% { box-shadow: 0 0 30px var(--glow); }
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0px 0px 2px var(--glow); 
+        }
+        50% { 
+            transform: scale(1.07);
+            box-shadow: 0 0 30px var(--glow); 
+        }
     }
 }
 
 .mobile-menu {
     position: fixed;
-    top: 0;
-    right: -250px;
-    width: 250px;
-    height: 100%;
-    background: black;
-    transition: right 0.3s ease;
-    z-index: 500;
-}
-
-.mobile-wrapper {
-    margin-top: 3.5rem;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    gap: 1.5rem;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1rem;
+    left: 0;
+    bottom: -480px;
+    width: 100%;
+    height: 480px;
+    background: black;
+    transition: bottom 0.3s ease;
+    z-index: 500;
 }
 
 body.menu-open .mobile-menu {
     box-shadow: -2px 0 10px var(--glow);
-    right: 0;
+    bottom: 0;
 }
 
 .mobile-menu a {
