@@ -71,7 +71,7 @@ main {
     --a: 50deg; /* control the depth of the curvature*/
     --p: 50%; /* control the position */
     --nav-border-color: #4b4d51;
-    --nav-width: 475px;
+    --nav-width: 510px;
     --nav-height: 52px;
 }
 
@@ -136,7 +136,6 @@ main {
     width: var(--nav-width);
     height: var(--nav-height);
     background-color: var(--nav-border-color);
-    --nav-width: 475px;
     --cut-point: calc(var(--nav-width) - 48px); /* adjust for the notch */
     clip-path: polygon(
         0 0, 
@@ -219,7 +218,7 @@ main {
     z-index: 1000;
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 1080px) {
     .cyber-nav {
         justify-content: center;
         z-index: 1000;
