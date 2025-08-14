@@ -9,10 +9,10 @@ Lightweight HTTPS server written in C++
 - [✓] Make 'Skills' section mobile-friendly
 - [✓] Make the navigation bar mobile-friendly
 - [✓] Add icons for 'LinkedIn' and 'GitHub' on navigation bar
-- [ ] Add links for 'LinkedIn' and 'GitHub' on navigation bar
+- [✓] Add links for 'LinkedIn' and 'GitHub' on navigation bar
 - [ ] Make 'About Me' section mobile-friendly
 - [ ] Make 'Landing Page' section mobile-friendly
-- [ ] Tidy up landing page terminal
+- [ ] Tidy up 'Landing Page terminal
 - [ ] Resume should download resume
 - [ ] Fix toggle-to-skip animation
 - [ ] Add my picture
