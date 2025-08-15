@@ -341,24 +341,28 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('terminal-panel').addEventListener("click", async () => {
     terminalCancelToken.canceled = true;
 
+    renderFinalTerminalHTML();
     const lastTerminalCursor = document.getElementById("terminal-cursor");
     if (lastTerminalCursor) lastTerminalCursor.remove();
-});
+}, { once: true });
 document.getElementById("about-background").addEventListener("click", async () => {
     aboutCancelToken.canceled = true;
 
+    renderFinalAboutMeHTML();
     const lastAboutCursor = document.getElementById("about-cursor");
     if (lastAboutCursor) lastAboutCursor.remove();
 });
 document.getElementById("hobbies").addEventListener("click", async () => {
     hobbiesCancelToken.canceled = true;
 
+    renderFinalHobbiesHTML();
     const lastHobbiesCursor = document.getElementById("about-cursor");
     if (lastHobbiesCursor) lastHobbiesCursor.remove();
 });
 document.getElementById("learn").addEventListener("click", async () => {
     learnCancelToken.canceled = true;
 
+    renderFinalLearnHTML();
     const lastLearnCursor = document.getElementById("learn-cursor");
     if (lastLearnCursor) lastLearnCursor.remove();
 });
@@ -584,7 +588,6 @@ async function typeText(text, delay, targetID, cursorID, cancelToken, removeCurs
 
     for (let i = 0; i < text.length; i++) {
         if (cancelToken.canceled) {
-            targetEl.insertAdjacentText("beforeend", text.slice(i));
             break;
         }
         cursorSpan.insertAdjacentText("beforebegin", text[i]);
@@ -596,12 +599,13 @@ async function typeText(text, delay, targetID, cursorID, cancelToken, removeCurs
     }
 }
 
-async function typeListItems(listID, listItems, listItemClassName, charDelay, delayBetween, cursorID, token) {
+async function typeListItems(listID, listItems, listItemClassName, charDelay, delayBetween, cursorID, cancelToken) {
     const listContainer = document.getElementById(listID);
 
-    listContainer.innerHTML = "";
-
     for (const text of listItems) {
+        if (cancelToken.canceled) {
+            return;
+        }
         const li = document.createElement("li");
         li.classList.add(listItemClassName);
 
@@ -612,7 +616,7 @@ async function typeListItems(listID, listItems, listItemClassName, charDelay, de
         li.appendChild(emoji);
         listContainer.appendChild(li);
 
-        await typeText(text.slice(2), charDelay, li.id = crypto.randomUUID(), cursorID, token);
+        await typeText(text.slice(2), charDelay, li.id = crypto.randomUUID(), cursorID, cancelToken);
         await sleep(delayBetween);
     }
 }
@@ -640,4 +644,75 @@ function getExperienceColor(yoe) {
         default:
             return ["master", "gold"];
     }
+}
+
+function renderFinalTerminalHTML() {
+    document.getElementById("terminal-text").innerHTML = `
+        <div id="terminal-command">
+            <span class="prompt">~</span><span class="dollar">$</span>
+            <span id="terminal-command-text">
+                Visitor detected...<wbr>executing</span>
+            <span id="terminal-command-program">greetings.exe<wbr></span><span id="terminal-command-ellipsis">...</span>
+        </div>
+        <div class="terminal-desc">
+            <span id="terminal-desc-text">Hello there, I'm Cordell.<br>A multifaceted Georgia Tech engineer.</span>
+        </div>
+        <div class="terminal-more">
+            <span id="terminal-more-text">Click 'Resume' above to download my resume, or keep scrolling to learn more about me!</span>
+        </div>
+    `;
+}
+
+function renderFinalAboutMeHTML() {
+    document.getElementById("about-background").innerHTML = `
+        <h2 class="header">
+            <span id="about-back-head">Background</span>
+        </h2>
+        <p id="about-line-1">
+        Hey there—My name is Cordell Palmer. In December 2024, I graduated from Georgia Tech 
+        with a Bachelor of Science in Mechanical Engineering and a Minor in Computer Science, with a focus on Machine Learning.
+        During my undergraduate years, I was able to cultivate a broad set of skills, having obtained proficiency in areas such as
+        CAD modeling/3D printing, structural analysis, software and hardware programming, AI, robotics, and wide range of electrical and mechanical
+        data analysis/manufacturing tools. Despite my background being primarily rooted in mechanical systems, my true passion lies at the intersection of hardware, 
+        software, and AI development.</p>
+        <p id="about-line-2">
+        Since graduation I've deeply immersed myself in systems development, having written the HTTP server that
+        runs this website from scratch in C++ with barebones kernel APIs. The journey to enrich my understanding of networking, memory, and 
+        OS-level architecture has sparked an ever evolving passion in all things embedded systems, FPGAs, digital circuitry, and future-forward
+        technologies like graphene semiconductors.</p>
+        <p id="about-line-3">In short: I enjoy building things that closely interact with our world, and this is only the beginning.</p>
+    `;
+}
+
+function renderFinalHobbiesHTML() {
+    document.getElementById("hobbies").innerHTML = `
+        <h2 id="hobbies-header" class="header">Hobbies</h2>
+        <div class="hobbies-container">
+            <div id="hobbies-text">Engineering can be exhausting, so I enjoy winding down in the following ways:</div>
+            <ul id="hobbies-list">
+                <li class="hobbies-item" id="eaf0cf86-5aad-49a8-9815-c98f41436c90"><span class="emoji">🏋</span>️ Gym/Weightlifting</li>
+                <li class="hobbies-item" id="14655adc-54e0-48db-8425-832de625d5c4"><span class="emoji">📕</span> Reading</li>
+                <li class="hobbies-item" id="dc400590-9592-465b-a429-bfbfefef672b"><span class="emoji">🎮</span> Playing Video Games</li>
+                <li class="hobbies-item" id="8f43bf15-ff7f-4d03-84ab-40b824a2919d"><span class="emoji">📺</span> Watching Anime</li>
+            </ul>
+        </div>`;
+}
+
+function renderFinalLearnHTML() {
+    document.getElementById("learn").innerHTML = `
+        <h2 id="learn-header" class="header">Currently Learning</h2>
+        <div class="learn-container">
+            <div id="learn-text">Here's a list of topics/books I'm interested in learning/have learned:</div>
+            <ul id="learn-list">
+                <li class="learn-item" id="c2b5f683-4da1-477c-bbf9-abcde2457db1"><span class="emoji">🧠</span> Computer Systems: A Programmer's Perspective — Finished!</li>
+                <li class="learn-item" id="d7da618b-ff96-4e88-9fd4-ee61dce49906"><span class="emoji">📘</span> Operating Systems: Three Easy Pieces (OSTEP) — In Progress</li>
+                <li class="learn-item" id="7f5b17e2-0050-4723-9714-b17692e4e21d"><span class="emoji">📘</span> Operating Systems: Principles and Practice — In Progress</li>
+                <li class="learn-item" id="ae45e2c4-c7ca-4c3b-95bc-6fca3fb3f9a0"><span class="emoji">📘</span> xv6: Unix-like OS — Tinkering in progress</li>
+                <li class="learn-item" id="15fa6824-cf10-43f0-81cb-37b484cab566"><span class="emoji">📘</span> Linux Kernel Development (Third Edition) — In Progress</li>
+                <li class="learn-item" id="d5230458-6e01-48fc-80ee-1b6c976635ed"><span class="emoji">📘</span> Computer Architecture: A Quantitative Approach (Hennesey and Patterson) — Coming up next</li>
+                <li class="learn-item" id="92cd44ec-0e23-48ea-89e5-d00d3a51350b"><span class="emoji">📡</span> TCP/IP Illustrated — Coming up next</li>
+                <li class="learn-item" id="81614d35-92dd-47c3-9c3f-dee706874943"><span class="emoji">💡</span> Crafting Interpreters — Long-term goal</li>
+                <li class="learn-item" id="a2d31cfd-f4cc-4ea3-b96b-17ba4175d6f6"><span class="emoji">🔧</span> Makefiles &amp; Build Systems — Practicing with this HTTP server</li>
+            </ul>
+        </div>`;
 }
