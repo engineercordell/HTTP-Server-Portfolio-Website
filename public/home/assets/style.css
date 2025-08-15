@@ -356,7 +356,6 @@ body.menu-open .mobile-menu {
     height: 600px;
     max-height: 80vh;
     width: 80vw;
-    padding-top: 2rem;
     overflow: hidden;
     box-sizing: border-box;
     background-color: rgba(47, 44, 44, 0.7);
@@ -397,20 +396,29 @@ body.menu-open .mobile-menu {
     z-index: -2;
 }
 
+@media (max-width: 450px) {
+    #terminal-panel {
+        height: 400px;
+    }
+}
+
 #terminal-text {
+    display: inline-block;
+    text-align: left;
     max-width: 90%;
-    font-size: clamp(1.2rem, 5vmin, 4rem);
+    width: 830px;
+    height: 200px;
+    max-height: 80%;
+    font-size: clamp(1.2rem, 4.5vmin, 3.5rem);
     font-weight: bold;
     color: var(--text);
     text-shadow: 0 0 5px var(--glow);
-    display: inline-block;
-    text-align: left;
-    min-width: 0;
-    width: 770px;
 }
 
-#terminal-command {
-    padding-top: 0.75rem;
+@media (max-height: 450px) {
+    #terminal-text {
+        height: 150px;
+    }
 }
 
 #terminal-command-text, 

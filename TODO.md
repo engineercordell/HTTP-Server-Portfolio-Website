@@ -11,7 +11,7 @@ Lightweight HTTPS server written in C++
 - [✓] Add icons for 'LinkedIn' and 'GitHub' on navigation bar
 - [✓] Add links for 'LinkedIn' and 'GitHub' on navigation bar
 - [✓] Make 'Landing Page' section mobile-friendly
-- [ ] Tidy up 'Landing Page' terminal
+- [✓] Tidy up 'Landing Page' terminal
 - [ ] Fix toggle-to-skip animation
 - [ ] Make 'About Me' section mobile-friendly
 - [ ] Resume should download resume

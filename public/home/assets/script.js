@@ -273,9 +273,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     await typeText("Visitor detected", 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
     await typeText("...", 300, "terminal-command-text", "terminal-cursor", terminalCancelToken);
+    await appendWbr("terminal-command-text");
     await sleep(1000);
-    await typeText("executing", 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
-    await typeText("\u00A0greetings.exe", 40, "terminal-command-program", "terminal-cursor", terminalCancelToken);
+    await typeText(`executing `, 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
+    await typeText("greetings.exe", 40, "terminal-command-program", "terminal-cursor", terminalCancelToken);
+    await appendWbr("terminal-command-program");
     await typeText("...", 40, "terminal-command-ellipsis", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
 
@@ -287,7 +289,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span id="terminal-desc-text"></span>
     `;
     terminal.appendChild(descLine);
-    await typeText("Hello there, I'm Cordell. A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text", "terminal-cursor", terminalCancelToken);
+    await typeText("Hello there, I'm Cordell.", 20, "terminal-desc-text", "terminal-cursor", terminalCancelToken);
+    document.getElementById("terminal-desc-text").innerHTML += "<br>";
+    await typeText("A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text", "terminal-cursor", terminalCancelToken);
 
     const aboutLine = document.createElement('div');
     aboutLine.classList.add('terminal-more');
@@ -611,6 +615,11 @@ async function typeListItems(listID, listItems, listItemClassName, charDelay, de
         await typeText(text.slice(2), charDelay, li.id = crypto.randomUUID(), cursorID, token);
         await sleep(delayBetween);
     }
+}
+
+async function appendWbr(selector) {
+    terminal_command = document.getElementById(selector);
+    terminal_command.innerHTML += `<wbr>`;
 }
 
 function sleep(ms) {
