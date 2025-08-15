@@ -403,22 +403,14 @@ body.menu-open .mobile-menu {
     font-weight: bold;
     color: var(--text);
     text-shadow: 0 0 5px var(--glow);
+    display: inline-block;
+    text-align: left;
+    min-width: 0;
+    width: 770px;
 }
 
 #terminal-command {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 770px;
     padding-top: 0.75rem;
-}
-
-.text-wrapper {
-    display: inline-block;
-    text-align: left;
-    flex-shrink: 1;
-    flex-wrap: wrap;
-    min-width: 0;
-    width: 770px;
 }
 
 #terminal-command-text, 
@@ -426,7 +418,7 @@ body.menu-open .mobile-menu {
 #terminal-command-ellipsis,
 #terminal-more-text {
     white-space: normal;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .prompt {
@@ -436,6 +428,16 @@ body.menu-open .mobile-menu {
 
 .dollar {
     white-space: pre-wrap;
+}
+
+#terminal-command-program {
+    color: green;
+    text-shadow: none;
+    white-space: normal;
+}
+
+.terminal-desc {
+    padding-top: 2rem;
 }
 
 .cursor {
@@ -452,23 +454,6 @@ body.menu-open .mobile-menu {
 .cursor.stopped {
     animation: none;
     opacity: 1;
-}
-
-#terminal-command-program {
-    color: green;
-    text-shadow: none;
-    white-space: normal;
-}
-
-.terminal-desc {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 2rem;
-}
-
-.terminal-more {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 @media (max-height: 480px) {

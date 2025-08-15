@@ -284,9 +284,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const descLine = document.createElement('div');
     descLine.classList.add('terminal-desc');
     descLine.innerHTML = `
-        <span class="text-wrapper">
-            <span id="terminal-desc-text"></span>
-        </span>
+        <span id="terminal-desc-text"></span>
     `;
     terminal.appendChild(descLine);
     await typeText("Hello there, I'm Cordell. A multifaceted Georgia Tech engineer.", 20, "terminal-desc-text", "terminal-cursor", terminalCancelToken);
@@ -294,9 +292,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const aboutLine = document.createElement('div');
     aboutLine.classList.add('terminal-more');
     aboutLine.innerHTML = `
-        <span class="text-wrapper">
-            <span id="terminal-more-text"></span>
-        </span>
+        <span id="terminal-more-text"></span>
     `;
     terminal.appendChild(aboutLine);
     await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
