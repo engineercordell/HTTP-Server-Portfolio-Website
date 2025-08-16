@@ -278,7 +278,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     await typeText(`executing `, 40, "terminal-command-text", "terminal-cursor", terminalCancelToken);
     await typeText("greetings.exe", 40, "terminal-command-program", "terminal-cursor", terminalCancelToken);
     await appendWbr("terminal-command-program");
-    await typeText("...", 40, "terminal-command-ellipsis", "terminal-cursor", terminalCancelToken);
     await sleep(1000);
 
     const terminal = document.getElementById('terminal-text');
@@ -652,7 +651,7 @@ function renderFinalTerminalHTML() {
             <span class="prompt">~</span><span class="dollar">$</span>
             <span id="terminal-command-text">
                 Visitor detected...<wbr>executing</span>
-            <span id="terminal-command-program">greetings.exe<wbr></span><span id="terminal-command-ellipsis">...</span>
+            <span id="terminal-command-program">greetings.exe<wbr></span>
         </div>
         <div class="terminal-desc">
             <span id="terminal-desc-text">Hello there, I'm Cordell.<br>A multifaceted Georgia Tech engineer.</span>

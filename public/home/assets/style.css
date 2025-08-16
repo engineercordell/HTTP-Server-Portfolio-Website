@@ -540,7 +540,8 @@ body.menu-open .mobile-menu {
 }
 
 #my-img {
-    max-height: 500px;
+    max-width: 450px;
+    max-height: 450px;
 }
 
 .header {
@@ -624,13 +625,35 @@ body.menu-open .mobile-menu {
 }
 
 @media (max-width: 1000px) {
-    #about-body-1 {
+    #about-body-1,
+    #about-body-2 {
         flex-direction: column;
     }
 
     #about-body-2 {
-        flex-direction: column;
+        gap: 1rem;
     }
+
+    #about-background {
+        max-width: 90vw;
+    }
+
+    #hobbies {
+        max-width: 90vw;
+        align-self: center;
+    }
+
+    #learn {
+        max-width: 90vw;
+        align-self: center;
+    }
+
+    #my-img {
+        order: -1;
+        margin-top: 2rem;
+    }
+
+    
 }
 
 /* SKILLS */
