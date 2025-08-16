@@ -542,6 +542,7 @@ body.menu-open .mobile-menu {
 #my-img {
     max-width: 450px;
     max-height: 450px;
+    transition: opacity 1s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header {
@@ -587,6 +588,7 @@ body.menu-open .mobile-menu {
     width: 100%;
     max-width: 70vw;
     min-height: 460px;
+    transition: opacity 1s ease;
 }
 
 #about-background > p {
@@ -607,6 +609,7 @@ body.menu-open .mobile-menu {
     min-width: 25vw;
     max-width: 30vw;
     align-self: start;
+    transition: opacity 1s ease;
 }
 
 #hobbies-text {
@@ -622,6 +625,11 @@ body.menu-open .mobile-menu {
     align-self: start;
     min-height: 300px;
     min-width: 40vw;
+    transition: opacity 1s ease;
+}
+
+.about-hidden {
+    opacity: 0;
 }
 
 @media (max-width: 1000px) {
@@ -652,8 +660,6 @@ body.menu-open .mobile-menu {
         order: -1;
         margin-top: 2rem;
     }
-
-    
 }
 
 /* SKILLS */

@@ -450,8 +450,12 @@ async function handleAboutMeReveal(entries) {
     aboutHasAnimated = true;
 
     await typeText("./about-me", 50, "about-command", "about-cursor", aboutCancelToken);
-    await sleep(200);
 
+    const myImg = document.getElementById('my-img');
+    myImg.classList.remove('about-hidden');
+
+    const aboutBack = document.getElementById('about-background');
+    aboutBack.classList.remove('about-hidden');
     await typeText("Background", 1, "about-back-head", "about-cursor", aboutCancelToken);
     await typeText(`
         Hey there—My name is Cordell Palmer. In December 2024, I graduated from Georgia Tech 
@@ -474,15 +478,26 @@ async function handleHobbiesReveal(entries) {
     if (entry.isIntersecting && !hobbiesHasAnimated) {
         hobbiesHasAnimated = true;
 
+        const hobbiesID = document.getElementById('hobbies');
+        hobbiesID.classList.remove('about-hidden');
+
         await typeText("Hobbies", 50, "hobbies-header", "hobbies-cursor", hobbiesCancelToken);
+
         await typeText("Engineering can be exhausting, so I enjoy winding down in the following ways:", 1, "hobbies-text", "hobbies-cursor", hobbiesCancelToken);
         await typeListItems("hobbies-list", hobbies, "hobbies-item", 1, 200, "hobbies-cursor", hobbiesCancelToken);
+
+        
     }
 }
 async function handleLearningReveal(entries) {
     const entry = entries[0];
     if (entry.isIntersecting && !learnHasAnimated) {
         learnHasAnimated = true;
+
+        await sleep(700);
+
+        const learnID = document.getElementById('learn');
+        learnID.classList.remove('about-hidden');
 
         await typeText("Currently Learning", 50, "learn-header", "learn-cursor", learnCancelToken);
         await typeText("Here's a list of topics/books I'm interested in learning/have learned:", 1, "learn-text", "learn-cursor", learnCancelToken);
