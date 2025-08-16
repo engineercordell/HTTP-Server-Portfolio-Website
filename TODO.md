@@ -13,7 +13,7 @@ Lightweight HTTPS server written in C++
 - [✓] Make 'Landing Page' section mobile-friendly
 - [✓] Tidy up 'Landing Page' terminal
 - [✓] Fix toggle-to-skip animation
-- [ ] Make 'About Me' section mobile-friendly
+- [✓] Make 'About Me' section mobile-friendly
 - [✓] Add my picture
 - [ ] Add 'Contact Me' section
 - [ ] Resume should download resume

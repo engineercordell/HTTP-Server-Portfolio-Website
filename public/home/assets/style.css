@@ -409,7 +409,7 @@ body.menu-open .mobile-menu {
     width: 830px;
     height: 200px;
     max-height: 80%;
-    font-size: clamp(1.2rem, 4.5vmin, 3.5rem);
+    font-size: clamp(1rem, 4.5vmin, 3.5rem);
     font-weight: bold;
     color: var(--text);
     text-shadow: 0 0 5px var(--glow);
