@@ -534,13 +534,12 @@ body.menu-open .mobile-menu {
 
 #about-body-1 {
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
 }
 
-#about-body-1 >.my-img {
+.my-img {
     position: relative;
     width: 500px;
     min-height: 500px;
@@ -561,7 +560,7 @@ body.menu-open .mobile-menu {
     z-index: 0;
 }
 
-#about-body-1 >.my-img::before {
+.my-img::before {
     content: '';
     position: absolute;
     top: 1px;
@@ -661,6 +660,16 @@ body.menu-open .mobile-menu {
     align-self: start;
     min-height: 300px;
     min-width: 40vw;
+}
+
+@media (max-width: 1000px) {
+    #about-body-1 {
+        flex-direction: column;
+    }
+
+    #about-body-2 {
+        flex-direction: column;
+    }
 }
 
 /* SKILLS */

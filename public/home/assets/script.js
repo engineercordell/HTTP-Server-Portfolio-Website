@@ -662,7 +662,6 @@ function renderFinalTerminalHTML() {
         </div>
     `;
 }
-
 function renderFinalAboutMeHTML() {
     document.getElementById("about-background").innerHTML = `
         <h2 class="header">
@@ -683,7 +682,6 @@ function renderFinalAboutMeHTML() {
         <p id="about-line-3">In short: I enjoy building things that closely interact with our world, and this is only the beginning.</p>
     `;
 }
-
 function renderFinalHobbiesHTML() {
     document.getElementById("hobbies").innerHTML = `
         <h2 id="hobbies-header" class="header">Hobbies</h2>
@@ -697,7 +695,6 @@ function renderFinalHobbiesHTML() {
             </ul>
         </div>`;
 }
-
 function renderFinalLearnHTML() {
     document.getElementById("learn").innerHTML = `
         <h2 id="learn-header" class="header">Currently Learning</h2>
