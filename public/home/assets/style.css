@@ -1358,3 +1358,31 @@ body.menu-open .mobile-menu {
 #ml-proj {
     padding: 0.5rem;
 }
+
+/* CONTACT ME */
+
+.contact-me {
+    min-height: 50vh;
+    margin-top: 7rem;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item {
+    width: fit-content;
+    margin: 0;
+}
+
+.contact-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    white-space: normal;
+    gap: 0.5rem;
+}

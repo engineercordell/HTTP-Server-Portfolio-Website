@@ -4,12 +4,14 @@ let hobbiesCancelToken = { canceled: false };
 let learnCancelToken = { canceled: false };
 let skillsCancelToken = { canceled: false };
 let projectsCancelToken = { canceled: false };
+let contactMeCancelToken = { canceled: false };
 let aboutHasAnimated = false;
 let hobbiesHasAnimated = false;
 let learnHasAnimated = false;
 let skillsHasAnimated = false;
 let projectsHasAnimated = false;
 let capstoneHasAnimated = false;
+let contactMeHasAnimated = false;
 
 const isTouch = window.matchMedia('(pointer: coarse) and (pointer: coarse)').matches;
 if (isTouch) {
@@ -308,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const learnObserver = new IntersectionObserver(handleLearningReveal, { threshold: 0.1 });
     const skillsObserver = new IntersectionObserver(handleSkillsReveal, { threshold: 0.1 });
     const projectsObserver = new IntersectionObserver(handleProjectsReveal, { threshold: 0.1 });
+    const contactObserver = new IntersectionObserver(handleContactMeReveal, { threshold: 0.1 });
 
     const aboutSection = document.getElementById('about-me');
     aboutObserver.observe(aboutSection);
@@ -319,6 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
     skillsObserver.observe(skillsSection);
     const projectsSection = document.getElementById('projects');
     projectsObserver.observe(projectsSection);
+    const contactSection = document.getElementById('contact-me');
+    contactObserver.observe(contactSection);
 
     // Projects Mobile Device Event Listeners
     const cards = document.querySelectorAll('.project-img-wrapper');
@@ -586,6 +591,14 @@ async function handleProjectsReveal(entries) {
             card.style.transitionDelay = `${delay}s`;
             delay += 0.5;
         });
+    }
+}
+async function handleContactMeReveal(entries) {
+    const entry = entries[0];
+    if (entry.isIntersecting && !contactMeHasAnimated) {
+        contactMeHasAnimated = true;
+
+        await typeText("./contact-me", 50, "contact-command", "contact-cursor", contactMeCancelToken);
     }
 }
 
