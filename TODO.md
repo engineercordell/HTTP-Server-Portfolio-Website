@@ -20,6 +20,7 @@ Lightweight HTTPS server written in C++
 - [ ] Fix Capstone Project buttons not working
 - [ ] Fix large fonts on small displays in 'Project' section
 - [ ] Resume should download resume
+- [ ] Get rid of 'GitHub' and 'LinkedIn' on navbar
 - [ ] Add pulsing effect to nav bar regardless of display
 
 ## Future Projects to Add
