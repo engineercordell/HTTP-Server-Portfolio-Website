@@ -1375,10 +1375,6 @@ body.menu-open .mobile-menu {
     align-items: center;
 }
 
-#contact-overview {
-    width: fit-content;
-}
-
 .contact-list {
     display: flex;
     flex-direction: column;
