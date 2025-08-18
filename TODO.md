@@ -19,7 +19,7 @@ Lightweight HTTPS server written in C++
 - [✓] Fix 'Project' section and 'Contact Me' section overlap
 - [✓] Fix Capstone Project buttons not working
 - [✓] Fix large fonts on small displays in 'Project' section
-- [ ] Add pulsing effect to nav bar regardless of display
+- [✓] Add pulsing effect to nav bar regardless of display
 - [ ] Resume should download resume
 
 
