@@ -449,6 +449,14 @@ document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
     }
 });
 
+// set up contact me event listener
+document.querySelectorAll(".contact-item").forEach(item => {
+    item.addEventListener("click", () => {
+        const link = item.getAttribute("data-link");
+        window.open(link, "_blank");
+    });
+});
+
 async function handleAboutMeReveal(entries) {
   const entry = entries[0];
   if (entry.isIntersecting && !aboutHasAnimated) {
@@ -599,6 +607,22 @@ async function handleContactMeReveal(entries) {
         contactMeHasAnimated = true;
 
         await typeText("./contact-me", 50, "contact-command", "contact-cursor", contactMeCancelToken);
+
+        const contactOverview = document.getElementById('contact-overview');
+        contactOverview.classList.remove('overview-wrapper-hidden');
+        contactOverview.classList.add('overview-wrapper');
+
+        await sleep(500);
+
+        delay = 0;
+
+        const contacts = document.getElementById('contact-list').querySelectorAll('.contact-wrapper-hidden');
+        contacts.forEach((contact) => {
+            contact.classList.remove('contact-wrapper-hidden');
+            contact.classList.add('contact-item-wrapper');
+            contact.style.transitionDelay = `${delay}s`;
+            delay += 0.5;
+        });
     }
 }
 

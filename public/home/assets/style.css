@@ -1374,9 +1374,27 @@ body.menu-open .mobile-menu {
     gap: 1rem;
 }
 
+.contact-wrapper-hidden {
+    opacity: 0;
+    transform: translateY(-30%);
+}
+
+.contact-item-wrapper {
+    opacity: 1;
+    transform: translateY(0);
+    width: clamp(300px, 40%, 500px);
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
 .contact-item {
-    width: fit-content;
     margin: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-item:hover {
+    background-color: white;
+    transform: scale(1.03);
 }
 
 .contact-wrapper {
