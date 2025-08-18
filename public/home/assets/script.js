@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span id="terminal-more-text"></span>
     `;
     terminal.appendChild(aboutLine);
-    await typeText("Click 'Resume' above to download my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
+    await typeText("Click 'Resume' above to view my resume, or keep scrolling to learn more about me!", 20, "terminal-more-text", "terminal-cursor", terminalCancelToken);
 });
 
 // when page is loaded, add observers
@@ -708,7 +708,7 @@ function renderFinalTerminalHTML() {
             <span id="terminal-desc-text">Hello there, I'm Cordell.<br>A multifaceted Georgia Tech engineer.</span>
         </div>
         <div class="terminal-more">
-            <span id="terminal-more-text">Click 'Resume' above to download my resume, or keep scrolling to learn more about me!</span>
+            <span id="terminal-more-text">Click 'Resume' above to view my resume, or keep scrolling to learn more about me!</span>
         </div>
     `;
 }
