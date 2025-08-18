@@ -449,14 +449,6 @@ document.querySelectorAll(".skill-transform-wrapper").forEach(wrapper => {
     }
 });
 
-// set up contact me event listener
-document.querySelectorAll(".contact-item").forEach(item => {
-    item.addEventListener("click", () => {
-        const link = item.getAttribute("data-link");
-        window.open(link, "_blank");
-    });
-});
-
 async function handleAboutMeReveal(entries) {
   const entry = entries[0];
   if (entry.isIntersecting && !aboutHasAnimated) {
@@ -625,6 +617,13 @@ async function handleContactMeReveal(entries) {
         });
     }
 }
+// set up contact me event listener
+document.querySelectorAll(".contact-item").forEach(item => {
+    item.addEventListener("click", () => {
+        const link = item.getAttribute("data-link");
+        window.open(link, "_blank");
+    });
+});
 
 async function typeText(text, delay, targetID, cursorID, cancelToken, removeCursorOnEnd = true) {
     const targetEl = document.getElementById(targetID);

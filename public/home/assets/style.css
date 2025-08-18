@@ -948,21 +948,17 @@ body.menu-open .mobile-menu {
 /* PROJECTS */
 
 /* Specifically target sections in the projects section */
-.section.projects-container > section {
-    box-sizing: border-box;
-    margin: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: calc(100% - 2rem);
-    min-height: 200vh;
+.projects-container {
+    position: relative;
+    overflow: visible;
 }
 
 #projects {
+    position: relative;
     transition: opacity 0.5s ease, transform 1s ease, visibility 0s linear 0.5s;
     opacity: 1;
     transform: translateX(0);
-    position: relative;
+    margin: 1rem 0;
 }
 
 #projects.learn-more-hide {
@@ -971,6 +967,11 @@ body.menu-open .mobile-menu {
 }
 
 #capstone-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
     opacity: 0;
     transform: translateX(-100%);
     transition: opacity 0.5s ease, transform 1s ease;
@@ -1004,8 +1005,6 @@ body.menu-open .mobile-menu {
         --proj_corner_size: 25px;
     }
 }
-
-
 
 .project-card-hidden {
     opacity: 0;
@@ -1159,7 +1158,7 @@ body.menu-open .mobile-menu {
     z-index: 0;
     background: white;
     text-decoration: none;
-    pointer-events: none;
+    /* pointer-events: none; */
     color: var(--text);
     gap: 0.3rem;
     clip-path: polygon(

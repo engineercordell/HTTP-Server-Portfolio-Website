@@ -16,8 +16,8 @@ Lightweight HTTPS server written in C++
 - [✓] Make 'About Me' section mobile-friendly
 - [✓] Add my picture
 - [✓] Add 'Contact Me' section
-- [ ] Fix 'Project' section and 'Contact Me' section overlap
-- [ ] Fix Capstone Project buttons not working
+- [✓] Fix 'Project' section and 'Contact Me' section overlap
+- [✓] Fix Capstone Project buttons not working
 - [ ] Fix large fonts on small displays in 'Project' section
 - [ ] Resume should download resume
 - [ ] Get rid of 'GitHub' and 'LinkedIn' on navbar
