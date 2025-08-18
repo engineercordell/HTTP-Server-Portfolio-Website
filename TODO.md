@@ -18,10 +18,10 @@ Lightweight HTTPS server written in C++
 - [✓] Add 'Contact Me' section
 - [✓] Fix 'Project' section and 'Contact Me' section overlap
 - [✓] Fix Capstone Project buttons not working
-- [ ] Fix large fonts on small displays in 'Project' section
-- [ ] Resume should download resume
-- [ ] Get rid of 'GitHub' and 'LinkedIn' on navbar
+- [✓] Fix large fonts on small displays in 'Project' section
 - [ ] Add pulsing effect to nav bar regardless of display
+- [ ] Resume should download resume
+
 
 ## Future Projects to Add
 - [✓] Recession Predictor Proj

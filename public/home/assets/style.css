@@ -1136,6 +1136,7 @@ body.menu-open .mobile-menu {
     align-items: center;
     text-align: center;
     padding: 0 0.5rem;
+    font-size: clamp(10px, 3vw, 16px);
 }
 
 .project-img-wrapper:hover .project-overlay,
