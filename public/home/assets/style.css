@@ -216,7 +216,19 @@ main {
     font-family: 'Orbitron', sans-serif;
     color: var(--text);
     z-index: 1000;
+    animation: pulse 2s infinite;
 }
+
+@keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0px 0px 2px var(--glow); 
+        }
+        50% { 
+            transform: scale(1.07);
+            box-shadow: 0 0 30px var(--glow); 
+        }
+    }
 
 @media (max-width: 1080px) {
     .cyber-nav {
@@ -237,7 +249,7 @@ main {
     
     .nav-circle {
         cursor: pointer;
-        animation: pulse 2s infinite;
+        
     }
 
     .nav-circle .cp-text {
@@ -275,17 +287,6 @@ main {
         0%, 40% { opacity: 0; }
         50%, 90% { opacity: 1; }
         100% { opacity: 0; }
-    }
-
-    @keyframes pulse {
-        0%, 100% {
-            transform: scale(1);
-            box-shadow: 0px 0px 2px var(--glow); 
-        }
-        50% { 
-            transform: scale(1.07);
-            box-shadow: 0 0 30px var(--glow); 
-        }
     }
 }
 
