@@ -15,7 +15,7 @@ Lightweight HTTPS server written in C++
 - [✓] Fix toggle-to-skip animation
 - [✓] Make 'About Me' section mobile-friendly
 - [✓] Add my picture
-- [ ] Add 'Contact Me' section
+- [✓] Add 'Contact Me' section
 - [ ] Fix 'Project' section and 'Contact Me' section overlap
 - [ ] Fix Capstone Project buttons not working
 - [ ] Fix large fonts on small displays in 'Project' section
