@@ -971,6 +971,8 @@ body.menu-open .mobile-menu {
     position: absolute;
     top: 0;
     left: 0;
+    margin: 0;
+    width: 100%;
     height: 100%;
     overflow-y: auto;
     opacity: 0;
@@ -1248,7 +1250,7 @@ body.menu-open .mobile-menu {
     align-items: center;
 }
 
-#learn-more-title {
+.project-detail-title {
     margin: 2rem;
     width: fit-content;
 }
@@ -1359,6 +1361,13 @@ body.menu-open .mobile-menu {
 
 #ml-proj {
     padding: 0.5rem;
+}
+
+.machine-design-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* CONTACT ME */
