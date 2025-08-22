@@ -553,14 +553,22 @@ async function handleSkillsReveal(entries) {
         });
     }
 }
+
 const projects = document.getElementById("projects");
 const capstone = document.getElementById("capstone-details");
+const machineDesign = document.getElementById("machine-design-details");
 const backButton = document.getElementById("back-button");
 document.getElementById("capstone-button").addEventListener("click", async () => {
     projects.classList.add('learn-more-hide');
 
     await sleep(1000);
     capstone.classList.add('capstone-show');
+});
+document.getElementById("machine-design-button").addEventListener("click", async () => {
+    projects.classList.add('learn-more-hide');
+
+    await sleep(1000);
+    machineDesign.classList.add('machine-design-show');
 });
 document.getElementById("back-button").addEventListener("click", async () => {
     capstone.classList.remove('capstone-show');

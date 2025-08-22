@@ -967,7 +967,7 @@ body.menu-open .mobile-menu {
     transform: translateX(-100%);
 }
 
-#capstone-details {
+.learn-more-section {
     position: absolute;
     top: 0;
     left: 0;
@@ -984,6 +984,13 @@ body.menu-open .mobile-menu {
     transform: translateX(0);
     pointer-events: auto;
 }
+
+#machine-design-details.machine-design-show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
 
 #projects-grid {
     display: grid;
@@ -1248,7 +1255,7 @@ body.menu-open .mobile-menu {
     align-items: center;
 }
 
-#capstone-title {
+#learn-more-title {
     margin: 2rem;
     width: fit-content;
 }
