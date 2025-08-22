@@ -556,7 +556,6 @@ async function handleSkillsReveal(entries) {
 
 const projects = document.getElementById("projects");
 const detailSections = document.querySelectorAll(".project-detail");
-
 document.querySelectorAll(".proj-button[data-target]").forEach(button => {
     button.addEventListener("click", async () => {
         const targetId = button.getAttribute("data-target");
@@ -568,7 +567,6 @@ document.querySelectorAll(".proj-button[data-target]").forEach(button => {
         targetSection.classList.add("show");
     });
 });
-
 document.querySelectorAll(".project-detail .back-button").forEach(backBtn => {
     backBtn.addEventListener("click", async () => {
         const parentSection = backBtn.closest(".project-detail");
