@@ -25,11 +25,10 @@ Lightweight HTTPS server written in C++
 
 ## Future Projects to Add
 - [✓] Recession Predictor Proj
-- [ ] Machine Learning Projs
-- [ ] Intro to AI Projs
+- [✓] Machine Learning Projs
+- [✓] Intro to AI Projs
 - [ ] Machine Design Projs 2 & 3
 - [ ] Robotics Labs
-- [ ] MechE Technical Report Writing and Experimentation Reports
 - [ ] MechE CAD Personal Proj & Final Proj
 
 ## Security
