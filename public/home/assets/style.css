@@ -962,12 +962,12 @@ body.menu-open .mobile-menu {
     margin: 1rem 0;
 }
 
-#projects.learn-more-hide {
+#projects.hide {
     opacity: 0;
     transform: translateX(-100%);
 }
 
-.learn-more-section {
+.project-detail {
     position: absolute;
     top: 0;
     left: 0;
@@ -979,18 +979,11 @@ body.menu-open .mobile-menu {
     pointer-events: none;
 }
 
-#capstone-details.capstone-show {
+.project-detail.show {
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
 }
-
-#machine-design-details.machine-design-show {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-
 
 #projects-grid {
     display: grid;
@@ -1313,7 +1306,7 @@ body.menu-open .mobile-menu {
     }
 }
 
-#back-button {
+.back-button {
     display: inline-flex;
     position: relative;
     text-align: center;
@@ -1339,7 +1332,7 @@ body.menu-open .mobile-menu {
     opacity: 0.97;
 }
 
-#back-button::before {
+.back-button::before {
     content: '';
     position: absolute;
     z-index: -1;
@@ -1357,7 +1350,7 @@ body.menu-open .mobile-menu {
     );
 }
 
-#back-button:hover {
+.back-button:hover {
     color: var(--glow);
     background-color: var(--glow);
     transform: scale(1.05);

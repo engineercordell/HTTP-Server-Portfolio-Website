@@ -555,27 +555,30 @@ async function handleSkillsReveal(entries) {
 }
 
 const projects = document.getElementById("projects");
-const capstone = document.getElementById("capstone-details");
-const machineDesign = document.getElementById("machine-design-details");
-const backButton = document.getElementById("back-button");
-document.getElementById("capstone-button").addEventListener("click", async () => {
-    projects.classList.add('learn-more-hide');
+const detailSections = document.querySelectorAll(".project-detail");
 
-    await sleep(1000);
-    capstone.classList.add('capstone-show');
-});
-document.getElementById("machine-design-button").addEventListener("click", async () => {
-    projects.classList.add('learn-more-hide');
+document.querySelectorAll(".proj-button[data-target]").forEach(button => {
+    button.addEventListener("click", async () => {
+        const targetId = button.getAttribute("data-target");
+        const targetSection = document.getElementById(targetId);
 
-    await sleep(1000);
-    machineDesign.classList.add('machine-design-show');
-});
-document.getElementById("back-button").addEventListener("click", async () => {
-    capstone.classList.remove('capstone-show');
+        projects.classList.add("hide");
 
-    await sleep(1000);
-    projects.classList.remove('learn-more-hide');
+        await sleep(1000);
+        targetSection.classList.add("show");
+    });
 });
+
+document.querySelectorAll(".project-detail .back-button").forEach(backBtn => {
+    backBtn.addEventListener("click", async () => {
+        const parentSection = backBtn.closest(".project-detail");
+        parentSection.classList.remove("show");
+
+        await sleep(1000);
+        projects.classList.remove("hide");
+    });
+});
+
 async function handleProjectsReveal(entries) {
     const entry = entries[0];
     if (entry.isIntersecting && !projectsHasAnimated) {
