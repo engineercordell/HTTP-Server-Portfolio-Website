@@ -1370,6 +1370,28 @@ body.menu-open .mobile-menu {
     align-items: center;
 }
 
+.machine-design-overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.machine-design-overview-header {
+    margin: 1rem auto;
+}
+
+.machine-design-overview p {
+    text-indent: 1.5rem;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+
+.design-project-header {
+    width: fit-content;
+}
+
+
 /* CONTACT ME */
 
 .contact-me {
