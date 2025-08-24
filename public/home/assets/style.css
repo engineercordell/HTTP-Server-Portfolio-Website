@@ -1395,7 +1395,7 @@ body.menu-open .mobile-menu {
 .design-project-grid {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 2rem;
+    gap: 1rem;
     align-items: start;
     margin: 2rem 0;
 }
@@ -1433,15 +1433,17 @@ body.menu-open .mobile-menu {
 
 .design-project-img {
     height: 100%;
-    max-width: 400px;
+    max-width: 100%;
     justify-content: center;
     justify-self: center;
 }
 
 .design-project-img img {
+    display: block;
+    width: 100%;
     max-width: 400px;
     height: auto;
-    object-fit: fill;
+    object-fit: contain;
 }
 
 .grade {
@@ -1453,6 +1455,12 @@ body.menu-open .mobile-menu {
 @media (max-width: 1142px) {
     .design-project-grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 684px) {
+    .design-project-buttons {
+        flex-direction: column;
     }
 }
 
