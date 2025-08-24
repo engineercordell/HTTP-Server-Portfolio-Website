@@ -522,7 +522,7 @@ async function handleSkillsReveal(entries) {
         skillOverview.classList.remove('overview-wrapper-hidden');
         skillOverview.classList.add('overview-wrapper');
 
-        await sleep(1000);
+        await sleep(250);
 
         const skillColumns = skillsGrid.querySelectorAll('.skill-column');
 
@@ -549,7 +549,7 @@ async function handleSkillsReveal(entries) {
                 }, delay * 1000);
             });
 
-            baseDelay += skills.length * 0.1 + 0.3;
+            baseDelay += skills.length * 0.1 + 0.1;
         });
     }
 }
