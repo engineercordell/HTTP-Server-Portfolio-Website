@@ -27,7 +27,7 @@ Lightweight HTTPS server written in C++
 - [✓] Recession Predictor Proj
 - [✓] Machine Learning Projs
 - [✓] Intro to AI Projs
-- [ ] Machine Design Projs 2 & 3
+- [✓] Machine Design Projs 2 & 3
 - [ ] MechE CAD Personal Proj & Final Proj
 - [ ] Robotics Labs
 
