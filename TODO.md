@@ -28,8 +28,8 @@ Lightweight HTTPS server written in C++
 - [✓] Machine Learning Projs
 - [✓] Intro to AI Projs
 - [✓] Machine Design Projs 2 & 3
-- [ ] MechE CAD Personal Proj & Final Proj
 - [ ] Robotics Labs
+- [ ] MechE CAD Personal Proj & Final Proj
 
 ## Security
 - [✓] Prevent servicing a file that's outside of 'public/'

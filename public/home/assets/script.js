@@ -589,7 +589,7 @@ async function handleProjectsReveal(entries) {
         projectOverview.classList.remove('overview-wrapper-hidden');
         projectOverview.classList.add('overview-wrapper');
 
-        await sleep(500);
+        await sleep(250);
 
         delay = 0;
 
@@ -598,7 +598,7 @@ async function handleProjectsReveal(entries) {
             card.classList.remove('project-card-hidden');
             card.classList.add('project-card');
             card.style.transitionDelay = `${delay}s`;
-            delay += 0.5;
+            delay += 0.2;
         });
     }
 }
