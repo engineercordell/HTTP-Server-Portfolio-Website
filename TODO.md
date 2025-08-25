@@ -22,13 +22,12 @@ Lightweight HTTPS server written in C++
 - [✓] Add pulsing effect to nav bar regardless of display
 - [ ] Resume should download resume
 
-
 ## Future Projects to Add
 - [✓] Recession Predictor Proj
 - [✓] Machine Learning Projs
 - [✓] Intro to AI Projs
 - [✓] Machine Design Projs 2 & 3
-- [ ] Robotics Labs
+- [✓] Robotics Labs
 - [ ] MechE CAD Personal Proj & Final Proj
 
 ## Security
