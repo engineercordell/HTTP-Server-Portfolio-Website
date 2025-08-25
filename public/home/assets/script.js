@@ -483,6 +483,8 @@ async function handleHobbiesReveal(entries) {
     if (entry.isIntersecting && !hobbiesHasAnimated) {
         hobbiesHasAnimated = true;
 
+        await sleep(1000);
+
         const hobbiesID = document.getElementById('hobbies');
         hobbiesID.classList.remove('about-hidden');
 
@@ -499,7 +501,7 @@ async function handleLearningReveal(entries) {
     if (entry.isIntersecting && !learnHasAnimated) {
         learnHasAnimated = true;
 
-        await sleep(700);
+        await sleep(1500);
 
         const learnID = document.getElementById('learn');
         learnID.classList.remove('about-hidden');
