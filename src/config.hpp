@@ -9,7 +9,7 @@ namespace Config
 {
     constexpr int server_port = 8081;
     static constexpr const char* ip_addr = "0.0.0.0";
-    constexpr int max_pending_connections = 5;
+    constexpr int max_pending_connections = 75;
 
     // Define own base path to where static web pages live based on WSL file system
     inline const std::filesystem::path base_dir{"/home/ceejay/web-server/public"};

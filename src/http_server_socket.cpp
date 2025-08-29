@@ -4,6 +4,10 @@ HTTPServerSocket::HTTPServerSocket(int domain, int type, int protocol)
 {
     m_server_fd = socket(domain, type, protocol);
     if (m_server_fd < 1) throw std::runtime_error("Socket creation failed.\n");
+    
+    int opt = 1;
+    setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
     if (bind(m_server_fd, m_server_addr.get_sock_addr(), m_server_addr.get_addrlen()) < 0) throw std::runtime_error("bind() failed");
     
     sockaddr_in actual_addr{};

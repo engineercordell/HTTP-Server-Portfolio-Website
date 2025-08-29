@@ -26,7 +26,7 @@ public:
     HTTPServerSocket& operator=(const HTTPServerSocket&) = delete;
 
     int get_fd() const { return m_server_fd; } 
-    void listen_server(int backlog = 3);
+    void listen_server(int backlog = 10);
     const INetAddr& get_server_addr() { return m_server_addr; }
 };
 

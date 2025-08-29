@@ -3,7 +3,7 @@
 #include "thread_pool.hpp"
 #include "logger.hpp"
 
-const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency() / 2;
+const unsigned int ThreadPool::num_threads = std::thread::hardware_concurrency();
 
 ThreadPool::ThreadPool(const std::string& thread_type)
     : m_thread_type{thread_type}
