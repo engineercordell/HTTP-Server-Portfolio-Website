@@ -8,7 +8,7 @@
 namespace Config
 {
     constexpr int server_port = 8081;
-    constexpr std::string ip_addr = "127.0.0.1";
+    static constexpr const char* ip_addr = "0.0.0.0";
     constexpr int max_pending_connections = 5;
 
     // Define own base path to where static web pages live based on WSL file system
