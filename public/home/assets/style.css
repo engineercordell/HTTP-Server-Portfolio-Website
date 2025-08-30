@@ -629,6 +629,10 @@ body.menu-open .mobile-menu {
     transition: opacity 1s ease;
 }
 
+#learn-text {
+    margin-bottom: 0.5rem;
+}
+
 .about-hidden {
     opacity: 0;
 }
@@ -728,6 +732,9 @@ body.menu-open .mobile-menu {
 @media (max-width: 1200px) {
     #skills-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+    .skill-column {
+        justify-self: center;
     }
 }
 
@@ -935,11 +942,11 @@ body.menu-open .mobile-menu {
 }
 
 .skill.hover-proficient::before {
-    background: blue;
+    background: #3563f0;
 }
 
 .skill.hover-expert::before {
-    background: purple;
+    background: #f20c3e;
 }
 
 .skill.hover-master::before {

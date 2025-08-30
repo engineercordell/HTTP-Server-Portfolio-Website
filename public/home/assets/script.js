@@ -13,14 +13,20 @@ let projectsHasAnimated = false;
 let capstoneHasAnimated = false;
 let contactMeHasAnimated = false;
 
-const isTouch = window.matchMedia('(pointer: coarse) and (pointer: coarse)').matches;
+const isTouch = window.matchMedia('(pointer: coarse)').matches;
 if (isTouch) {
     const navCircle = document.querySelector('.nav-circle');
     const body = document.body;
 
-    navCircle.addEventListener('click', () => {
-        navCircle.classList.toggle('hamburger');
+    navCircle.addEventListener('click', (e) => {
+        e.stopPropagation();
         body.classList.toggle('menu-open');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') && !navCircle.contains(e.target)) {
+            body.classList.remove('menu-open');
+        }
     });
 }
 
@@ -490,10 +496,8 @@ async function handleHobbiesReveal(entries) {
 
         await typeText("Hobbies", 50, "hobbies-header", "hobbies-cursor", hobbiesCancelToken);
 
-        await typeText("Engineering can be exhausting, so I enjoy winding down in the following ways:", 1, "hobbies-text", "hobbies-cursor", hobbiesCancelToken);
+        await typeText("When I'm not worried about building something, I typically find myself engaging in the following:", 1, "hobbies-text", "hobbies-cursor", hobbiesCancelToken);
         await typeListItems("hobbies-list", hobbies, "hobbies-item", 1, 200, "hobbies-cursor", hobbiesCancelToken);
-
-        
     }
 }
 async function handleLearningReveal(entries) {
@@ -699,9 +703,9 @@ function getExperienceColor(yoe) {
         case 3:
             return ["beginner", "green"];
         case 4:
-            return ["proficient", "blue"];
+            return ["proficient", "#3563f0"];
         case 5:
-            return ["expert", "purple"];
+            return ["expert", "#f20c3e"];
         default:
             return ["master", "gold"];
     }
@@ -747,7 +751,7 @@ function renderFinalHobbiesHTML() {
     document.getElementById("hobbies").innerHTML = `
         <h2 id="hobbies-header" class="header">Hobbies</h2>
         <div class="hobbies-container">
-            <div id="hobbies-text">Engineering can be exhausting, so I enjoy winding down in the following ways:</div>
+            <div id="hobbies-text">When I'm not worried about building something, I typically find myself engaging in the following:</div>
             <ul id="hobbies-list">
                 <li class="hobbies-item" id="eaf0cf86-5aad-49a8-9815-c98f41436c90"><span class="emoji">🏋</span>️ Gym/Weightlifting</li>
                 <li class="hobbies-item" id="14655adc-54e0-48db-8425-832de625d5c4"><span class="emoji">📕</span> Reading</li>
